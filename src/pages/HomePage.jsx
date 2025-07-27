@@ -104,12 +104,14 @@ const HomePage = () => {
             </div>
           </motion.div>
 
+
+
           {/* Navigation Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <Link
               to="/students"
@@ -128,7 +130,7 @@ const HomePage = () => {
             </Link>
           </motion.div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator - moved to bottom */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -165,7 +167,7 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {/* Leadership Card */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -180,7 +182,7 @@ const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Leadership</h3>
+                <h3 className="text-xl font-bold text-neutral-900 mb-1">Leadership</h3>
                 <p className="text-neutral-600 mb-4 leading-relaxed">Meet our class adviser and student officers who guide our journey.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Learn More <ArrowRight className="w-4 h-4 ml-2" />
@@ -202,7 +204,7 @@ const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Student Showcase</h3>
+                <h3 className="text-xl font-bold text-neutral-900 mb-1">Student Showcase</h3>
                 <p className="text-neutral-600 mb-4 leading-relaxed">Discover the unique stories and dreams of our classmates.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Explore Profiles <ArrowRight className="w-4 h-4 ml-2" />
@@ -224,7 +226,7 @@ const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Achievements</h3>
+                <h3 className="text-xl font-bold text-neutral-900 mb-1">Achievements</h3>
                 <p className="text-neutral-600 mb-4 leading-relaxed">Celebrate our collective successes and milestones.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   View Timeline <ArrowRight className="w-4 h-4 ml-2" />
