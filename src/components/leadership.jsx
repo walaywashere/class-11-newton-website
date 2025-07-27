@@ -194,7 +194,7 @@ const Leadership = ({ adviser, students = [] }) => {
     : [];
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-white min-h-screen">
+    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -205,7 +205,7 @@ const Leadership = ({ adviser, students = [] }) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-primary-50 rounded-full border border-primary-200 text-primary-700 text-sm font-medium shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-white/80 backdrop-blur-sm rounded-full border border-primary-200 text-primary-700 text-sm font-medium shadow-sm">
             <Users className="w-4 h-4" />
             Leadership Team
           </div>
@@ -260,7 +260,7 @@ const Leadership = ({ adviser, students = [] }) => {
           className="text-center mt-16 sm:mt-20"
         >
           {/* Background container for better visibility */}
-          <div className="bg-gradient-to-r from-primary-50 to-accent-50 rounded-3xl p-8 sm:p-12 border border-primary-100 shadow-soft max-w-2xl mx-auto">
+          <div className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-primary-200 shadow-large max-w-2xl mx-auto">
             <div className="mb-6">
               <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
                 Want to meet everyone?
@@ -270,16 +270,52 @@ const Leadership = ({ adviser, students = [] }) => {
               </p>
             </div>
             
+            {/* Primary Button with Inline Styles */}
             <Link
               to="/students"
-              className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-2xl font-bold text-lg sm:text-xl hover:from-primary-700 hover:to-accent-700 hover:scale-105 hover:shadow-glow transition-all duration-300 shadow-large border-2 border-primary-600 hover:border-primary-700 animate-pulse-glow"
+              style={{
+                background: 'linear-gradient(135deg, #0284c7 0%, #d97706 100%)',
+                color: 'white',
+                border: '2px solid #0284c7',
+                boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: '16px 32px',
+                borderRadius: '16px',
+                fontWeight: 'bold',
+                fontSize: '18px',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease'
+              }}
+              className="hover:scale-105"
+              onMouseEnter={(e) => {
+                e.target.style.background = 'linear-gradient(135deg, #0369a1 0%, #b45309 100%)';
+                e.target.style.transform = 'scale(1.05)';
+                e.target.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.5), 0 12px 40px rgba(14, 165, 233, 0.25)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'linear-gradient(135deg, #0284c7 0%, #d97706 100%)';
+                e.target.style.transform = 'scale(1)';
+                e.target.style.boxShadow = '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)';
+              }}
             >
-              <Users className="w-6 h-6" />
+              <Users style={{ width: '24px', height: '24px' }} />
               Meet All Classmates
-              <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg style={{ width: '20px', height: '20px', marginLeft: '4px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+            
+            {/* Fallback Button - Simple Blue Background */}
+            <div className="mt-4">
+              <Link
+                to="/students"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl transition-colors duration-300"
+              >
+                👥 Meet All Classmates →
+              </Link>
+            </div>
           </div>
         </motion.div>
       </div>

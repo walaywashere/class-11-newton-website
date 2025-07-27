@@ -197,6 +197,16 @@ button, a, input, textarea {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Force visibility for CTA buttons */
+.cta-button {
+  background: linear-gradient(135deg, #0284c7 0%, #d97706 100%) !important;
+  color: white !important;
+  border: 2px solid #0284c7 !important;
+  display: inline-flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 /* Card hover effects */
 .card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
