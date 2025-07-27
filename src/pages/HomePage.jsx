@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, Sparkles, Users, Trophy, BookOpen, ArrowRight, Crown, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { scrollToTopInstant } from '../utils/scrollToTop';
 
 const HomePage = () => {
   const { scrollYProgress } = useScroll();
@@ -262,68 +263,70 @@ const HomePage = () => {
               transition={{ duration: 0.8, delay: 1.6 }}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-16"
             >
-              <Link
-                to="/students"
-                className="group relative overflow-hidden px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105"
-                style={{
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-                  boxShadow: '0 10px 30px rgba(59, 130, 246, 0.3)'
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative flex items-center gap-3 text-white">
-                  <Users className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                  Meet Our Students
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-              
-              <Link
-                to="/leadership"
-                className="group px-8 py-4 rounded-2xl font-bold text-lg border-2 border-white/20 text-white backdrop-blur-md hover:bg-white/10 hover:scale-105 transition-all duration-300"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)'
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <Crown className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                  Our Leadership
-                </div>
-              </Link>
+                             <Link
+                 to="/students"
+                 onClick={scrollToTopInstant}
+                 className="group relative overflow-hidden px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105"
+                 style={{
+                   background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+                   boxShadow: '0 10px 30px rgba(59, 130, 246, 0.3)'
+                 }}
+               >
+                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                 <div className="relative flex items-center gap-3 text-white">
+                   <Users className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                   Meet Our Students
+                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                 </div>
+               </Link>
+               
+               <Link
+                 to="/leadership"
+                 onClick={scrollToTopInstant}
+                 className="group px-8 py-4 rounded-2xl font-bold text-lg border-2 border-white/20 text-white backdrop-blur-md hover:bg-white/10 hover:scale-105 transition-all duration-300"
+                 style={{
+                   background: 'rgba(255, 255, 255, 0.05)'
+                 }}
+               >
+                 <div className="flex items-center gap-3">
+                   <Crown className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                   Our Leadership
+                 </div>
+               </Link>
             </motion.div>
           </div>
         </div>
         
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 cursor-pointer group"
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-          >
-            <div 
-              className="px-4 py-2 rounded-full backdrop-blur-md border text-white/80 text-sm font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300"
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderColor: 'rgba(255, 255, 255, 0.2)'
-              }}
-            >
-              Discover More
-            </div>
-            <motion.div
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ArrowDown className="w-5 h-5 text-white/60 group-hover:text-white/80 transition-colors" />
-            </motion.div>
-          </motion.div>
-        </motion.div>
+                 {/* Enhanced Scroll Indicator - Fixed Mobile Overlap */}
+         <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 1, delay: 2 }}
+           className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+         >
+           <motion.div
+             animate={{ y: [0, 6, 0] }}
+             transition={{ duration: 2, repeat: Infinity }}
+             className="flex flex-col items-center gap-1 sm:gap-2 cursor-pointer group"
+             onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+           >
+             <div 
+               className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md border text-white/80 text-xs sm:text-sm font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300"
+               style={{
+                 background: 'rgba(255, 255, 255, 0.1)',
+                 borderColor: 'rgba(255, 255, 255, 0.2)'
+               }}
+             >
+               Discover More
+             </div>
+             <motion.div
+               animate={{ y: [0, 3, 0] }}
+               transition={{ duration: 1.5, repeat: Infinity }}
+             >
+               <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/60 group-hover:text-white/80 transition-colors" />
+             </motion.div>
+           </motion.div>
+         </motion.div>
       </section>
       
       <style jsx>{`
@@ -396,26 +399,29 @@ const HomePage = () => {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="lg:row-span-2"
             >
-              <div
-                style={{
-                  background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #d97706 100%)',
-                  height: '100%',
-                  borderRadius: '24px',
-                  boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  transition: 'all 0.5s ease',
-                  cursor: 'pointer'
-                }}
-                className="group hover:scale-[1.02]"
-                onClick={() => window.location.href = '/leadership'}
-                onMouseEnter={(e) => {
-                  e.target.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.4), 0 20px 40px rgba(14, 165, 233, 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.boxShadow = '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)';
-                }}
-              >
+                          <div
+              style={{
+                background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #d97706 100%)',
+                height: '100%',
+                borderRadius: '24px',
+                boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)',
+                overflow: 'hidden',
+                position: 'relative',
+                transition: 'all 0.5s ease',
+                cursor: 'pointer'
+              }}
+              className="group hover:scale-[1.02]"
+              onClick={() => {
+                scrollToTopInstant();
+                window.location.href = '/leadership';
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.4), 0 20px 40px rgba(14, 165, 233, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.boxShadow = '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)';
+              }}
+            >
                 {/* Pattern Overlay */}
                 <div 
                   style={{
@@ -562,7 +568,10 @@ const HomePage = () => {
                     cursor: 'pointer'
                   }}
                   className="group hover:shadow-large hover:border-primary-200 hover:-translate-y-2"
-                  onClick={() => window.location.href = '/students'}
+                  onClick={() => {
+                    scrollToTopInstant();
+                    window.location.href = '/students';
+                  }}
                 >
                   <div className="flex items-start gap-4 mb-6">
                     <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -609,7 +618,10 @@ const HomePage = () => {
                     cursor: 'pointer'
                   }}
                   className="group hover:shadow-large hover:border-amber-200 hover:-translate-y-2"
-                  onClick={() => window.location.href = '/achievements'}
+                  onClick={() => {
+                    scrollToTopInstant();
+                    window.location.href = '/achievements';
+                  }}
                 >
                   <div className="flex items-start gap-4 mb-6">
                     <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
