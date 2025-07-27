@@ -1,0 +1,90 @@
+{
+  "site": {
+    "name": "Class 11-Newton",
+    "academicYear": "2025-2026",
+    "description": "Official website of Class 11-Newton - Excellence in Education",
+    "colors": {
+      "primary": {
+        "blue": "#3B82F6",
+        "purple": "#8B5CF6", 
+        "emerald": "#10B981",
+        "amber": "#F59E0B",
+        "red": "#EF4444"
+      },
+      "gradients": {
+        "hero": "from-slate-50 via-blue-50 to-purple-50",
+        "students": "from-blue-50 via-indigo-50 to-purple-50",
+        "leadership": "from-slate-50 via-blue-50 to-purple-50",
+        "achievements": "from-amber-50 via-orange-50 to-red-50"
+      }
+    }
+  },
+  "navigation": {
+    "logo": {
+      "text": "Class 11-Newton",
+      "showIcon": true,
+      "icon": "Sparkles"
+    },
+    "links": [
+      {
+        "name": "Home",
+        "href": "/",
+        "icon": "Home"
+      },
+      {
+        "name": "Students", 
+        "href": "/students",
+        "icon": "Users"
+      },
+      {
+        "name": "Leadership",
+        "href": "/leadership", 
+        "icon": "Crown"
+      },
+      {
+        "name": "Achievements",
+        "href": "/achievements",
+        "icon": "Trophy"
+      }
+    ]
+  },
+  "animations": {
+    "pageTransition": {
+      "duration": 0.4,
+      "easing": "easeInOut"
+    },
+    "cardHover": {
+      "scale": 1.05,
+      "translateY": -4,
+      "duration": 0.3
+    },
+    "staggerDelay": 0.1,
+    "floatingElements": {
+      "count": 12,
+      "duration": "5-8s",
+      "opacity": "0.4-0.9"
+    }
+  },
+  "responsive": {
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px", 
+      "lg": "1024px",
+      "xl": "1280px"
+    },
+    "gridCols": {
+      "mobile": 1,
+      "tablet": 2,
+      "desktop": 3,
+      "wide": 4
+    }
+  },
+  "features": {
+    "darkMode": false,
+    "animations": true,
+    "preloader": true,
+    "scrollToTop": true,
+    "sessionStorage": true,
+    "pagination": true
+  }
+}

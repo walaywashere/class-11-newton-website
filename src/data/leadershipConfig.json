@@ -1,0 +1,107 @@
+{
+  "pageSettings": {
+    "defaultViewMode": "grid",
+    "defaultFilterType": "all"
+  },
+  "heroSection": {
+    "badge": {
+      "text": "Leadership Excellence",
+      "icon": "Crown"
+    },
+    "title": {
+      "main": "Meet Our",
+      "highlight": "Leaders"
+    },
+    "subtitle": "Discover the visionaries and innovators who guide Class 11-Newton towards excellence and success.",
+    "stats": [
+      {
+        "label": "Class Adviser",
+        "value": "1",
+        "color": "purple"
+      },
+      {
+        "label": "Class Officers", 
+        "value": "dynamic",
+        "color": "blue",
+        "calculation": "officers"
+      },
+      {
+        "label": "Dedication",
+        "value": "100%",
+        "color": "emerald"
+      }
+    ]
+  },
+  "searchAndFilter": {
+    "searchPlaceholder": "Search leaders by name or role...",
+    "filterOptions": [
+      {
+        "value": "all",
+        "label": "All Leaders"
+      },
+      {
+        "value": "adviser",
+        "label": "Class Adviser"
+      },
+      {
+        "value": "officers",
+        "label": "Class Officers"
+      }
+    ]
+  },
+  "adviserSection": {
+    "title": "Our Class Adviser",
+    "subtitle": "The guiding force behind Class 11-Newton's success",
+    "cardSettings": {
+      "imageSize": "128px",
+      "showFunFact": true,
+      "backgroundGradient": "from-purple-50 to-blue-50",
+      "borderColor": "border-purple-200"
+    },
+    "bottomIcons": [
+      {
+        "icon": "Trophy",
+        "label": "Excellence",
+        "color": "amber"
+      },
+      {
+        "icon": "Heart",
+        "label": "Dedication", 
+        "color": "red"
+      },
+      {
+        "icon": "Users",
+        "label": "Leadership",
+        "color": "blue"
+      }
+    ]
+  },
+  "officersSection": {
+    "title": "Our Class Officers",
+    "cardSettings": {
+      "grid": {
+        "imageHeight": "240px",
+        "showQuote": true,
+        "showFunFact": true,
+        "showDreamJob": true,
+        "showInstagram": true
+      },
+      "list": {
+        "imageSize": {
+          "mobile": "64px",
+          "desktop": "80px"
+        },
+        "showFunFact": true,
+        "showDreamJob": true,
+        "showInstagram": true
+      }
+    }
+  },
+  "ctaSection": {
+    "title": "Ready to Meet Everyone?",
+    "subtitle": "Explore our complete student directory and discover the amazing individuals that make up Class 11-Newton.",
+    "buttonText": "Meet All Students",
+    "buttonLink": "/students",
+    "buttonIcon": "Users"
+  }
+}

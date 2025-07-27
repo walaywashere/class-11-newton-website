@@ -1,0 +1,153 @@
+{
+  "heroSection": {
+    "topBadge": {
+      "text": "Class of 2025-2026",
+      "icon": "Sparkles",
+      "showPulsingDot": true
+    },
+    "title": {
+      "firstPart": "Welcome to",
+      "secondPart": "Class 11-Newton"
+    },
+    "subtitle": {
+      "text": "Where brilliant minds come together to create extraordinary futures. We are a community of passionate learners, dedicated to ",
+      "highlightWords": [
+        {
+          "word": "Innovation",
+          "color": "blue"
+        },
+        {
+          "word": "Excellence", 
+          "color": "purple"
+        },
+        {
+          "word": "Dreams",
+          "color": "emerald"
+        }
+      ]
+    },
+    "stats": [
+      {
+        "icon": "Users",
+        "label": "Brilliant Minds",
+        "value": "40+",
+        "color": "blue"
+      },
+      {
+        "icon": "Trophy", 
+        "label": "Achievements",
+        "value": "15+",
+        "color": "purple"
+      },
+      {
+        "icon": "BookOpen",
+        "label": "Projects",
+        "value": "25+",
+        "color": "emerald"
+      },
+      {
+        "icon": "Star",
+        "label": "Excellence",
+        "value": "100%",
+        "color": "amber"
+      }
+    ],
+    "ctaButtons": [
+      {
+        "text": "Meet Our Students",
+        "link": "/students",
+        "type": "primary",
+        "icon": "Users"
+      },
+      {
+        "text": "Our Leadership",
+        "link": "/leadership", 
+        "type": "secondary",
+        "icon": "Crown"
+      }
+    ],
+    "scrollIndicator": {
+      "text": "Discover More",
+      "position": {
+        "mobile": "bottom-2",
+        "desktop": "bottom-6"
+      }
+    }
+  },
+  "exploreSection": {
+    "title": "Explore Our Class",
+    "subtitle": "Discover what makes Class 11-Newton extraordinary",
+    "cards": [
+      {
+        "title": "Leadership",
+        "subtitle": "Meet Our Leaders",
+        "description": "Discover the visionaries and innovators who guide our class towards excellence and success.",
+        "link": "/leadership",
+        "icon": "Crown",
+        "gradient": "from-purple-600 to-blue-600",
+        "stats": [
+          {
+            "label": "Class Adviser",
+            "value": "1"
+          },
+          {
+            "label": "Student Officers", 
+            "value": "8+"
+          },
+          {
+            "label": "Leadership Excellence",
+            "value": "100%"
+          }
+        ]
+      },
+      {
+        "title": "Students",
+        "subtitle": "Our Amazing Students", 
+        "description": "Meet the brilliant minds, unique personalities, and future leaders that make our class extraordinary.",
+        "link": "/students",
+        "icon": "Users",
+        "gradient": "from-blue-600 to-emerald-600",
+        "stats": [
+          {
+            "label": "Total Students",
+            "value": "40+"
+          },
+          {
+            "label": "Unique Stories",
+            "value": "40+"
+          },
+          {
+            "label": "Future Leaders", 
+            "value": "100%"
+          }
+        ]
+      },
+      {
+        "title": "Achievements",
+        "subtitle": "Our Success Stories",
+        "description": "Celebrate the remarkable milestones and collective successes that define our journey.",
+        "link": "/achievements", 
+        "icon": "Trophy",
+        "gradient": "from-emerald-600 to-amber-600",
+        "stats": [
+          {
+            "label": "Major Awards",
+            "value": "15+"
+          },
+          {
+            "label": "Projects Completed",
+            "value": "25+"
+          },
+          {
+            "label": "Excellence Rate",
+            "value": "100%"
+          }
+        ]
+      }
+    ],
+    "madeWithLove": {
+      "text": "Made with ❤️ by Class 11-Newton",
+      "showHeartAnimation": true
+    }
+  }
+}

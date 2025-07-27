@@ -1,0 +1,89 @@
+{
+  "pageSettings": {
+    "studentsPerPage": 12,
+    "defaultViewMode": "grid",
+    "defaultSortBy": "name"
+  },
+  "heroSection": {
+    "badge": {
+      "text": "Student Directory",
+      "icon": "Users"
+    },
+    "title": {
+      "main": "Our Amazing",
+      "highlight": "Students"
+    },
+    "subtitle": "Meet the brilliant minds, unique personalities, and future leaders that make Class 11-Newton extraordinary.",
+    "stats": [
+      {
+        "label": "Total Students",
+        "value": "dynamic", 
+        "color": "blue",
+        "calculation": "total"
+      },
+      {
+        "label": "Class Officers",
+        "value": "dynamic",
+        "color": "purple", 
+        "calculation": "officers"
+      },
+      {
+        "label": "Unique Stories",
+        "value": "100%",
+        "color": "emerald"
+      },
+      {
+        "label": "Dreams",
+        "value": "∞",
+        "color": "amber"
+      }
+    ]
+  },
+  "searchAndFilter": {
+    "searchPlaceholder": "Search by name, role, dream job, or fun fact...",
+    "sortOptions": [
+      {
+        "value": "name",
+        "label": "By Name"
+      },
+      {
+        "value": "role", 
+        "label": "By Position"
+      },
+      {
+        "value": "dreamJob",
+        "label": "By Dream Job"
+      }
+    ]
+  },
+  "cardSettings": {
+    "grid": {
+      "imageHeight": "200px",
+      "showQuote": true,
+      "showFunFact": true,
+      "showDreamJob": true,
+      "showInstagram": true
+    },
+    "list": {
+      "imageSize": {
+        "mobile": "64px",
+        "desktop": "80px"
+      },
+      "showFunFact": true,
+      "showDreamJob": true,
+      "showInstagram": true
+    }
+  },
+  "pagination": {
+    "showEllipsis": true,
+    "maxVisiblePages": 5,
+    "showPageInfo": true
+  },
+  "ctaSection": {
+    "title": "Want to Learn More?",
+    "subtitle": "Discover our leadership team and see how these amazing students contribute to our class excellence.",
+    "buttonText": "Meet Our Leaders",
+    "buttonLink": "/leadership",
+    "buttonIcon": "Trophy"
+  }
+}

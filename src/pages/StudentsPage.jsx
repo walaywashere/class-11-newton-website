@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, List, ChevronDown, MapPin, Calendar, Award, Instagram, Target, Sparkles } from 'lucide-react';
+import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, List, ChevronDown, MapPin, Calendar, Award, Instagram, Target, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { students } from '../data/classData';
@@ -11,6 +11,8 @@ const StudentsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const studentsPerPage = 12; // 12 students per page for better UX
 
   // Filter and sort students
   const filteredAndSortedStudents = useMemo(() => {
@@ -44,6 +46,17 @@ const StudentsPage = () => {
     return filtered;
   }, [students, searchTerm, sortBy]);
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredAndSortedStudents.length / studentsPerPage);
+  const startIndex = (currentPage - 1) * studentsPerPage;
+  const endIndex = startIndex + studentsPerPage;
+  const currentStudents = filteredAndSortedStudents.slice(startIndex, endIndex);
+
+  // Reset to first page when search/sort changes
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, sortBy]);
+
   const StudentModal = ({ student, onClose }) => (
     <AnimatePresence>
       {student && (
@@ -63,11 +76,14 @@ const StudentsPage = () => {
           >
             <div className="relative">
               {student.photo ? (
-                <img
-                  src={student.photo}
-                  alt={student.name}
-                  className="w-full h-64 object-cover rounded-t-3xl"
-                />
+                <div className="w-full h-64 overflow-hidden rounded-t-3xl">
+                  <img
+                    src={student.photo}
+                    alt={student.name}
+                    className="w-full h-full object-cover"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  />
+                </div>
               ) : (
                 <div className="w-full h-64 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center rounded-t-3xl">
                   <Users className="w-24 h-24 text-blue-300" />
@@ -272,7 +288,7 @@ const StudentsPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col lg:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
+            className="flex flex-col lg:flex-row gap-4 justify-between items-center mb-12 p-4 sm:p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
           >
             {/* Search */}
             <div className="relative flex-1 max-w-md w-full">
@@ -287,12 +303,12 @@ const StudentsPage = () => {
             </div>
 
             {/* Sort and View Controls */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-full sm:w-auto">
               {/* Sort Dropdown */}
               <div className="relative">
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors min-w-[120px] justify-center"
                 >
                   <Filter className="w-4 h-4" />
                   <span className="text-sm font-medium">Sort</span>
@@ -305,13 +321,13 @@ const StudentsPage = () => {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 min-w-[150px]"
+                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-xl z-50 min-w-[180px]"
                     >
                       {[
                         { value: 'name', label: 'By Name' },
                         { value: 'role', label: 'By Position' },
                         { value: 'dreamJob', label: 'By Dream Job' }
-                      ].map((sort) => (
+                      ].map((sort, index) => (
                         <button
                           key={sort.value}
                           onClick={() => {
@@ -320,7 +336,7 @@ const StudentsPage = () => {
                           }}
                           className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
                             sortBy === sort.value ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
-                          } ${sort.value === 'name' ? 'rounded-t-xl' : sort.value === 'dreamJob' ? 'rounded-b-xl' : ''}`}
+                          } ${index === 0 ? 'rounded-t-xl' : index === 2 ? 'rounded-b-xl' : ''}`}
                         >
                           {sort.label}
                         </button>
@@ -352,35 +368,40 @@ const StudentsPage = () => {
             </div>
           </motion.div>
 
-          {/* Results Count */}
+          {/* Results Count and Pagination Info */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mb-8"
+            className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
           >
             <p className="text-gray-600">
-              Showing <span className="font-semibold text-blue-600">{filteredAndSortedStudents.length}</span> student{filteredAndSortedStudents.length !== 1 ? 's' : ''}
+              Showing <span className="font-semibold text-blue-600">{currentStudents.length}</span> of <span className="font-semibold text-blue-600">{filteredAndSortedStudents.length}</span> student{filteredAndSortedStudents.length !== 1 ? 's' : ''}
               {searchTerm && (
                 <span> matching "<span className="font-semibold">{searchTerm}</span>"</span>
               )}
             </p>
+            {totalPages > 1 && (
+              <p className="text-sm text-gray-500">
+                Page {currentPage} of {totalPages}
+              </p>
+            )}
           </motion.div>
 
           {/* Students Grid/List */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${viewMode}-${sortBy}-${searchTerm}`}
+              key={`${viewMode}-${sortBy}-${searchTerm}-${currentPage}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
               className={
                 viewMode === 'grid'
-                  ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
+                  ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'
                   : 'space-y-4'
               }
             >
-              {filteredAndSortedStudents.map((student, index) => (
+              {currentStudents.map((student, index) => (
                 <motion.div
                   key={student.name}
                   initial={{ opacity: 0, y: 30 }}
@@ -388,20 +409,21 @@ const StudentsPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   className={`group cursor-pointer ${
                     viewMode === 'grid'
-                      ? 'bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2'
+                      ? 'bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1'
                       : 'bg-white rounded-2xl border border-gray-200 p-4 hover:shadow-lg transition-all duration-300'
                   }`}
                   onClick={() => setSelectedStudent(student)}
                 >
                   {viewMode === 'grid' ? (
-                    // Grid Card View
+                    // Grid Card View - Fixed sizing
                     <>
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative overflow-hidden" style={{ height: '200px' }}>
                         {student.photo ? (
                           <img
                             src={student.photo}
                             alt={student.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            className="w-full h-full object-cover"
+                            style={{ objectFit: 'cover', objectPosition: 'center' }}
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
@@ -425,7 +447,7 @@ const StudentsPage = () => {
                       </div>
                       <div className="p-4">
                         <div className="mb-3">
-                          <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">{student.name}</h3>
+                          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 line-clamp-1">{student.name}</h3>
                           {student.dreamJob && (
                             <p className="text-emerald-600 font-medium text-sm line-clamp-1">{student.dreamJob}</p>
                           )}
@@ -449,17 +471,20 @@ const StudentsPage = () => {
                       </div>
                     </>
                   ) : (
-                    // List View
+                    // List View - Fixed sizing and better mobile layout
                     <div className="flex items-center gap-4">
                       <div className="flex-shrink-0 relative">
                         {student.photo ? (
-                          <img
-                            src={student.photo}
-                            alt={student.name}
-                            className="w-16 h-16 rounded-full object-cover"
-                          />
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
+                            <img
+                              src={student.photo}
+                              alt={student.name}
+                              className="w-full h-full object-cover"
+                              style={{ objectFit: 'cover', objectPosition: 'center' }}
+                            />
+                          </div>
                         ) : (
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                             <Users className="w-8 h-8 text-blue-300" />
                           </div>
                         )}
@@ -470,16 +495,16 @@ const StudentsPage = () => {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-lg font-bold text-gray-900 truncate">{student.name}</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                          <h3 className="text-base sm:text-lg font-bold text-gray-900 truncate">{student.name}</h3>
                           {student.role && (
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold flex-shrink-0">
+                            <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold flex-shrink-0 w-fit">
                               {student.role}
                             </span>
                           )}
                         </div>
                         {student.dreamJob && (
-                          <p className="text-emerald-600 font-medium text-sm mb-1">{student.dreamJob}</p>
+                          <p className="text-emerald-600 font-medium text-sm mb-1 truncate">{student.dreamJob}</p>
                         )}
                         {student.funFact && (
                           <p className="text-gray-600 text-sm line-clamp-1">{student.funFact}</p>
@@ -495,6 +520,68 @@ const StudentsPage = () => {
               ))}
             </motion.div>
           </AnimatePresence>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex justify-center items-center gap-2 mt-12"
+            >
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="hidden sm:inline">Previous</span>
+              </button>
+              
+              <div className="flex items-center gap-1">
+                {[...Array(totalPages)].map((_, index) => {
+                  const pageNumber = index + 1;
+                  const isCurrentPage = pageNumber === currentPage;
+                  
+                  // Show first page, last page, current page, and pages around current
+                  const showPage = pageNumber === 1 || 
+                                  pageNumber === totalPages || 
+                                  Math.abs(pageNumber - currentPage) <= 1;
+                  
+                  if (!showPage) {
+                    // Show ellipsis
+                    if (pageNumber === currentPage - 2 || pageNumber === currentPage + 2) {
+                      return <span key={pageNumber} className="px-2 text-gray-400">...</span>;
+                    }
+                    return null;
+                  }
+                  
+                  return (
+                    <button
+                      key={pageNumber}
+                      onClick={() => setCurrentPage(pageNumber)}
+                      className={`w-10 h-10 rounded-xl font-medium transition-colors ${
+                        isCurrentPage
+                          ? 'bg-blue-600 text-white shadow-lg'
+                          : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {pageNumber}
+                    </button>
+                  );
+                })}
+              </div>
+              
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <span className="hidden sm:inline">Next</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          )}
 
           {/* No Results */}
           {filteredAndSortedStudents.length === 0 && (

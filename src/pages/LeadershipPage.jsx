@@ -164,12 +164,12 @@ const LeadershipPage = () => {
             </div>
 
             {/* Filter and View Controls */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-full sm:w-auto">
               {/* Filter Dropdown */}
               <div className="relative">
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors min-w-[120px] justify-center"
                 >
                   <Filter className="w-4 h-4" />
                   <span className="text-sm font-medium">Filter</span>
@@ -182,7 +182,7 @@ const LeadershipPage = () => {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 min-w-[150px]"
+                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-xl z-50 min-w-[180px]"
                     >
                       {['all', 'adviser', 'officers'].map((type) => (
                         <button
@@ -340,14 +340,15 @@ const LeadershipPage = () => {
                       }`}
                     >
                       {viewMode === 'grid' ? (
-                        // Grid Card View
+                        // Grid Card View - Fixed sizing
                         <>
-                          <div className="relative h-64 overflow-hidden">
+                          <div className="relative overflow-hidden" style={{ height: '240px' }}>
                             {officer.photo ? (
                               <img
                                 src={officer.photo}
                                 alt={officer.name}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                className="w-full h-full object-cover"
+                                style={{ objectFit: 'cover', objectPosition: 'center' }}
                               />
                             ) : (
                               <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
@@ -398,17 +399,20 @@ const LeadershipPage = () => {
                           </div>
                         </>
                       ) : (
-                        // List View
-                        <div className="flex items-center gap-6">
+                        // List View - Fixed sizing
+                        <div className="flex items-center gap-4 sm:gap-6">
                           <div className="flex-shrink-0 relative">
                             {officer.photo ? (
-                              <img
-                                src={officer.photo}
-                                alt={officer.name}
-                                className="w-16 h-16 rounded-full object-cover"
-                              />
+                              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
+                                <img
+                                  src={officer.photo}
+                                  alt={officer.name}
+                                  className="w-full h-full object-cover"
+                                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                                />
+                              </div>
                             ) : (
-                              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                                 <Users className="w-8 h-8 text-blue-300" />
                               </div>
                             )}

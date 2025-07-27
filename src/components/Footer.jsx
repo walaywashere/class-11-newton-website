@@ -104,11 +104,11 @@ const Footer = () => {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+                      className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 flex flex-col items-center justify-center"
                     >
                       <stat.icon className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-white">{stat.value}</div>
-                      <div className="text-sm text-gray-400">{stat.label}</div>
+                      <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                      <div className="text-sm text-gray-400 text-center">{stat.label}</div>
                     </motion.div>
                   ))}
                 </div>
