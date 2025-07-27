@@ -1,30 +1,28 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, RefreshCw, Briefcase, Sparkles, Instagram, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Briefcase, Sparkles, Instagram, Search, ChevronLeft, ChevronRight, Users, Heart, Target, Smile } from 'lucide-react';
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const StudentCard = ({ student }) => {
+const StudentCard = ({ student, index }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   
   const flipCard = useCallback(() => setIsFlipped(prev => !prev), []);
   const handleLinkClick = useCallback((e) => e.stopPropagation(), []);
 
-  // Add error boundary for missing student data
   if (!student || !student.name) {
     return null;
   }
 
   return (
     <motion.div 
-      variants={cardVariants}
-      whileTap={{ scale: 0.95, transition: { type: 'spring', stiffness: 400 } }}
+      initial={{ opacity: 0, y: 40, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: index * 0.05 }}
+      className="group"
     >
       <div 
-        className="w-full aspect-[3/4] [perspective:1000px] cursor-pointer group" 
+        className="w-full aspect-[3/4] [perspective:1000px] cursor-pointer" 
         onClick={flipCard}
         role="button"
         tabIndex={0}
@@ -40,74 +38,127 @@ const StudentCard = ({ student }) => {
           className="relative w-full h-full [transform-style:preserve-3d]"
           initial={false}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
         >
           {/* Front of the Card */}
-          <div className="absolute w-full h-full [backface-visibility:hidden] rounded-lg ring-1 ring-slate-900/5 group-hover:ring-indigo-500 transition-shadow">
-            <img 
-              className="w-full h-full object-cover rounded-lg shadow-md" 
-              src={student.photo} 
-              alt={`Photo of ${student.name}`}
-              loading="lazy"
-              onError={(e) => {
-                e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23f1f5f9"/%3E%3Ctext x="100" y="100" text-anchor="middle" dy="0.35em" font-family="system-ui" font-size="14" fill="%2364748b"%3ENo Image%3C/text%3E%3C/svg%3E';
-              }}
-            />
-            <div className="absolute inset-0 bg-black/30 rounded-lg"></div>
-            <div className="absolute top-2 right-2 p-1 bg-black/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <RefreshCw size={16} className="text-white" />
-            </div>
-            <div className="absolute bottom-0 left-0 w-full p-4">
-              <h3 className="font-bold text-lg text-white drop-shadow-md">{student.name}</h3>
-              {student.role && (
-                <p className="text-sm text-indigo-300 font-semibold flex items-center drop-shadow-md">
-                  <Star size={14} className="mr-1" />
-                  {student.role}
-                </p>
+          <div className="absolute w-full h-full [backface-visibility:hidden] rounded-2xl overflow-hidden shadow-large group-hover:shadow-glow transition-all duration-300">
+            <div className="relative w-full h-full">
+              {!imageLoaded && (
+                <div className="absolute inset-0 skeleton" />
               )}
+              
+              <img 
+                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" 
+                src={student.photo} 
+                alt={`Photo of ${student.name}`}
+                loading="lazy"
+                onLoad={() => setImageLoaded(true)}
+                onError={(e) => {
+                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23f1f5f9"/%3E%3Ctext x="100" y="100" text-anchor="middle" dy="0.35em" font-family="system-ui" font-size="14" fill="%2364748b"%3ENo Image%3C/text%3E%3C/svg%3E';
+                  setImageLoaded(true);
+                }}
+              />
+              
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              
+              {/* Role badge */}
+              {student.role && student.role !== 'Student' && (
+                <div className="absolute top-4 left-4 px-3 py-1 glass text-white text-xs font-semibold rounded-full">
+                  {student.role}
+                </div>
+              )}
+              
+              {/* Flip indicator */}
+              <div className="absolute top-4 right-4 w-8 h-8 glass rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <motion.div
+                  animate={{ rotate: isFlipped ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Sparkles className="w-4 h-4" />
+                </motion.div>
+              </div>
+              
+              {/* Name overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-1">{student.name}</h3>
+                {student.dreamJob && (
+                  <p className="text-sm text-white/80 flex items-center gap-2">
+                    <Target className="w-3 h-3" />
+                    {student.dreamJob}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Back of the Card */}
-          <div className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-lg shadow-xl p-3 sm:p-5 flex flex-col justify-between ring-1 ring-slate-900/5 group-hover:ring-indigo-500 transition-shadow">
-            <div className="text-left overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent">
-              {student.dreamJob && (
-                <div className="flex items-start gap-2 sm:gap-3 mb-3 sm:mb-4">
-                  <Briefcase className="h-6 w-6 sm:h-8 sm:w-8 text-indigo-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase">Dream Job</p>
-                    <p className="font-bold text-base sm:text-lg">{student.dreamJob}</p>
-                  </div>
-                </div>
-              )}
-              {student.dreamJob && student.funFact && (
-                <div className="w-full h-px bg-slate-700 my-2 sm:my-3"></div>
-              )}
-              {student.funFact && (
-                <div className="flex items-start gap-2 sm:gap-3">
-                  <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-indigo-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase">Fun Fact</p>
-                    <p className="text-sm sm:text-base">{student.funFact}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-            {student.socials?.instagram && (
-              <div className="mt-3 pt-2 sm:mt-4 sm:pt-3 border-t border-slate-700 flex-shrink-0">
-                <a
-                  href={`https://instagram.com/${student.socials.instagram}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-800 rounded-sm"
-                  onClick={handleLinkClick}
-                  aria-label={`Visit ${student.name}'s Instagram profile`}
-                >
-                  <Instagram size={18} />
-                  <span className="text-xs sm:text-sm font-medium">@{student.socials.instagram}</span>
-                </a>
+          <div className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl bg-white shadow-large border border-neutral-100 overflow-hidden">
+            <div className="h-full flex flex-col">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-4 text-white">
+                <h3 className="text-lg font-bold mb-1">{student.name}</h3>
+                {student.role && (
+                  <p className="text-xs text-white/80">{student.role}</p>
+                )}
               </div>
-            )}
+              
+              {/* Content */}
+              <div className="flex-1 p-4 space-y-4">
+                {/* Dream Job */}
+                {student.dreamJob && (
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-4 h-4 text-primary-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">Dream Career</p>
+                      <p className="text-sm font-medium text-neutral-900">{student.dreamJob}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Fun Fact */}
+                {student.funFact && (
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Smile className="w-4 h-4 text-accent-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">Fun Fact</p>
+                      <p className="text-sm text-neutral-700 leading-relaxed">{student.funFact}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Quote */}
+                {student.quote && (
+                  <div className="bg-neutral-50 rounded-xl p-3 border-l-4 border-primary-400">
+                    <p className="text-sm italic text-neutral-700 leading-relaxed">"{student.quote}"</p>
+                  </div>
+                )}
+              </div>
+              
+              {/* Footer */}
+              <div className="p-4 bg-neutral-50 border-t border-neutral-100">
+                {student.socials?.instagram ? (
+                  <a
+                    href={`https://instagram.com/${student.socials.instagram}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleLinkClick}
+                    className="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg text-xs font-semibold hover:scale-105 transition-transform"
+                  >
+                    <Instagram className="w-3 h-3" />
+                    @{student.socials.instagram}
+                  </a>
+                ) : (
+                  <div className="text-center text-xs text-neutral-400">
+                    Tap to flip back
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -116,51 +167,40 @@ const StudentCard = ({ student }) => {
 };
 
 const StudentShowcase = ({ students = [] }) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const studentsPerPage = 10;
+  const [searchTerm, setSearchTerm] = useState('');
+  const studentsPerPage = 12;
+
+  // Filter students based on search
+  const filteredStudents = useMemo(() => {
+    return students.filter(student => 
+      student?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student?.dreamJob?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student?.role?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [students, searchTerm]);
+
+  // Pagination logic
+  const paginationData = useMemo(() => {
+    const totalStudents = filteredStudents.length;
+    const totalPages = Math.ceil(totalStudents / studentsPerPage);
+    const startIndex = (currentPage - 1) * studentsPerPage;
+    const endIndex = startIndex + studentsPerPage;
+    const currentStudents = filteredStudents.slice(startIndex, endIndex);
+
+    return {
+      totalStudents,
+      totalPages,
+      currentStudents,
+      startIndex,
+      endIndex: Math.min(endIndex, totalStudents)
+    };
+  }, [filteredStudents, currentPage, studentsPerPage]);
 
   // Reset to first page when search changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery]);
-
-  // Memoize filtered students to avoid unnecessary recalculations
-  const filteredStudents = useMemo(() => {
-    if (!Array.isArray(students)) return [];
-    return students.filter(student =>
-      student?.name?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [students, searchQuery]);
-
-  // Memoize pagination calculations
-  const paginationData = useMemo(() => {
-    const indexOfLastStudent = currentPage * studentsPerPage;
-    const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
-    const currentStudents = filteredStudents.slice(indexOfFirstStudent, indexOfLastStudent);
-    const totalPages = Math.ceil(filteredStudents.length / studentsPerPage);
-    
-    return {
-      currentStudents,
-      totalPages,
-      indexOfFirstStudent,
-      indexOfLastStudent
-    };
-  }, [filteredStudents, currentPage, studentsPerPage]);
-
-  const paginate = useCallback((pageNumber) => {
-    if (pageNumber < 1 || pageNumber > paginationData.totalPages) return;
-    setCurrentPage(pageNumber);
-  }, [paginationData.totalPages]);
-
-  const handleSearchChange = useCallback((e) => {
-    setSearchQuery(e.target.value);
-  }, []);
-
-  const gridContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
-  };
+  }, [searchTerm]);
 
   // Generate page numbers for pagination
   const pageNumbers = useMemo(() => {
@@ -180,131 +220,158 @@ const StudentShowcase = ({ students = [] }) => {
     
     return pages;
   }, [currentPage, paginationData]);
-  
+
   return (
-    <section id="classmates" className="py-16 md:py-24 bg-slate-100">
+    <section id="classmates" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-white via-primary-50/30 to-accent-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-12 border-4 border-slate-200">
-          <motion.h2 
-            initial={{ opacity: 0, y: 50, skewY: 3 }}
-            whileInView={{ opacity: 1, y: 0, skewY: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="text-3xl sm:text-4xl font-bold text-center text-slate-900"
-          >
-            Meet the Class
-          </motion.h2>
-          <p className="text-center mt-2 text-slate-600">The amazing individuals who make 11-Newton special.</p>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 glass rounded-full text-primary-700 text-sm font-medium">
+            <Users className="w-4 h-4" />
+            Our Amazing Class
+          </div>
           
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 leading-tight">
+            Meet Our
+            <span className="block gradient-text bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+              Brilliant Minds
+            </span>
+          </h2>
+          
+          <p className="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            Discover the unique stories, dreams, and personalities that make Class 11-Newton extraordinary.
+          </p>
+
           {/* Search Bar */}
-          <div className="mt-8 mb-12 max-w-lg mx-auto">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
-              <input
-                type="text"
-                placeholder="Search students..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                aria-label="Search students by name"
-              />
+          <div className="max-w-md mx-auto relative">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-neutral-400" />
             </div>
+            <input
+              type="text"
+              placeholder="Search students, careers, roles..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 bg-white border border-neutral-200 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-neutral-900 placeholder-neutral-500"
+            />
           </div>
+        </motion.div>
 
-          {/* Results info */}
-          <div className="text-center mb-6 text-slate-600">
-            {searchQuery && (
-              <p>
-                Found {filteredStudents.length} student{filteredStudents.length !== 1 ? 's' : ''} 
-                {searchQuery && ` matching "${searchQuery}"`}
-              </p>
-            )}
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-4 mb-12"
+        >
+          <div className="px-4 py-2 bg-white rounded-xl shadow-soft border border-neutral-100">
+            <span className="text-sm text-neutral-600">
+              Showing <span className="font-semibold text-primary-600">{paginationData.currentStudents.length}</span> of{' '}
+              <span className="font-semibold text-primary-600">{paginationData.totalStudents}</span> students
+            </span>
           </div>
-
-          {/* Student Grid */}
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={`${currentPage}-${searchQuery}`}
-              className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 min-h-[400px]"
-              variants={gridContainerVariants}
-              initial="hidden"
-              animate="visible"
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-            >
-              {paginationData.currentStudents.length > 0 ? (
-                paginationData.currentStudents.map((student, index) => (
-                  <StudentCard key={`${student.name}-${index}`} student={student} />
-                ))
-              ) : (
-                <div className="col-span-full flex flex-col items-center justify-center py-12 text-slate-500">
-                  <Search size={48} className="mb-4 opacity-50" />
-                  <p className="text-lg">No students found</p>
-                  {searchQuery && (
-                    <p className="text-sm mt-2">Try adjusting your search term</p>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Pagination */}
-          {paginationData.totalPages > 1 && (
-            <div className="mt-12 flex justify-center items-center space-x-1 sm:space-x-2">
-              <motion.button 
-                whileTap={{ scale: 0.95 }} 
-                onClick={() => paginate(currentPage - 1)} 
-                disabled={currentPage === 1} 
-                className="p-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                aria-label="Previous page"
-              >
-                <ChevronLeft size={20} />
-              </motion.button>
-              
-              {pageNumbers.map((pageNum, index) => (
-                pageNum === '...' ? (
-                  <span key={`ellipsis-${index}`} className="px-2 py-2 text-slate-400">
-                    ...
-                  </span>
-                ) : (
-                  <motion.button
-                    key={pageNum}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => paginate(pageNum)}
-                    className={`relative px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                      currentPage === pageNum
-                        ? 'bg-indigo-600 text-white'
-                        : 'text-slate-700 hover:bg-slate-200'
-                    }`}
-                    aria-label={`Go to page ${pageNum}`}
-                    aria-current={currentPage === pageNum ? 'page' : undefined}
-                  >
-                    {currentPage === pageNum && (
-                      <motion.div
-                        layoutId="highlight"
-                        className="absolute inset-0 bg-indigo-600 rounded-md"
-                        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                      />
-                    )}
-                    <span className={`relative z-10 ${currentPage === pageNum ? 'text-white' : ''}`}>
-                      {pageNum}
-                    </span>
-                  </motion.button>
-                )
-              ))}
-              
-              <motion.button 
-                whileTap={{ scale: 0.95 }} 
-                onClick={() => paginate(currentPage + 1)} 
-                disabled={currentPage === paginationData.totalPages} 
-                className="p-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                aria-label="Next page"
-              >
-                <ChevronRight size={20} />
-              </motion.button>
+          {searchTerm && (
+            <div className="px-4 py-2 bg-accent-50 rounded-xl border border-accent-200">
+              <span className="text-sm text-accent-700">
+                Searching for: <span className="font-semibold">"{searchTerm}"</span>
+              </span>
             </div>
           )}
-        </div>
+        </motion.div>
+
+        {/* Students Grid */}
+        <AnimatePresence mode="wait">
+          {paginationData.currentStudents.length > 0 ? (
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mb-12"
+            >
+              {paginationData.currentStudents.map((student, index) => (
+                <StudentCard key={student.name} student={student} index={index} />
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-16"
+            >
+              <div className="bg-white rounded-2xl p-8 shadow-soft max-w-md mx-auto">
+                <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-8 h-8 text-neutral-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-900 mb-2">No students found</h3>
+                <p className="text-neutral-600 text-sm mb-4">
+                  Try adjusting your search terms or clear the search to see all students.
+                </p>
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+                >
+                  Clear Search
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Pagination */}
+        {paginationData.totalPages > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center items-center gap-2 flex-wrap"
+          >
+            {/* Previous button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Page numbers */}
+            {pageNumbers.map((page, index) => (
+              <button
+                key={index}
+                onClick={() => typeof page === 'number' && setCurrentPage(page)}
+                disabled={typeof page !== 'number'}
+                className={`min-w-[40px] h-10 rounded-xl font-medium text-sm transition-all duration-200 ${
+                  page === currentPage
+                    ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-glow'
+                    : typeof page === 'number'
+                    ? 'bg-white border border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600'
+                    : 'bg-transparent text-neutral-400 cursor-default'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            {/* Next button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, paginationData.totalPages))}
+              disabled={currentPage === paginationData.totalPages}
+              className="p-2 rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );

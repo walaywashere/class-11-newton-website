@@ -1,171 +1,126 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Trophy, Star, Award } from 'lucide-react';
+import { Calendar, Trophy, Star, Award, Clock, MapPin, Users, Sparkles } from 'lucide-react';
 
-// Enhanced skeleton component with better animations
+// Enhanced skeleton component with modern styling
 const TimelineSkeleton = ({ isOdd, delay = 0 }) => (
   <motion.div 
-    className={`flex w-full mb-8 sm:mb-10 ${isOdd ? 'md:flex-row-reverse' : 'md:flex-row'} items-center`}
-    initial={{ opacity: 0, y: 30 }}
+    className={`flex w-full mb-12 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center`}
+    initial={{ opacity: 0, y: 40 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
+    transition={{ duration: 0.6, delay }}
   >
-    <div className="w-full md:w-1/2 px-2 sm:px-0">
-      <div className="p-4 sm:p-6 rounded-lg sm:rounded-xl bg-white shadow-lg">
-        <motion.div 
-          className="h-3 sm:h-4 w-1/3 bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 rounded mb-3"
-          animate={{ x: [-20, 20, -20] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="h-5 sm:h-6 w-3/4 bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 rounded mb-4"
-          animate={{ x: [-20, 20, -20] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
-        />
-        <motion.div 
-          className="h-3 sm:h-4 w-full bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 rounded mb-2"
-          animate={{ x: [-20, 20, -20] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.4 }}
-        />
-        <motion.div 
-          className="h-3 sm:h-4 w-5/6 bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 rounded"
-          animate={{ x: [-20, 20, -20] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.6 }}
-        />
+    <div className="w-full lg:w-5/12">
+      <div className="bg-white rounded-2xl shadow-soft p-6 border border-neutral-100">
+        <div className="skeleton h-4 w-1/3 rounded-lg mb-4" />
+        <div className="skeleton h-6 w-3/4 rounded-lg mb-4" />
+        <div className="skeleton h-4 w-full rounded-lg mb-2" />
+        <div className="skeleton h-4 w-5/6 rounded-lg mb-4" />
+        <div className="skeleton h-32 w-full rounded-xl" />
       </div>
     </div>
     
-    {/* Mobile icon */}
-    <div className="flex md:hidden w-8 h-8 rounded-full bg-slate-300 ml-4 flex-shrink-0 animate-pulse" />
-    
-    {/* Desktop icon */}
-    <div className="relative w-12 flex-shrink-0 mx-4 hidden md:block">
-      <motion.div 
-        className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-slate-300"
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-      />
+    {/* Timeline connector */}
+    <div className="relative w-2 lg:w-24 flex-shrink-0 mx-auto lg:mx-0">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="w-4 h-4 bg-neutral-300 rounded-full animate-pulse" />
+      </div>
     </div>
+    
+    <div className="w-full lg:w-5/12" />
   </motion.div>
 );
 
-// Enhanced timeline item component
+// Enhanced timeline item component with modern design
 const TimelineItem = ({ item, isOdd, index }) => {
-  const [isHoverig, setIsHovering] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   // Memoize animation variants
   const itemVariants = useMemo(() => ({
     hidden: { 
       opacity: 0, 
-      x: isOdd ? 60 : -60,
-      scale: 0.9
+      y: 40,
+      scale: 0.95
     },
     visible: { 
       opacity: 1, 
-      x: 0,
+      y: 0,
       scale: 1,
-      transition: { 
-        type: 'spring', 
-        stiffness: 100, 
-        damping: 15,
-        delay: index * 0.1
-      }
-    },
-  }), [isOdd, index]);
-
-  const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: { 
-      scale: 1, 
-      rotate: 0,
-      transition: { 
-        type: 'spring', 
-        stiffness: 200, 
-        damping: 15,
-        delay: index * 0.1 + 0.3
+      transition: {
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "easeOut"
       }
     }
-  };
+  }), [index]);
 
-  // Default icon if none provided
-  const getDefaultIcon = useCallback(() => {
-    const icons = [Trophy, Star, Award, Calendar];
-    const IconComponent = icons[index % icons.length];
-    return <IconComponent size={20} />;
-  }, [index]);
+  const cardVariants = useMemo(() => ({
+    rest: { scale: 1, y: 0 },
+    hover: { 
+      scale: 1.02, 
+      y: -8,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  }), []);
 
   if (!item) return null;
 
   return (
-    <motion.div
-      className={`flex w-full mb-8 sm:mb-10 items-center ${isOdd ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+    <motion.div 
+      className={`flex w-full mb-12 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center group`}
       variants={itemVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.3 }}
+      onHoverStart={() => setIsHovering(true)}
+      onHoverEnd={() => setIsHovering(false)}
     >
-      {/* Card Content */}
-      <div className="w-full md:w-1/2 px-2 sm:px-0">
-        <motion.div 
-          className="bg-white rounded-lg sm:rounded-xl shadow-lg hover:shadow-2xl p-4 sm:p-6 relative overflow-hidden group cursor-pointer"
-          whileHover={{ 
-            scale: 1.02,
-            y: -4,
-            transition: { type: 'spring', stiffness: 400, damping: 25 }
-          }}
-          whileTap={{ 
-            scale: 0.98,
-            transition: { type: 'spring', stiffness: 400, damping: 25 }
-          }}
-          onHoverStart={() => setIsHovering(true)}
-          onHoverEnd={() => setIsHovering(false)}
-        >
-          {/* Hover gradient overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHoverig ? 1 : 0 }}
-          />
-          
-          <div className="relative z-10">
-            <motion.div 
-              className="flex items-center gap-2 mb-3"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-            >
-              <Calendar size={16} className="text-indigo-600 flex-shrink-0" />
-              <p className="text-xs sm:text-sm font-semibold text-indigo-600">
-                {item.date || 'Date Unknown'}
-              </p>
-            </motion.div>
-            
-            <motion.h3 
-              className="mb-3 font-bold text-slate-900 text-base sm:text-lg md:text-xl leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-            >
-              {item.title || 'Event Title'}
-            </motion.h3>
-            
-            <motion.p 
-              className="text-xs sm:text-sm leading-relaxed tracking-wide text-slate-600"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
-            >
-              {item.description || 'No description available.'}
-            </motion.p>
+      {/* Content Card */}
+      <motion.div 
+        className="w-full lg:w-5/12"
+        variants={cardVariants}
+        initial="rest"
+        whileHover="hover"
+      >
+        <div className="bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden border border-neutral-100 group-hover:border-primary-200">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-4 text-white">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                <span className="text-sm font-medium opacity-90">
+                  {item.date ? new Date(item.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  }) : 'Date not available'}
+                </span>
+              </div>
+              {item.icon && (
+                <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                  <item.icon className="w-4 h-4" />
+                </div>
+              )}
+            </div>
+            <h3 className="text-xl font-bold leading-tight">
+              {item.title || 'Achievement Title'}
+            </h3>
+          </div>
 
-            {/* Optional image */}
+          {/* Content */}
+          <div className="p-6">
+            <p className="text-neutral-700 leading-relaxed mb-6">
+              {item.description || 'Achievement description goes here.'}
+            </p>
+
+            {/* Image */}
             {item.image && (
               <motion.div 
-                className="mt-4 rounded-lg overflow-hidden"
-                initial={{ opacity: 0, scale: 0.9 }}
+                className="mb-6 rounded-xl overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
@@ -173,7 +128,7 @@ const TimelineItem = ({ item, isOdd, index }) => {
                 <img 
                   src={item.image} 
                   alt={item.title || 'Achievement image'}
-                  className="w-full h-32 sm:h-40 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -182,72 +137,63 @@ const TimelineItem = ({ item, isOdd, index }) => {
               </motion.div>
             )}
 
-            {/* Tags if provided */}
+            {/* Tags */}
             {item.tags && Array.isArray(item.tags) && item.tags.length > 0 && (
-              <motion.div 
-                className="flex flex-wrap gap-2 mt-3"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.6 }}
-              >
+              <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag, tagIndex) => (
-                  <span 
+                  <span
                     key={tagIndex}
-                    className="px-2 py-1 text-xs bg-indigo-100 text-indigo-700 rounded-full font-medium"
+                    className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-medium border border-primary-100"
                   >
                     {tag}
                   </span>
                 ))}
-              </motion.div>
+              </div>
             )}
           </div>
-        </motion.div>
-      </div>
-      
-      {/* Mobile Icon */}
-      <motion.div 
-        className="flex md:hidden w-8 h-8 rounded-full bg-indigo-600 text-white ml-4 flex-shrink-0 items-center justify-center shadow-lg"
-        variants={iconVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <div className="text-xs">
-          {item.icon || getDefaultIcon()}
         </div>
       </motion.div>
       
-      {/* Desktop Icon */}
-      <div className="relative w-12 flex-shrink-0 mx-4 hidden md:block">
-        <motion.div 
-          className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center bg-indigo-600 text-white shadow-xl w-12 h-12 rounded-full cursor-pointer"
-          variants={iconVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          whileHover={{ 
-            scale: 1.15, 
-            rotate: 5,
-            boxShadow: "0 8px 25px rgba(99, 102, 241, 0.4)"
-          }}
-          whileTap={{ scale: 0.9 }}
-        >
-          {item.icon || getDefaultIcon()}
-        </motion.div>
+      {/* Timeline Connector */}
+      <div className="relative w-2 lg:w-24 flex-shrink-0 mx-auto lg:mx-0">
+        {/* Vertical line */}
+        <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gradient-to-b from-primary-200 to-accent-200 transform -translate-x-1/2" />
+        
+        {/* Center dot */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <motion.div 
+            className="relative"
+            animate={isHovering ? { scale: 1.2 } : { scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="w-6 h-6 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-glow flex items-center justify-center">
+              {item.icon ? (
+                <item.icon className="w-3 h-3 text-white" />
+              ) : (
+                <div className="w-2 h-2 bg-white rounded-full" />
+              )}
+            </div>
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-400 rounded-full opacity-0"
+              animate={isHovering ? { opacity: 0.3, scale: 1.5 } : { opacity: 0, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+        </div>
       </div>
+      
+      {/* Spacer for alternating layout */}
+      <div className="w-full lg:w-5/12" />
     </motion.div>
   );
 };
 
-// Enhanced main component
-const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "A timeline of our key moments and achievements." }) => {
+// Enhanced main component with modern design
+const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "Milestones and achievements that define our path to excellence." }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate data fetching with error handling
+    // Simulate data loading
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1200);
@@ -262,126 +208,142 @@ const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "A 
       : [];
   }, [achievements]);
 
-  // Animation variants for container
-  const containerVariants = {
+  // Animation variants
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
         delayChildren: 0.2
-      },
+      }
     }
-  };
+  }), []);
 
-  const lineVariants = {
-    hidden: { scaleY: 0, originY: 0 },
-    visible: { 
-      scaleY: 1,
-      transition: { 
-        duration: 1.5, 
-        ease: "easeInOut",
+  const headerVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
         delay: 0.5
       }
     }
-  };
-
-
+  }), []);
 
   return (
-    <section id="achievements" className="py-12 sm:py-16 md:py-24 bg-slate-200 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="achievements" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-primary-50/30 via-white to-accent-50/30 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center mb-16 sm:mb-20"
         >
-          <motion.h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2"
-            initial={{ opacity: 0, y: 30, skewY: 3 }}
-            whileInView={{ opacity: 1, y: 0, skewY: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            {title}
-          </motion.h2>
-          <motion.p 
-            className="text-slate-600 text-sm sm:text-base"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 glass rounded-full text-primary-700 text-sm font-medium">
+            <Trophy className="w-4 h-4" />
+            Our Achievements
+          </div>
+          
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 leading-tight">
+            {title.split(' ').map((word, index) => (
+              <span key={index}>
+                {index === 1 ? (
+                  <span className="gradient-text bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+                    {word}
+                  </span>
+                ) : (
+                  word
+                )}
+                {index < title.split(' ').length - 1 && ' '}
+              </span>
+            ))}
+          </h2>
+          
+          <p className="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
             {subtitle}
-          </motion.p>
+          </p>
         </motion.div>
-        
+
+        {/* Timeline Container */}
         <div className="relative">
-          {/* Animated vertical line */}
-          <motion.div 
-            className="absolute top-0 h-full w-0.5 bg-gradient-to-b from-indigo-400 via-indigo-500 to-indigo-600 left-6 md:left-1/2 md:-translate-x-1/2 shadow-sm"
-            variants={lineVariants}
+          {/* Background decoration */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-50/20 to-transparent rounded-3xl" />
+          
+          <motion.div
+            variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-          />
-
-          <AnimatePresence mode="wait">
+            className="relative"
+          >
             {isLoading ? (
-              <motion.div
-                key="loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
+              // Loading skeletons
+              <div className="space-y-8">
                 {[...Array(3)].map((_, index) => (
-                  <TimelineSkeleton 
-                    key={index} 
-                    isOdd={index % 2 !== 0} 
-                    delay={index * 0.2}
-                  />
+                  <TimelineSkeleton key={index} isOdd={index % 2 === 1} delay={index * 0.2} />
                 ))}
-              </motion.div>
+              </div>
             ) : validAchievements.length > 0 ? (
-              <motion.div
-                key="content"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-              >
-                {validAchievements.map((item, index) => (
-                  <TimelineItem 
-                    key={`${item.title || 'item'}-${index}`} 
-                    item={item} 
-                    isOdd={index % 2 !== 0}
+              // Achievement items
+              <div className="space-y-8">
+                {validAchievements.map((achievement, index) => (
+                  <TimelineItem
+                    key={`${achievement.title || 'achievement'}-${index}`}
+                    item={achievement}
+                    isOdd={index % 2 === 1}
                     index={index}
                   />
                 ))}
-              </motion.div>
+              </div>
             ) : (
-              <motion.div 
-                key="empty"
-                className="text-center py-16"
+              // Empty state
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
+                className="text-center py-16"
               >
-                <div className="bg-white rounded-xl p-8 shadow-lg max-w-md mx-auto">
-                  <div className="text-slate-400 mb-4">
-                    <Trophy className="w-16 h-16 mx-auto" />
+                <div className="bg-white rounded-2xl p-8 shadow-soft max-w-md mx-auto">
+                  <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Trophy className="w-8 h-8 text-neutral-400" />
                   </div>
-                  <h3 className="text-slate-700 text-lg font-semibold mb-2">No achievements yet</h3>
-                  <p className="text-slate-500 text-sm">Check back later for updates on our journey!</p>
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-2">No achievements yet</h3>
+                  <p className="text-neutral-600 text-sm">
+                    Our journey is just beginning. Great achievements are on the way!
+                  </p>
                 </div>
               </motion.div>
             )}
-          </AnimatePresence>
+          </motion.div>
         </div>
+
+        {/* Call to action */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-center mt-16"
+        >
+          <div className="bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl p-8 text-white">
+            <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-80" />
+            <h3 className="text-2xl font-bold mb-4">Ready to Create More Memories?</h3>
+            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+              Join us as we continue to achieve greatness and make our mark in the world.
+            </p>
+            <a
+              href="#classmates"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-semibold text-lg hover:bg-neutral-50 hover:scale-105 transition-all duration-300 shadow-large"
+            >
+              <Users className="w-5 h-5" />
+              Meet the Team
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
