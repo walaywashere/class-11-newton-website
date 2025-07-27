@@ -33,9 +33,12 @@ const Navbar = () => {
           ? 'glass-dark backdrop-blur-xl border-b border-white/10' 
           : 'bg-transparent'
       }`}
+      style={{
+        paddingTop: 'env(safe-area-inset-top)',
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 sm:h-18 lg:h-20">
           {/* Logo */}
           <motion.div 
             className="flex items-center gap-3"
@@ -88,7 +91,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
+              className="p-2 rounded-lg sm:rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
             >
@@ -130,7 +133,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="lg:hidden glass-dark backdrop-blur-xl border-t border-white/10"
           >
-            <div className="px-3 sm:px-4 py-4 sm:py-6 space-y-1 sm:space-y-2">
+            <div className="px-4 py-6 space-y-2">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.title}
@@ -141,13 +144,13 @@ const Navbar = () => {
                   <Link
                     to={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`group flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+                    className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium ${
                       location.pathname === link.href 
                         ? 'text-white bg-white/10' 
                         : 'text-white/80 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full transition-transform ${
+                    <div className={`w-2 h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full transition-transform ${
                       location.pathname === link.href 
                         ? 'scale-125' 
                         : 'group-hover:scale-125'

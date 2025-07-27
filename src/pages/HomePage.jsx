@@ -16,7 +16,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden navbar-offset safe-x">
         {/* Modern gradient background */}
         <div className="absolute inset-0 gradient-bg"></div>
         
@@ -85,22 +85,22 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 max-w-2xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-12 max-w-2xl mx-auto"
           >
-            <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
-              <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
-              <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">40+</div>
-              <div className="text-white/70 text-xs sm:text-sm">Students</div>
+            <div className="glass rounded-2xl p-6 text-center group hover:bg-white/20 transition-all duration-300">
+              <Users className="w-8 h-8 text-accent-300 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-2xl font-bold text-white mb-1">40+</div>
+              <div className="text-white/70 text-sm">Students</div>
             </div>
-            <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
-              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
-              <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">15+</div>
-              <div className="text-white/70 text-xs sm:text-sm">Achievements</div>
+            <div className="glass rounded-2xl p-6 text-center group hover:bg-white/20 transition-all duration-300">
+              <Trophy className="w-8 h-8 text-accent-300 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-2xl font-bold text-white mb-1">15+</div>
+              <div className="text-white/70 text-sm">Achievements</div>
             </div>
-            <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
-              <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
-              <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">100%</div>
-              <div className="text-white/70 text-xs sm:text-sm">Excellence</div>
+            <div className="glass rounded-2xl p-6 text-center group hover:bg-white/20 transition-all duration-300">
+              <BookOpen className="w-8 h-8 text-accent-300 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-2xl font-bold text-white mb-1">100%</div>
+              <div className="text-white/70 text-sm">Excellence</div>
             </div>
           </motion.div>
 

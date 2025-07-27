@@ -8,7 +8,7 @@ const StudentsPage = () => {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Header */}
-      <div className="relative bg-gradient-to-br from-primary-500 via-accent-500 to-primary-600 text-white py-12 sm:py-16 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-primary-500 via-accent-500 to-primary-600 text-white py-12 sm:py-16 overflow-hidden navbar-offset">
         {/* Background decoration */}
         <div className="absolute inset-0 gradient-bg opacity-80"></div>
         <div className="absolute inset-0 bg-black/10"></div>

@@ -13,6 +13,57 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Safe area utilities for mobile devices */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-x {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-y {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-all {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Navbar height compensation */
+.navbar-offset {
+  padding-top: calc(4rem + env(safe-area-inset-top));
+}
+
+@media (min-width: 640px) {
+  .navbar-offset {
+    padding-top: calc(4.5rem + env(safe-area-inset-top));
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-offset {
+    padding-top: calc(5rem + env(safe-area-inset-top));
+  }
+}
+
 /* Modern scrollbar styles */
 ::-webkit-scrollbar {
   width: 6px;
@@ -150,5 +201,10 @@ button, a, input, textarea {
   /* Reduce motion on mobile for better performance */
   .animate-float {
     animation-duration: 8s;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .navbar-offset {
+    padding-top: calc(4rem + env(safe-area-inset-top, 20px));
   }
 }

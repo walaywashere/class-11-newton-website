@@ -70,7 +70,7 @@ const TimelineItem = ({ item, isOdd, index }) => {
 
   return (
     <motion.div 
-      className={`flex w-full mb-8 sm:mb-12 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center group`}
+      className={`flex w-full mb-12 sm:mb-16 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-stretch group`}
       variants={itemVariants}
       initial="hidden"
       whileInView="visible"
@@ -80,12 +80,12 @@ const TimelineItem = ({ item, isOdd, index }) => {
     >
       {/* Content Card */}
       <motion.div 
-        className="w-full lg:w-5/12"
+        className="w-full lg:w-5/12 flex"
         variants={cardVariants}
         initial="rest"
         whileHover="hover"
       >
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden border border-neutral-100 group-hover:border-primary-200">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden border border-neutral-100 group-hover:border-primary-200 w-full flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-3 sm:p-4 text-white">
             <div className="flex items-center justify-between mb-2">
@@ -111,8 +111,8 @@ const TimelineItem = ({ item, isOdd, index }) => {
           </div>
 
           {/* Content */}
-          <div className="p-4 sm:p-6">
-            <p className="text-neutral-700 leading-relaxed mb-6">
+          <div className="p-4 sm:p-6 flex-1 flex flex-col">
+            <p className="text-neutral-700 leading-relaxed mb-6 flex-1">
               {item.description || 'Achievement description goes here.'}
             </p>
 
@@ -240,7 +240,7 @@ const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "Mi
   }), []);
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-primary-50/30 via-white to-accent-50/30 overflow-hidden">
+    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary-50/30 via-white to-accent-50/30 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -248,7 +248,7 @@ const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "Mi
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-12 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 glass rounded-full text-primary-700 text-sm font-medium">
             <Trophy className="w-4 h-4" />
