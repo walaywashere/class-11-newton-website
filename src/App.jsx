@@ -54,20 +54,32 @@ function App() {
                   </Routes>
                 </Suspense>
               </main>
-              <footer className="relative bg-gradient-to-r from-primary-900 via-primary-800 to-primary-900 text-white py-8 sm:py-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <footer className="relative bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 text-white py-12 sm:py-16 border-t border-neutral-200 footer-shadow mt-8">
+                {/* Background pattern for better visual separation */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-900/10 via-accent-900/10 to-primary-900/10"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.1),transparent_50%)]"></div>
+                
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary-400 to-accent-500 rounded-lg flex items-center justify-center">
-                        <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                    <div className="flex items-center justify-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-glow">
+                        <Sparkles className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-lg sm:text-xl font-bold">Class 11-Newton</h3>
+                      <div>
+                        <h3 className="text-2xl font-bold">Class 11-Newton</h3>
+                        <p className="text-white/60 text-sm">Class of 2025</p>
+                      </div>
                     </div>
-                    <p className="text-white/80 mb-4 sm:mb-6 text-sm sm:text-base">Shaping tomorrow, one brilliant mind at a time.</p>
-                    <div className="w-16 sm:w-24 h-0.5 bg-gradient-to-r from-primary-400 to-accent-500 mx-auto mb-4 sm:mb-6"></div>
-                    <p className="text-white/60 text-xs sm:text-sm px-4">
-                      &copy; 2025 Class 11-Newton. All Rights Reserved. | Built with ❤️ by our amazing class.
-                    </p>
+                    <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto leading-relaxed">Shaping tomorrow, one brilliant mind at a time.</p>
+                    <div className="w-24 h-1 bg-gradient-to-r from-primary-400 to-accent-500 mx-auto mb-8 rounded-full"></div>
+                    <div className="space-y-4">
+                      <p className="text-white/70 text-base">
+                        &copy; 2025 Class 11-Newton. All Rights Reserved.
+                      </p>
+                      <p className="text-white/60 text-sm">
+                        Built with ❤️ by our amazing class
+                      </p>
+                    </div>
                   </div>
                 </div>
               </footer>
