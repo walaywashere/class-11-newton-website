@@ -312,43 +312,63 @@ const HomePage = () => {
           </motion.div>
 
         </div>
-      </section>
 
-      {/* Discover More - At Section Edge */}
-      <div className="relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2 }}
-          className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-30"
-        >
+        {/* Discover More - Perfect Edge Positioning */}
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center">
           <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 cursor-pointer group"
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 2 }}
+            className="transform translate-y-1/2 z-50"
+            style={{ marginBottom: '-24px' }} // Half the height to center on edge
           >
-            <div 
-              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full backdrop-blur-md border text-white/90 text-sm sm:text-base font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-lg"
-              style={{
-                background: 'rgba(0, 0, 0, 0.3)',
-                borderColor: 'rgba(255, 255, 255, 0.3)'
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-3 cursor-pointer group"
+              onClick={() => {
+                const nextSection = document.querySelector('.explore-section');
+                if (nextSection) {
+                  nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
               }}
             >
-              Discover More
-            </div>
-            <motion.div
-              animate={{ y: [0, 3, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover:text-white transition-colors" />
+              {/* Enhanced Button Design */}
+              <div 
+                className="px-5 py-3 sm:px-6 sm:py-3.5 lg:px-7 lg:py-4 rounded-full backdrop-blur-lg border-2 text-white font-semibold text-sm sm:text-base lg:text-lg group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
+                  borderColor: 'rgba(255, 255, 255, 0.4)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                }}
+              >
+                <span className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+                  Discover More
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+                </span>
+              </div>
+              
+              {/* Animated Arrow */}
+              <motion.div
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                className="p-2 rounded-full"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)'
+                }}
+              >
+                <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 group-hover:text-white transition-colors" />
+              </motion.div>
             </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
 
       {/* Explore Our Class Section - Mobile Responsive */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+      <section className="explore-section py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header - Mobile Optimized */}
