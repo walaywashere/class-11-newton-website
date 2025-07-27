@@ -10,8 +10,8 @@ const AdviserSection = ({ person }) => {
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl transform rotate-1"></div>
       
-      <div className="relative bg-white rounded-3xl shadow-large p-6 sm:p-8 lg:p-12 border border-white/20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-large p-4 sm:p-6 md:p-8 lg:p-12 border border-white/20">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Image Section */}
           <motion.div 
             className="relative group"
@@ -220,7 +220,7 @@ const Leadership = ({ adviser, students = [] }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {officers.map((officer, index) => (
               <OfficerCard key={officer.name} person={officer} index={index} />
             ))}

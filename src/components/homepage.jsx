@@ -20,30 +20,30 @@ const HomePage = () => {
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20"></div>
       
-      {/* Floating geometric shapes */}
+      {/* Floating geometric shapes - Mobile responsive */}
       <motion.div 
         style={{ y: y1 }} 
-        className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-2xl rotate-45 animate-float"
+        className="absolute top-10 sm:top-20 left-4 sm:left-10 w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 bg-white/10 rounded-2xl rotate-45 animate-float"
       />
       <motion.div 
         style={{ y: y2 }} 
-        className="absolute top-40 right-20 w-16 h-16 bg-accent-400/20 rounded-full animate-float"
+        className="absolute top-20 sm:top-40 right-4 sm:right-20 w-10 sm:w-12 md:w-16 h-10 sm:h-12 md:h-16 bg-accent-400/20 rounded-full animate-float"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div 
         style={{ y: y1 }} 
-        className="absolute bottom-32 left-1/4 w-12 h-12 bg-white/15 rounded-lg rotate-12 animate-float"
+        className="absolute bottom-20 sm:bottom-32 left-1/4 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-white/15 rounded-lg rotate-12 animate-float"
       />
       <motion.div 
         style={{ y: y2 }} 
-        className="absolute bottom-20 right-1/3 w-8 h-8 bg-accent-300/25 rounded-full animate-float"
+        className="absolute bottom-10 sm:bottom-20 right-1/4 sm:right-1/3 w-6 sm:w-8 h-6 sm:h-8 bg-accent-300/25 rounded-full animate-float"
       />
 
       {/* Main content */}
       <motion.div 
         style={{ opacity }}
-        className="relative z-10 text-center px-6 sm:px-8 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 md:px-8 max-w-5xl mx-auto"
       >
         {/* Badge */}
         <motion.div
@@ -85,22 +85,22 @@ const HomePage = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-12 max-w-2xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 max-w-2xl mx-auto"
         >
-          <div className="glass rounded-2xl p-4 sm:p-6 text-center group hover:bg-white/20 transition-all duration-300">
-            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-accent-300 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-            <div className="text-xl sm:text-2xl font-bold text-white">40+</div>
-            <div className="text-white/70 text-sm">Students</div>
+          <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
+            <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">40+</div>
+            <div className="text-white/70 text-xs sm:text-sm">Students</div>
           </div>
-          <div className="glass rounded-2xl p-4 sm:p-6 text-center group hover:bg-white/20 transition-all duration-300">
-            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-accent-300 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-            <div className="text-xl sm:text-2xl font-bold text-white">15+</div>
-            <div className="text-white/70 text-sm">Achievements</div>
+          <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
+            <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">15+</div>
+            <div className="text-white/70 text-xs sm:text-sm">Achievements</div>
           </div>
-          <div className="glass rounded-2xl p-4 sm:p-6 text-center group hover:bg-white/20 transition-all duration-300">
-            <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-accent-300 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-            <div className="text-xl sm:text-2xl font-bold text-white">100%</div>
-            <div className="text-white/70 text-sm">Excellence</div>
+          <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
+            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">100%</div>
+            <div className="text-white/70 text-xs sm:text-sm">Excellence</div>
           </div>
         </motion.div>
 

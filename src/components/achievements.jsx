@@ -70,7 +70,7 @@ const TimelineItem = ({ item, isOdd, index }) => {
 
   return (
     <motion.div 
-      className={`flex w-full mb-12 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center group`}
+      className={`flex w-full mb-8 sm:mb-12 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center group`}
       variants={itemVariants}
       initial="hidden"
       whileInView="visible"
@@ -85,9 +85,9 @@ const TimelineItem = ({ item, isOdd, index }) => {
         initial="rest"
         whileHover="hover"
       >
-        <div className="bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden border border-neutral-100 group-hover:border-primary-200">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden border border-neutral-100 group-hover:border-primary-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-4 text-white">
+          <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-3 sm:p-4 text-white">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
@@ -105,13 +105,13 @@ const TimelineItem = ({ item, isOdd, index }) => {
                 </div>
               )}
             </div>
-            <h3 className="text-xl font-bold leading-tight">
+            <h3 className="text-lg sm:text-xl font-bold leading-tight">
               {item.title || 'Achievement Title'}
             </h3>
           </div>
 
           {/* Content */}
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <p className="text-neutral-700 leading-relaxed mb-6">
               {item.description || 'Achievement description goes here.'}
             </p>

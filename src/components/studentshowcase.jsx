@@ -259,17 +259,17 @@ const StudentShowcase = ({ students = [] }) => {
             Discover the unique stories, dreams, and personalities that make Class 11-Newton extraordinary.
           </p>
 
-          {/* Search Bar */}
-          <div className="max-w-md mx-auto relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-neutral-400" />
+          {/* Search Bar - Mobile responsive */}
+          <div className="max-w-md mx-auto relative px-4 sm:px-0">
+            <div className="absolute inset-y-0 left-4 sm:left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-400" />
             </div>
             <input
               type="text"
               placeholder="Search students, careers, roles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-white border border-neutral-200 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-neutral-900 placeholder-neutral-500"
+              className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-white border border-neutral-200 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base text-neutral-900 placeholder-neutral-500"
             />
           </div>
         </motion.div>
@@ -306,7 +306,7 @@ const StudentShowcase = ({ students = [] }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mb-12"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12"
             >
               {paginationData.currentStudents.map((student, index) => (
                 <StudentCard key={student.name} student={student} index={index} />
@@ -344,15 +344,15 @@ const StudentShowcase = ({ students = [] }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex justify-center items-center gap-2 flex-wrap"
+            className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap px-4 sm:px-0"
           >
             {/* Previous button */}
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             {/* Page numbers */}
@@ -361,7 +361,7 @@ const StudentShowcase = ({ students = [] }) => {
                 key={index}
                 onClick={() => typeof page === 'number' && setCurrentPage(page)}
                 disabled={typeof page !== 'number'}
-                className={`min-w-[40px] h-10 rounded-xl font-medium text-sm transition-all duration-200 ${
+                className={`min-w-[32px] sm:min-w-[40px] h-8 sm:h-10 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 ${
                   page === currentPage
                     ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-glow'
                     : typeof page === 'number'

@@ -33,7 +33,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <motion.div 
             className="flex items-center gap-3"
@@ -41,13 +41,13 @@ const Navbar = () => {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-accent-500 rounded-xl flex items-center justify-center shadow-glow">
-                <Sparkles className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-400 to-accent-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-glow">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent-400 rounded-full animate-pulse"></div>
+              <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-accent-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">11-Newton</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-white">11-Newton</h1>
               <p className="text-xs text-white/60 font-medium">Class of 2025</p>
             </div>
           </motion.div>
@@ -76,7 +76,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
+              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
             >
@@ -118,7 +118,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="lg:hidden glass-dark backdrop-blur-xl border-t border-white/10"
           >
-            <div className="px-4 py-6 space-y-2">
+            <div className="px-3 sm:px-4 py-4 sm:py-6 space-y-1 sm:space-y-2">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.title}
@@ -129,9 +129,9 @@ const Navbar = () => {
                   <a
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="group flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 font-medium"
+                    className="group flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 font-medium text-sm sm:text-base"
                   >
-                    <div className="w-2 h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full group-hover:scale-125 transition-transform"></div>
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full group-hover:scale-125 transition-transform"></div>
                     {link.title}
                   </a>
                 </motion.div>

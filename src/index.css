@@ -121,3 +121,34 @@ button, a, input, textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  /* Ensure touch targets are at least 44px */
+  button, a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Optimize scroll performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix viewport issues */
+  html {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+  
+  /* Reduce motion on mobile for better performance */
+  .animate-float {
+    animation-duration: 8s;
+  }
+}
