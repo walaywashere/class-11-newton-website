@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Crown, Sparkles, Users, Trophy, Search, Filter, Grid, List, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Crown, Sparkles, Users, Trophy, Search, Filter, Grid, List, ChevronDown, Instagram, Target, Star, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { adviser, students } from '../data/classData';
@@ -11,22 +11,25 @@ const LeadershipPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
 
-  // Combine and filter data
-  const allLeaders = [
-    { ...adviser, type: 'adviser', category: 'Faculty' },
-    ...students.filter(student => student.position && student.position !== 'Student').map(student => ({
-      ...student,
-      type: 'officer',
-      category: 'Student Officer'
-    }))
-  ];
+  // Get class officers from students
+  const classOfficers = students.filter(student => student.role);
 
-  const filteredLeaders = allLeaders.filter(leader => {
-    const matchesFilter = filterType === 'all' || leader.type === filterType;
-    const matchesSearch = leader.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (leader.position && leader.position.toLowerCase().includes(searchTerm.toLowerCase()));
+  // Filter officers based on search and filter
+  const filteredOfficers = classOfficers.filter(officer => {
+    const matchesFilter = filterType === 'all' || filterType === 'officers';
+    const matchesSearch = officer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (officer.role && officer.role.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                         (officer.dreamJob && officer.dreamJob.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesFilter && matchesSearch;
   });
+
+  // Check if adviser matches search
+  const adviserMatches = filterType !== 'officers' && (
+    adviser.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (adviser.role && adviser.role.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const showAdviser = (filterType === 'all' || filterType === 'adviser') && adviserMatches;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
@@ -126,8 +129,8 @@ const LeadershipPage = () => {
               <div className="text-sm text-gray-600">Class Adviser</div>
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-blue-100">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{students.filter(s => s.position && s.position !== 'Student').length}+</div>
-              <div className="text-sm text-gray-600">Student Officers</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">{classOfficers.length}</div>
+              <div className="text-sm text-gray-600">Class Officers</div>
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-emerald-100">
               <div className="text-3xl font-bold text-emerald-600 mb-2">100%</div>
@@ -153,7 +156,7 @@ const LeadershipPage = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search leaders..."
+                placeholder="Search leaders by name or role..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
@@ -181,7 +184,7 @@ const LeadershipPage = () => {
                       exit={{ opacity: 0, y: -10 }}
                       className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 min-w-[150px]"
                     >
-                      {['all', 'adviser', 'officer'].map((type) => (
+                      {['all', 'adviser', 'officers'].map((type) => (
                         <button
                           key={type}
                           onClick={() => {
@@ -190,9 +193,9 @@ const LeadershipPage = () => {
                           }}
                           className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
                             filterType === type ? 'bg-purple-50 text-purple-700' : 'text-gray-700'
-                          } ${type === 'all' ? 'rounded-t-xl' : type === 'officer' ? 'rounded-b-xl' : ''}`}
+                          } ${type === 'all' ? 'rounded-t-xl' : type === 'officers' ? 'rounded-b-xl' : ''}`}
                         >
-                          {type === 'all' ? 'All Leaders' : type === 'adviser' ? 'Class Adviser' : 'Student Officers'}
+                          {type === 'all' ? 'All Leaders' : type === 'adviser' ? 'Class Adviser' : 'Class Officers'}
                         </button>
                       ))}
                     </motion.div>
@@ -222,138 +225,250 @@ const LeadershipPage = () => {
             </div>
           </motion.div>
 
-          {/* Results Count */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mb-8"
-          >
-            <p className="text-gray-600">
-              Showing <span className="font-semibold text-purple-600">{filteredLeaders.length}</span> leader{filteredLeaders.length !== 1 ? 's' : ''}
-              {searchTerm && (
-                <span> matching "<span className="font-semibold">{searchTerm}</span>"</span>
-              )}
-            </p>
-          </motion.div>
-
-          {/* Leaders Grid/List */}
-          <AnimatePresence mode="wait">
+          {/* Class Adviser Section - Highlighted */}
+          {showAdviser && (
             <motion.div
-              key={`${viewMode}-${filterType}-${searchTerm}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className={
-                viewMode === 'grid'
-                  ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-                  : 'space-y-6'
-              }
+              transition={{ duration: 0.6 }}
+              className="mb-12"
             >
-              {filteredLeaders.map((leader, index) => (
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Class Adviser</h2>
+                <p className="text-gray-600">The guiding force behind Class 11-Newton's success</p>
+              </div>
+              
+              <div className="max-w-2xl mx-auto">
                 <motion.div
-                  key={leader.id || leader.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`group ${
-                    viewMode === 'grid'
-                      ? 'bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2'
-                      : 'bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300'
-                  }`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 border-2 border-purple-200 shadow-xl"
                 >
-                  {viewMode === 'grid' ? (
-                    // Grid Card View
-                    <>
-                      <div className="relative h-64 overflow-hidden">
-                        {leader.image ? (
-                          <img
-                            src={leader.image}
-                            alt={leader.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-                            <Users className="w-16 h-16 text-purple-300" />
-                          </div>
-                        )}
-                        <div className="absolute top-4 right-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            leader.type === 'adviser' 
-                              ? 'bg-purple-100 text-purple-700 border border-purple-200'
-                              : 'bg-blue-100 text-blue-700 border border-blue-200'
-                          }`}>
-                            {leader.category}
-                          </span>
+                  <div className="text-center">
+                    <div className="relative inline-block mb-6">
+                      {adviser.photo ? (
+                        <img
+                          src={adviser.photo}
+                          alt={adviser.name}
+                          className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-white shadow-lg"
+                        />
+                      ) : (
+                        <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center mx-auto border-4 border-white shadow-lg">
+                          <Crown className="w-16 h-16 text-purple-400" />
                         </div>
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{leader.name}</h3>
-                        <p className="text-purple-600 font-semibold mb-3">{leader.position}</p>
-                        {leader.bio && (
-                          <p className="text-gray-600 text-sm line-clamp-3 mb-4">{leader.bio}</p>
-                        )}
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            {leader.type === 'adviser' ? (
-                              <Crown className="w-4 h-4 text-purple-500" />
-                            ) : (
-                              <Sparkles className="w-4 h-4 text-blue-500" />
-                            )}
-                            <span className="text-sm text-gray-500">{leader.type === 'adviser' ? 'Faculty' : 'Officer'}</span>
-                          </div>
-                          <Trophy className="w-4 h-4 text-amber-500" />
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    // List View
-                    <div className="flex items-center gap-6">
-                      <div className="flex-shrink-0">
-                        {leader.image ? (
-                          <img
-                            src={leader.image}
-                            alt={leader.name}
-                            className="w-16 h-16 rounded-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-                            <Users className="w-8 h-8 text-purple-300" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-xl font-bold text-gray-900">{leader.name}</h3>
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            leader.type === 'adviser' 
-                              ? 'bg-purple-100 text-purple-700'
-                              : 'bg-blue-100 text-blue-700'
-                          }`}>
-                            {leader.category}
-                          </span>
-                        </div>
-                        <p className="text-purple-600 font-semibold mb-2">{leader.position}</p>
-                        {leader.bio && (
-                          <p className="text-gray-600 text-sm line-clamp-2">{leader.bio}</p>
-                        )}
-                      </div>
-                      <div className="flex-shrink-0 flex items-center gap-2">
-                        {leader.type === 'adviser' ? (
-                          <Crown className="w-5 h-5 text-purple-500" />
-                        ) : (
-                          <Sparkles className="w-5 h-5 text-blue-500" />
-                        )}
+                      )}
+                      <div className="absolute -top-2 -right-2 p-2 bg-purple-600 rounded-full">
+                        <Crown className="w-5 h-5 text-white" />
                       </div>
                     </div>
-                  )}
+                    
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{adviser.name}</h3>
+                    <p className="text-purple-600 font-semibold mb-4">{adviser.role}</p>
+                    
+                    {adviser.fact && (
+                      <div className="bg-white/70 rounded-2xl p-4 mb-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Sparkles className="w-5 h-5 text-purple-600" />
+                          <span className="text-sm font-semibold text-gray-900">Fun Fact</span>
+                        </div>
+                        <p className="text-gray-700">{adviser.fact}</p>
+                      </div>
+                    )}
+                    
+                    <div className="flex justify-center gap-4">
+                      <div className="text-center">
+                        <Trophy className="w-8 h-8 text-amber-500 mx-auto mb-1" />
+                        <p className="text-xs text-gray-600">Excellence</p>
+                      </div>
+                      <div className="text-center">
+                        <Heart className="w-8 h-8 text-red-500 mx-auto mb-1" />
+                        <p className="text-xs text-gray-600">Dedication</p>
+                      </div>
+                      <div className="text-center">
+                        <Users className="w-8 h-8 text-blue-500 mx-auto mb-1" />
+                        <p className="text-xs text-gray-600">Leadership</p>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
-              ))}
+              </div>
             </motion.div>
-          </AnimatePresence>
+          )}
 
-          {/* No Results */}
-          {filteredLeaders.length === 0 && (
+          {/* Class Officers Section */}
+          {(filterType === 'all' || filterType === 'officers') && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: showAdviser ? 0.3 : 0 }}
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Class Officers</h2>
+                <p className="text-gray-600">
+                  Showing <span className="font-semibold text-purple-600">{filteredOfficers.length}</span> officer{filteredOfficers.length !== 1 ? 's' : ''}
+                  {searchTerm && (
+                    <span> matching "<span className="font-semibold">{searchTerm}</span>"</span>
+                  )}
+                </p>
+              </div>
+
+              {/* Officers Grid/List */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${viewMode}-${filterType}-${searchTerm}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className={
+                    viewMode === 'grid'
+                      ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+                      : 'space-y-6'
+                  }
+                >
+                  {filteredOfficers.map((officer, index) => (
+                    <motion.div
+                      key={officer.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className={`group ${
+                        viewMode === 'grid'
+                          ? 'bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2'
+                          : 'bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300'
+                      }`}
+                    >
+                      {viewMode === 'grid' ? (
+                        // Grid Card View
+                        <>
+                          <div className="relative h-64 overflow-hidden">
+                            {officer.photo ? (
+                              <img
+                                src={officer.photo}
+                                alt={officer.name}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                                <Users className="w-16 h-16 text-blue-300" />
+                              </div>
+                            )}
+                            <div className="absolute top-4 right-4">
+                              <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold border border-blue-200">
+                                {officer.role}
+                              </span>
+                            </div>
+                            {officer.socials?.instagram && (
+                              <div className="absolute bottom-4 right-4">
+                                <div className="p-2 bg-pink-100 rounded-full border border-pink-200">
+                                  <Instagram className="w-4 h-4 text-pink-600" />
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-6">
+                            <div className="mb-4">
+                              <h3 className="text-xl font-bold text-gray-900 mb-1">{officer.name}</h3>
+                              {officer.dreamJob && (
+                                <p className="text-emerald-600 font-medium text-sm">{officer.dreamJob}</p>
+                              )}
+                            </div>
+                            
+                            {officer.quote && (
+                              <div className="bg-blue-50 rounded-lg p-3 mb-4">
+                                <p className="text-blue-700 text-sm italic">"{officer.quote}"</p>
+                              </div>
+                            )}
+                            
+                            {officer.funFact && (
+                              <p className="text-gray-600 text-sm line-clamp-2 mb-4">{officer.funFact}</p>
+                            )}
+                            
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 text-blue-500" />
+                                <span className="text-sm text-gray-500">Officer</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                {officer.dreamJob && <Target className="w-4 h-4 text-emerald-400" />}
+                                <Trophy className="w-4 h-4 text-amber-500" />
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        // List View
+                        <div className="flex items-center gap-6">
+                          <div className="flex-shrink-0 relative">
+                            {officer.photo ? (
+                              <img
+                                src={officer.photo}
+                                alt={officer.name}
+                                className="w-16 h-16 rounded-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                                <Users className="w-8 h-8 text-blue-300" />
+                              </div>
+                            )}
+                            {officer.socials?.instagram && (
+                              <div className="absolute -bottom-1 -right-1 p-1 bg-pink-100 rounded-full border-2 border-white">
+                                <Instagram className="w-3 h-3 text-pink-600" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <h3 className="text-xl font-bold text-gray-900">{officer.name}</h3>
+                              <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
+                                {officer.role}
+                              </span>
+                            </div>
+                            {officer.dreamJob && (
+                              <p className="text-emerald-600 font-medium text-sm mb-1">{officer.dreamJob}</p>
+                            )}
+                            {officer.funFact && (
+                              <p className="text-gray-600 text-sm line-clamp-1">{officer.funFact}</p>
+                            )}
+                          </div>
+                          <div className="flex-shrink-0 flex items-center gap-2">
+                            <Sparkles className="w-5 h-5 text-blue-500" />
+                            <Trophy className="w-5 h-5 text-amber-500" />
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* No Officers Results */}
+              {filteredOfficers.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-16"
+                >
+                  <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No officers found</h3>
+                  <p className="text-gray-600 mb-6">Try adjusting your search criteria.</p>
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setFilterType('all');
+                    }}
+                    className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors"
+                  >
+                    Clear Filters
+                  </button>
+                </motion.div>
+              )}
+            </motion.div>
+          )}
+
+          {/* No Results at all */}
+          {!showAdviser && filteredOfficers.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

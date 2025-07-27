@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, List, ChevronDown, MapPin, Calendar, Award } from 'lucide-react';
+import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, List, ChevronDown, MapPin, Calendar, Award, Instagram, Target, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { students } from '../data/classData';
@@ -16,8 +16,9 @@ const StudentsPage = () => {
   const filteredAndSortedStudents = useMemo(() => {
     let filtered = students.filter(student => 
       student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (student.bio && student.bio.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (student.hobbies && student.hobbies.some(hobby => hobby.toLowerCase().includes(searchTerm.toLowerCase())))
+      (student.dreamJob && student.dreamJob.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (student.funFact && student.funFact.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (student.role && student.role.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
     // Sort students
@@ -25,10 +26,15 @@ const StudentsPage = () => {
       switch (sortBy) {
         case 'name':
           return a.name.localeCompare(b.name);
-        case 'position':
-          if (a.position && !b.position) return -1;
-          if (!a.position && b.position) return 1;
-          if (a.position && b.position) return a.position.localeCompare(b.position);
+        case 'role':
+          if (a.role && !b.role) return -1;
+          if (!a.role && b.role) return 1;
+          if (a.role && b.role) return a.role.localeCompare(b.role);
+          return a.name.localeCompare(b.name);
+        case 'dreamJob':
+          if (a.dreamJob && !b.dreamJob) return -1;
+          if (!a.dreamJob && b.dreamJob) return 1;
+          if (a.dreamJob && b.dreamJob) return a.dreamJob.localeCompare(b.dreamJob);
           return a.name.localeCompare(b.name);
         default:
           return 0;
@@ -56,9 +62,9 @@ const StudentsPage = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative">
-              {student.image ? (
+              {student.photo ? (
                 <img
-                  src={student.image}
+                  src={student.photo}
                   alt={student.name}
                   className="w-full h-64 object-cover rounded-t-3xl"
                 />
@@ -73,39 +79,57 @@ const StudentsPage = () => {
               >
                 ×
               </button>
+              {student.role && (
+                <div className="absolute top-4 left-4">
+                  <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold border border-blue-200">
+                    {student.role}
+                  </span>
+                </div>
+              )}
             </div>
             <div className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div>
+                <div className="flex-1">
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">{student.name}</h2>
-                  {student.position && (
-                    <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
-                      {student.position}
-                    </span>
-                  )}
+                  <div className="flex items-center gap-4">
+                    {student.dreamJob && (
+                      <div className="flex items-center gap-2">
+                        <Target className="w-4 h-4 text-emerald-600" />
+                        <span className="text-emerald-700 font-medium">{student.dreamJob}</span>
+                      </div>
+                    )}
+                    {student.socials?.instagram && (
+                      <a 
+                        href={`https://instagram.com/${student.socials.instagram}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-pink-600 hover:text-pink-700 transition-colors"
+                      >
+                        <Instagram className="w-4 h-4" />
+                        <span className="font-medium">@{student.socials.instagram}</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
               
-              {student.bio && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">About</h3>
-                  <p className="text-gray-600 leading-relaxed">{student.bio}</p>
+              {student.quote && (
+                <div className="mb-6 p-4 bg-blue-50 rounded-2xl border-l-4 border-blue-500">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-blue-600" />
+                    Motto
+                  </h3>
+                  <p className="text-gray-700 italic">"{student.quote}"</p>
                 </div>
               )}
               
-              {student.hobbies && student.hobbies.length > 0 && (
+              {student.funFact && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Interests & Hobbies</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {student.hobbies.map((hobby, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm"
-                      >
-                        {hobby}
-                      </span>
-                    ))}
-                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <Star className="w-5 h-5 text-amber-600" />
+                    Fun Fact
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">{student.funFact}</p>
                 </div>
               )}
               
@@ -115,7 +139,7 @@ const StudentsPage = () => {
                   <p className="text-sm text-gray-600">Unique Individual</p>
                 </div>
                 <div className="text-center">
-                  <Star className="w-8 h-8 text-yellow-500 mx-auto mb-2" />
+                  <Trophy className="w-8 h-8 text-yellow-500 mx-auto mb-2" />
                   <p className="text-sm text-gray-600">Future Leader</p>
                 </div>
               </div>
@@ -224,8 +248,8 @@ const StudentsPage = () => {
               <div className="text-xs sm:text-sm text-gray-600">Total Students</div>
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-100">
-              <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2">{students.filter(s => s.position && s.position !== 'Student').length}</div>
-              <div className="text-xs sm:text-sm text-gray-600">Student Leaders</div>
+              <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2">{students.filter(s => s.role).length}</div>
+              <div className="text-xs sm:text-sm text-gray-600">Class Officers</div>
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-emerald-100">
               <div className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2">100%</div>
@@ -233,7 +257,7 @@ const StudentsPage = () => {
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-amber-100">
               <div className="text-2xl sm:text-3xl font-bold text-amber-600 mb-2">∞</div>
-              <div className="text-xs sm:text-sm text-gray-600">Potential</div>
+              <div className="text-xs sm:text-sm text-gray-600">Dreams</div>
             </div>
           </motion.div>
         </div>
@@ -255,7 +279,7 @@ const StudentsPage = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search students by name, bio, or interests..."
+                placeholder="Search by name, role, dream job, or fun fact..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -285,7 +309,8 @@ const StudentsPage = () => {
                     >
                       {[
                         { value: 'name', label: 'By Name' },
-                        { value: 'position', label: 'By Position' }
+                        { value: 'role', label: 'By Position' },
+                        { value: 'dreamJob', label: 'By Dream Job' }
                       ].map((sort) => (
                         <button
                           key={sort.value}
@@ -295,7 +320,7 @@ const StudentsPage = () => {
                           }}
                           className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
                             sortBy === sort.value ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
-                          } ${sort.value === 'name' ? 'rounded-t-xl' : 'rounded-b-xl'}`}
+                          } ${sort.value === 'name' ? 'rounded-t-xl' : sort.value === 'dreamJob' ? 'rounded-b-xl' : ''}`}
                         >
                           {sort.label}
                         </button>
@@ -357,7 +382,7 @@ const StudentsPage = () => {
             >
               {filteredAndSortedStudents.map((student, index) => (
                 <motion.div
-                  key={student.id || student.name}
+                  key={student.name}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -372,9 +397,9 @@ const StudentsPage = () => {
                     // Grid Card View
                     <>
                       <div className="relative h-48 overflow-hidden">
-                        {student.image ? (
+                        {student.photo ? (
                           <img
-                            src={student.image}
+                            src={student.photo}
                             alt={student.name}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
@@ -383,55 +408,81 @@ const StudentsPage = () => {
                             <Users className="w-12 h-12 text-blue-300" />
                           </div>
                         )}
-                        {student.position && student.position !== 'Student' && (
+                        {student.role && (
                           <div className="absolute top-3 right-3">
                             <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold border border-blue-200">
-                              {student.position}
+                              {student.role}
                             </span>
+                          </div>
+                        )}
+                        {student.socials?.instagram && (
+                          <div className="absolute bottom-3 right-3">
+                            <div className="p-2 bg-pink-100 rounded-full border border-pink-200">
+                              <Instagram className="w-3 h-3 text-pink-600" />
+                            </div>
                           </div>
                         )}
                       </div>
                       <div className="p-4">
-                        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{student.name}</h3>
-                        {student.bio && (
-                          <p className="text-gray-600 text-sm line-clamp-2 mb-3">{student.bio}</p>
+                        <div className="mb-3">
+                          <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">{student.name}</h3>
+                          {student.dreamJob && (
+                            <p className="text-emerald-600 font-medium text-sm line-clamp-1">{student.dreamJob}</p>
+                          )}
+                        </div>
+                        {student.funFact && (
+                          <p className="text-gray-600 text-sm line-clamp-2 mb-3">{student.funFact}</p>
+                        )}
+                        {student.quote && (
+                          <p className="text-blue-600 text-sm italic line-clamp-2 mb-3">"{student.quote}"</p>
                         )}
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
                             <Heart className="w-4 h-4 text-red-400" />
                             <span className="text-xs text-gray-500">Unique</span>
                           </div>
-                          <Star className="w-4 h-4 text-yellow-400" />
+                          <div className="flex items-center gap-1">
+                            <Target className="w-4 h-4 text-emerald-400" />
+                            <Star className="w-4 h-4 text-yellow-400" />
+                          </div>
                         </div>
                       </div>
                     </>
                   ) : (
                     // List View
                     <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0">
-                        {student.image ? (
+                      <div className="flex-shrink-0 relative">
+                        {student.photo ? (
                           <img
-                            src={student.image}
+                            src={student.photo}
                             alt={student.name}
-                            className="w-12 h-12 rounded-full object-cover"
+                            className="w-16 h-16 rounded-full object-cover"
                           />
                         ) : (
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                            <Users className="w-6 h-6 text-blue-300" />
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                            <Users className="w-8 h-8 text-blue-300" />
+                          </div>
+                        )}
+                        {student.socials?.instagram && (
+                          <div className="absolute -bottom-1 -right-1 p-1 bg-pink-100 rounded-full border-2 border-white">
+                            <Instagram className="w-3 h-3 text-pink-600" />
                           </div>
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="text-lg font-bold text-gray-900 truncate">{student.name}</h3>
-                          {student.position && student.position !== 'Student' && (
+                          {student.role && (
                             <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold flex-shrink-0">
-                              {student.position}
+                              {student.role}
                             </span>
                           )}
                         </div>
-                        {student.bio && (
-                          <p className="text-gray-600 text-sm line-clamp-1">{student.bio}</p>
+                        {student.dreamJob && (
+                          <p className="text-emerald-600 font-medium text-sm mb-1">{student.dreamJob}</p>
+                        )}
+                        {student.funFact && (
+                          <p className="text-gray-600 text-sm line-clamp-1">{student.funFact}</p>
                         )}
                       </div>
                       <div className="flex-shrink-0 flex items-center gap-2">
