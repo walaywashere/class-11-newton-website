@@ -194,7 +194,7 @@ const Leadership = ({ adviser, students = [] }) => {
     : [];
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 min-h-screen">
+    <section className="py-12 sm:py-16 lg:py-20 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -205,7 +205,7 @@ const Leadership = ({ adviser, students = [] }) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-white/80 backdrop-blur-sm rounded-full border border-primary-200 text-primary-700 text-sm font-medium shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-primary-50 rounded-full border border-primary-200 text-primary-700 text-sm font-medium shadow-sm">
             <Users className="w-4 h-4" />
             Leadership Team
           </div>
@@ -251,21 +251,36 @@ const Leadership = ({ adviser, students = [] }) => {
           </motion.div>
         )}
 
-        {/* Call to Action */}
+        {/* Enhanced Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-12 sm:mt-16"
+          className="text-center mt-16 sm:mt-20"
         >
-          <Link
-            to="/students"
-            className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg hover:from-primary-700 hover:to-accent-700 hover:scale-105 transition-all duration-300 shadow-large"
-          >
-            <Users className="w-5 h-5" />
-            Meet All Classmates
-          </Link>
+          {/* Background container for better visibility */}
+          <div className="bg-gradient-to-r from-primary-50 to-accent-50 rounded-3xl p-8 sm:p-12 border border-primary-100 shadow-soft max-w-2xl mx-auto">
+            <div className="mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
+                Want to meet everyone?
+              </h3>
+              <p className="text-neutral-600 text-sm sm:text-base">
+                Discover all the amazing students in Class 11-Newton
+              </p>
+            </div>
+            
+            <Link
+              to="/students"
+              className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-2xl font-bold text-lg sm:text-xl hover:from-primary-700 hover:to-accent-700 hover:scale-105 hover:shadow-glow transition-all duration-300 shadow-large border-2 border-primary-600 hover:border-primary-700 animate-pulse-glow"
+            >
+              <Users className="w-6 h-6" />
+              Meet All Classmates
+              <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
