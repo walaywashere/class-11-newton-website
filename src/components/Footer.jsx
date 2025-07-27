@@ -6,14 +6,10 @@ import {
   Mail, 
   MapPin, 
   Calendar,
-  Users,
-  Trophy,
-  BookOpen,
-  Github,
-  Instagram,
-  Twitter,
   ArrowUp
 } from 'lucide-react';
+import { getIcon } from '../utils/iconMapper';
+import footerConfig from '../data/footerConfig.json';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -22,25 +18,24 @@ const Footer = () => {
 
   const currentYear = new Date().getFullYear();
 
-  const quickLinks = [
-    { name: 'Our Students', href: '/students', icon: Users },
-    { name: 'Leadership', href: '/leadership', icon: Sparkles },
-    { name: 'Achievements', href: '/achievements', icon: Trophy },
-    { name: 'About Class', href: '/', icon: BookOpen }
-  ];
+  // Get data from JSON config
+  const { branding, classStats, quickLinks, contact, socialLinks, copyright } = footerConfig;
 
-  const socialLinks = [
-    { name: 'GitHub', href: '#', icon: Github, color: 'hover:text-gray-400' },
-    { name: 'Instagram', href: '#', icon: Instagram, color: 'hover:text-pink-400' },
-    { name: 'Twitter', href: '#', icon: Twitter, color: 'hover:text-blue-400' }
-  ];
+  // Convert icon names to components
+  const processedQuickLinks = quickLinks.map(link => ({
+    ...link,
+    icon: getIcon(link.icon)
+  }));
 
-  const classStats = [
-    { label: 'Students', value: '40+', icon: Users },
-    { label: 'Projects', value: '25+', icon: BookOpen },
-    { label: 'Achievements', value: '15+', icon: Trophy },
-    { label: 'Years', value: '2024-25', icon: Calendar }
-  ];
+  const processedSocialLinks = socialLinks.map(social => ({
+    ...social,
+    icon: getIcon(social.icon)
+  }));
+
+  const processedClassStats = classStats.map(stat => ({
+    ...stat,
+    icon: getIcon(stat.icon)
+  }));
 
   return (
     <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
@@ -95,20 +90,19 @@ const Footer = () => {
                   </div>
                   <div>
                     <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                      Class 11-Newton
+                      {branding.name}
                     </h2>
-                    <p className="text-blue-300 font-medium">Excellence in Education • Class of 2025</p>
+                    <p className="text-blue-300 font-medium">{branding.tagline} • Class of {branding.academicYear}</p>
                   </div>
                 </div>
                 
                 <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                  We are a community of passionate learners, innovators, and future leaders. 
-                  Together, we're shaping tomorrow through knowledge, creativity, and collaboration.
+                  {branding.description}
                 </p>
 
                 {/* Class Stats */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {classStats.map((stat, index) => (
+                  {processedClassStats.map((stat, index) => (
                     <motion.div
                       key={stat.label}
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -138,7 +132,7 @@ const Footer = () => {
                   Quick Links
                 </h3>
                 <nav className="space-y-3">
-                  {quickLinks.map((link) => (
+                  {processedQuickLinks.map((link) => (
                     <motion.a
                       key={link.name}
                       href={link.href}
@@ -175,19 +169,19 @@ const Footer = () => {
                     <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
                       <MapPin className="w-4 h-4 text-green-400" />
                     </div>
-                    <span>Your School Name, City</span>
+                    <span>{contact.schoolName}, {contact.city}</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
                       <Mail className="w-4 h-4 text-blue-400" />
                     </div>
-                    <span>class11newton@school.edu</span>
+                    <span>{contact.email}</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
                       <Calendar className="w-4 h-4 text-purple-400" />
                     </div>
-                    <span>Academic Year 2024-2025</span>
+                    <span>{contact.academicYear}</span>
                   </div>
                 </div>
 
@@ -195,7 +189,7 @@ const Footer = () => {
                 <div>
                   <p className="text-sm text-gray-400 mb-4">Follow our journey</p>
                   <div className="flex items-center gap-3">
-                    {socialLinks.map((social) => (
+                    {processedSocialLinks.map((social) => (
                       <motion.a
                         key={social.name}
                         href={social.href}
@@ -227,10 +221,10 @@ const Footer = () => {
                 className="text-center sm:text-left"
               >
                 <p className="text-gray-400 text-sm">
-                  &copy; {currentYear} Class 11-Newton. All rights reserved.
+                  &copy; {currentYear} {branding.name}. {copyright.text}
                 </p>
                 <p className="text-gray-500 text-xs mt-1 flex items-center justify-center sm:justify-start gap-1">
-                  Made with <Heart className="w-3 h-3 text-red-400 animate-pulse" /> by our amazing class
+                  {copyright.madeWithLove.split('❤️')[0]}<Heart className="w-3 h-3 text-red-400 animate-pulse" />{copyright.madeWithLove.split('❤️')[1]}
                 </p>
               </motion.div>
 

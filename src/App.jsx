@@ -13,15 +13,24 @@ import StudentsPage from './pages/StudentsPage';
 import AchievementsPage from './pages/AchievementsPage';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Check if preloader has already been shown in this session
+    const hasSeenPreloader = sessionStorage.getItem('hasSeenPreloader');
+    return !hasSeenPreloader; // Show preloader only if not seen before
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+    // Only run the timer if we're actually showing the preloader
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        // Mark that the preloader has been shown in this session
+        sessionStorage.setItem('hasSeenPreloader', 'true');
+      }, 2500);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   return (
     <ErrorBoundary>

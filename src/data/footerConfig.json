@@ -1,0 +1,82 @@
+{
+  "branding": {
+    "name": "Class 11-Newton",
+    "tagline": "Excellence in Education",
+    "academicYear": "2025-2026",
+    "description": "We are a community of passionate learners, innovators, and future leaders. Together, we're shaping tomorrow through knowledge, creativity, and collaboration."
+  },
+  "classStats": [
+    {
+      "label": "Students",
+      "value": "40+",
+      "icon": "Users"
+    },
+    {
+      "label": "Projects", 
+      "value": "25+",
+      "icon": "BookOpen"
+    },
+    {
+      "label": "Achievements",
+      "value": "15+", 
+      "icon": "Trophy"
+    },
+    {
+      "label": "Academic Year",
+      "value": "2025-26",
+      "icon": "Calendar"
+    }
+  ],
+  "quickLinks": [
+    {
+      "name": "Our Students",
+      "href": "/students",
+      "icon": "Users"
+    },
+    {
+      "name": "Leadership", 
+      "href": "/leadership",
+      "icon": "Sparkles"
+    },
+    {
+      "name": "Achievements",
+      "href": "/achievements", 
+      "icon": "Trophy"
+    },
+    {
+      "name": "About Class",
+      "href": "/",
+      "icon": "BookOpen"
+    }
+  ],
+  "contact": {
+    "schoolName": "Your School Name",
+    "city": "Your City",
+    "email": "class11newton@school.edu",
+    "academicYear": "Academic Year 2025-2026"
+  },
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "href": "#",
+      "icon": "Github",
+      "color": "hover:text-gray-400"
+    },
+    {
+      "name": "Instagram", 
+      "href": "#",
+      "icon": "Instagram",
+      "color": "hover:text-pink-400"
+    },
+    {
+      "name": "Twitter",
+      "href": "#",
+      "icon": "Twitter", 
+      "color": "hover:text-blue-400"
+    }
+  ],
+  "copyright": {
+    "text": "All rights reserved.",
+    "madeWithLove": "Made with ❤️ by our amazing class"
+  }
+}
