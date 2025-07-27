@@ -302,16 +302,16 @@ const HomePage = () => {
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 1, delay: 2 }}
-           className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+           className="absolute bottom-2 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-10"
          >
            <motion.div
-             animate={{ y: [0, 6, 0] }}
+             animate={{ y: [0, 4, 0] }}
              transition={{ duration: 2, repeat: Infinity }}
-             className="flex flex-col items-center gap-1 sm:gap-2 cursor-pointer group"
+             className="flex flex-col items-center gap-1 cursor-pointer group"
              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
            >
              <div 
-               className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md border text-white/80 text-xs sm:text-sm font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300"
+               className="px-2 py-1 sm:px-3 sm:py-1.5 rounded-full backdrop-blur-md border text-white/80 text-xs font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300"
                style={{
                  background: 'rgba(255, 255, 255, 0.1)',
                  borderColor: 'rgba(255, 255, 255, 0.2)'
@@ -320,10 +320,10 @@ const HomePage = () => {
                Discover More
              </div>
              <motion.div
-               animate={{ y: [0, 3, 0] }}
+               animate={{ y: [0, 2, 0] }}
                transition={{ duration: 1.5, repeat: Infinity }}
              >
-               <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/60 group-hover:text-white/80 transition-colors" />
+               <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/60 group-hover:text-white/80 transition-colors" />
              </motion.div>
            </motion.div>
          </motion.div>
