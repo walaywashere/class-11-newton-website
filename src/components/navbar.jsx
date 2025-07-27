@@ -145,9 +145,12 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    onClick={() => {
+                    onClick={(e) => {
                       setIsOpen(false);
-                      scrollToTopInstant();
+                      // Ensure scroll to top works on mobile
+                      setTimeout(() => {
+                        scrollToTopInstant();
+                      }, 100);
                     }}
                     className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium ${
                       location.pathname === link.href 

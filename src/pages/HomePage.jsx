@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Mobile First */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28">
+      <section id="home" className="relative flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24 lg:pb-28">
         {/* Dynamic Gradient Background */}
         <div 
           className="absolute inset-0"
@@ -312,60 +312,60 @@ const HomePage = () => {
           </motion.div>
 
         </div>
+      </section>
 
-        {/* Discover More - Perfect Edge Positioning */}
-        <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+      {/* Discover More Transition - Perfect Edge */}
+      <div className="relative -mt-16 mb-16 z-50 flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="relative"
+        >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2 }}
-            className="transform translate-y-1/2 z-50"
-            style={{ marginBottom: '-24px' }} // Half the height to center on edge
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-3 cursor-pointer group"
+            onClick={() => {
+              const nextSection = document.querySelector('.explore-section');
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
           >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-3 cursor-pointer group"
-              onClick={() => {
-                const nextSection = document.querySelector('.explore-section');
-                if (nextSection) {
-                  nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+            {/* Enhanced Button Design */}
+            <div 
+              className="px-5 py-3 sm:px-6 sm:py-3.5 lg:px-7 lg:py-4 rounded-full backdrop-blur-lg border-2 text-white font-semibold text-sm sm:text-base lg:text-lg group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%)',
+                borderColor: 'rgba(255, 255, 255, 0.5)',
+                backdropFilter: 'blur(20px)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
               }}
             >
-              {/* Enhanced Button Design */}
-              <div 
-                className="px-5 py-3 sm:px-6 sm:py-3.5 lg:px-7 lg:py-4 rounded-full backdrop-blur-lg border-2 text-white font-semibold text-sm sm:text-base lg:text-lg group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
-                  borderColor: 'rgba(255, 255, 255, 0.4)',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                }}
-              >
-                <span className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-                  Discover More
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-                </span>
-              </div>
-              
-              {/* Animated Arrow */}
-              <motion.div
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                className="p-2 rounded-full"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)'
-                }}
-              >
-                <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 group-hover:text-white transition-colors" />
-              </motion.div>
+              <span className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+                Discover More
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+              </span>
+            </div>
+            
+            {/* Animated Arrow */}
+            <motion.div
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              className="p-2 rounded-full"
+              style={{
+                background: 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}
+            >
+              <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-white/90 group-hover:text-white transition-colors" />
             </motion.div>
           </motion.div>
-        </div>
-      </section>
+        </motion.div>
+      </div>
 
       {/* Explore Our Class Section - Mobile Responsive */}
       <section className="explore-section py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">

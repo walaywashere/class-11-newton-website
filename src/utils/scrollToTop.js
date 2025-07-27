@@ -9,7 +9,13 @@ export const scrollToTop = () => {
 
 // Alternative instant scroll to top (no animation)
 export const scrollToTopInstant = () => {
-  window.scrollTo(0, 0);
+  // For mobile compatibility, use setTimeout to ensure it works after navigation
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    // Backup method for stubborn mobile browsers
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 10);
 };
 
 export default scrollToTop;

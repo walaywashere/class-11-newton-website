@@ -28,7 +28,7 @@ const Dropdown = ({
       const viewportHeight = window.innerHeight;
 
       let left = 0;
-      let top = triggerRect.height + 8; // 8px gap
+      let top = -dropdownRect.height - 8; // Always show above trigger
 
       // Horizontal positioning
       switch (align) {
@@ -57,13 +57,13 @@ const Dropdown = ({
         left = 16 - triggerLeft;
       }
 
-      // Prevent vertical overflow
-      const triggerBottom = triggerRect.bottom;
-      const dropdownBottom = triggerBottom + top + dropdownRect.height;
+      // Check if dropdown would go above viewport when showing upward
+      const triggerTop = triggerRect.top;
+      const dropdownTop = triggerTop + top;
 
-      if (dropdownBottom > viewportHeight - 16) {
-        // Show above trigger
-        top = -dropdownRect.height - 8;
+      if (dropdownTop < 16) {
+        // If showing above would go off-screen, show below instead
+        top = triggerRect.height + 8;
       }
 
       setDropdownStyle({
@@ -132,9 +132,9 @@ const Dropdown = ({
             {/* Dropdown Menu */}
             <motion.div
               ref={dropdownRef}
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15 }}
               className={`absolute bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden ${dropdownClassName}`}
               style={{
