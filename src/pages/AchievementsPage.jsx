@@ -3,12 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Trophy, Star, Award, Zap, Target, Medal, Crown, Users, Calendar, MapPin, ExternalLink, Filter, Grid, List, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
+import Dropdown from '../components/Dropdown';
 
 const AchievementsPage = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [filterCategory, setFilterCategory] = useState('all');
-  const [showFilters, setShowFilters] = useState(false);
   const [selectedAchievement, setSelectedAchievement] = useState(null);
+
+  const categories = ['all', 'Academic', 'Science', 'Cultural', 'Social', 'Sports'];
+  const categoryOptions = categories.map(cat => ({
+    value: cat,
+    label: cat === 'all' ? 'All Categories' : cat
+  }));
 
   // Sample achievements data - replace with actual data
   const achievements = [
@@ -85,8 +91,6 @@ const AchievementsPage = () => {
       icon: Zap
     }
   ];
-
-  const categories = ['all', 'Academic', 'Science', 'Cultural', 'Social', 'Sports'];
 
   const filteredAchievements = achievements.filter(achievement => 
     filterCategory === 'all' || achievement.category === filterCategory
@@ -311,45 +315,16 @@ const AchievementsPage = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
           >
-            {/* Category Filter */}
-            <div className="relative z-[99999]">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors"
-              >
-                <Filter className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  {filterCategory === 'all' ? 'All Categories' : filterCategory}
-                </span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-              </button>
-              
-              <AnimatePresence>
-                {showFilters && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                                          className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl shadow-2xl z-[99999] min-w-[180px]"
-                  >
-                    {categories.map((category, index) => (
-                      <button
-                        key={category}
-                        onClick={() => {
-                          setFilterCategory(category);
-                          setShowFilters(false);
-                        }}
-                        className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
-                          filterCategory === category ? 'bg-amber-50 text-amber-700' : 'text-gray-700'
-                        } ${index === 0 ? 'rounded-t-xl' : index === categories.length - 1 ? 'rounded-b-xl' : ''}`}
-                      >
-                        {category === 'all' ? 'All Categories' : category}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* Category Filter - Bulletproof */}
+            <Dropdown
+              trigger={<Filter className="w-4 h-4" />}
+              options={categoryOptions}
+              value={filterCategory}
+              onChange={setFilterCategory}
+              placeholder="All Categories"
+              align="left"
+              className="flex-shrink-0"
+            />
 
             {/* View Mode Toggle */}
             <div className="flex bg-gray-100 rounded-xl p-1">

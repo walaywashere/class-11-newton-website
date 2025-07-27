@@ -311,38 +311,41 @@ const HomePage = () => {
             </Link>
           </motion.div>
 
-          {/* Enhanced Scroll Indicator - Maximum Gap */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2 }}
-            className="absolute bottom-12 sm:bottom-20 lg:bottom-24 left-1/2 transform -translate-x-1/2 z-20 w-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="flex flex-col items-center gap-1 cursor-pointer group"
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-            >
-              <div 
-                className="px-2 py-1 sm:px-3 sm:py-1.5 rounded-full backdrop-blur-md border text-white/80 text-xs sm:text-sm font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderColor: 'rgba(255, 255, 255, 0.2)'
-                }}
-              >
-                Discover More
-              </div>
-              <motion.div
-                animate={{ y: [0, 2, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/60 group-hover:text-white/80 transition-colors" />
-              </motion.div>
-            </motion.div>
-          </motion.div>
         </div>
       </section>
+
+      {/* Discover More - At Section Edge */}
+      <div className="relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-30"
+        >
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-2 cursor-pointer group"
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          >
+            <div 
+              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full backdrop-blur-md border text-white/90 text-sm sm:text-base font-medium group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-lg"
+              style={{
+                background: 'rgba(0, 0, 0, 0.3)',
+                borderColor: 'rgba(255, 255, 255, 0.3)'
+              }}
+            >
+              Discover More
+            </div>
+            <motion.div
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover:text-white transition-colors" />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
 
       {/* Explore Our Class Section - Mobile Responsive */}
       <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">

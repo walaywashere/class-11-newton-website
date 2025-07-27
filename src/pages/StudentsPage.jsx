@@ -4,15 +4,21 @@ import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, 
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { students } from '../data/classData';
+import Dropdown from '../components/Dropdown';
 
 const StudentsPage = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [sortBy, setSortBy] = useState('name');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const studentsPerPage = 12; // 12 students per page for better UX
+
+  const sortOptions = [
+    { value: 'name', label: 'By Name' },
+    { value: 'role', label: 'By Position' },
+    { value: 'dreamJob', label: 'By Dream Job' }
+  ];
 
   // Filter and sort students
   const filteredAndSortedStudents = useMemo(() => {
@@ -304,47 +310,16 @@ const StudentsPage = () => {
 
             {/* Sort and View Controls */}
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              {/* Sort Dropdown */}
-              <div className="relative z-[99999]">
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors min-w-[120px] justify-center"
-                >
-                  <Filter className="w-4 h-4" />
-                  <span className="text-sm font-medium">Sort</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {showFilters && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-2xl z-[99999] min-w-[180px]"
-                    >
-                      {[
-                        { value: 'name', label: 'By Name' },
-                        { value: 'role', label: 'By Position' },
-                        { value: 'dreamJob', label: 'By Dream Job' }
-                      ].map((sort, index) => (
-                        <button
-                          key={sort.value}
-                          onClick={() => {
-                            setSortBy(sort.value);
-                            setShowFilters(false);
-                          }}
-                          className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
-                            sortBy === sort.value ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
-                          } ${index === 0 ? 'rounded-t-xl' : index === 2 ? 'rounded-b-xl' : ''}`}
-                        >
-                          {sort.label}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              {/* Sort Dropdown - Bulletproof */}
+              <Dropdown
+                trigger={<Filter className="w-4 h-4" />}
+                options={sortOptions}
+                value={sortBy}
+                onChange={setSortBy}
+                placeholder="Sort"
+                align="right"
+                className="flex-shrink-0"
+              />
 
               {/* View Mode Toggle - Perfect Mobile Alignment */}
               <div className="flex bg-gray-100 rounded-xl p-1">

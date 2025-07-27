@@ -4,12 +4,18 @@ import { ArrowLeft, Crown, Sparkles, Users, Trophy, Search, Filter, Grid, List, 
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { adviser, students } from '../data/classData';
+import Dropdown from '../components/Dropdown';
 
 const LeadershipPage = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [filterType, setFilterType] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
+
+  const filterOptions = [
+    { value: 'all', label: 'All Leaders' },
+    { value: 'adviser', label: 'Class Adviser' },
+    { value: 'officers', label: 'Class Officers' }
+  ];
 
   // Get class officers from students
   const classOfficers = students.filter(student => student.role);
@@ -165,43 +171,16 @@ const LeadershipPage = () => {
 
             {/* Filter and View Controls */}
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              {/* Filter Dropdown */}
-              <div className="relative z-[99999]">
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors min-w-[120px] justify-center"
-                >
-                  <Filter className="w-4 h-4" />
-                  <span className="text-sm font-medium">Filter</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {showFilters && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-2xl z-[99999] min-w-[180px]"
-                    >
-                      {['all', 'adviser', 'officers'].map((type) => (
-                        <button
-                          key={type}
-                          onClick={() => {
-                            setFilterType(type);
-                            setShowFilters(false);
-                          }}
-                          className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
-                            filterType === type ? 'bg-purple-50 text-purple-700' : 'text-gray-700'
-                          } ${type === 'all' ? 'rounded-t-xl' : type === 'officers' ? 'rounded-b-xl' : ''}`}
-                        >
-                          {type === 'all' ? 'All Leaders' : type === 'adviser' ? 'Class Adviser' : 'Class Officers'}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              {/* Filter Dropdown - Bulletproof */}
+              <Dropdown
+                trigger={<Filter className="w-4 h-4" />}
+                options={filterOptions}
+                value={filterType}
+                onChange={setFilterType}
+                placeholder="Filter"
+                align="right"
+                className="flex-shrink-0"
+              />
 
               {/* View Mode Toggle - Perfect Mobile Alignment */}
               <div className="flex bg-gray-100 rounded-xl p-1">
