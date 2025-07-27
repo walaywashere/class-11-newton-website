@@ -97,14 +97,15 @@ const Dropdown = ({
   const selectedOption = options.find(option => option.value === value);
 
   return (
-    <div className={`relative ${className}`} style={{ zIndex: 999999 }}>
+    <div className={`relative ${className}`} style={{ zIndex: 9999999 }}>
       {/* Trigger Button */}
       <button
         ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center justify-between gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors min-w-[120px] w-full ${
+        className={`flex items-center justify-between gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors min-w-[120px] w-full relative ${
           isOpen ? 'ring-2 ring-blue-500 ring-opacity-50' : ''
         }`}
+        style={{ zIndex: 9999999 }}
       >
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {trigger}
@@ -123,10 +124,17 @@ const Dropdown = ({
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop for mobile */}
+            {/* Backdrop for mobile and hero sections */}
             <div 
-              className="fixed inset-0 z-[999998] md:hidden"
+              className="fixed inset-0 z-[9999998] md:hidden"
               onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Hero Section Backdrop - Desktop */}
+            <div 
+              className="fixed inset-0 z-[9999997] hidden md:block"
+              onClick={() => setIsOpen(false)}
+              style={{ background: 'transparent' }}
             />
             
             {/* Dropdown Menu */}
@@ -139,9 +147,10 @@ const Dropdown = ({
               className={`absolute bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden ${dropdownClassName}`}
               style={{
                 ...dropdownStyle,
-                zIndex: 999999,
+                zIndex: 9999999,
                 maxHeight: '60vh',
-                overflowY: 'auto'
+                overflowY: 'auto',
+                position: 'absolute'
               }}
             >
               {options.map((option, index) => (

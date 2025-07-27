@@ -326,11 +326,11 @@ const AchievementsPage = () => {
               className="flex-shrink-0"
             />
 
-            {/* View Mode Toggle */}
+            {/* View Mode Toggle - Perfect Center Alignment */}
             <div className="flex bg-gray-100 rounded-xl p-1">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
                   viewMode === 'grid' ? 'bg-white shadow-sm text-amber-600' : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
@@ -338,7 +338,7 @@ const AchievementsPage = () => {
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
                   viewMode === 'list' ? 'bg-white shadow-sm text-amber-600' : 'text-gray-500 hover:text-gray-700'
                 }`}
               >

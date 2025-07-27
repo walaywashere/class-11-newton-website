@@ -1,0 +1,392 @@
+{
+  "pageSettings": {
+    "defaultViewMode": "grid",
+    "defaultFilterCategory": "all",
+    "achievementsPerPage": 12,
+    "enablePhotoAlbums": true,
+    "maxPhotosPerAlbum": 8,
+    "photoFormats": ["jpg", "jpeg", "png", "webp"]
+  },
+  "heroSection": {
+    "badge": {
+      "text": "🏆 Our Achievements",
+      "className": "bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-200 border-amber-400/30"
+    },
+    "title": "Celebrating Excellence",
+    "subtitle": "Discover the remarkable achievements and milestones of Class 11-Newton",
+    "stats": [
+      {
+        "icon": "Trophy",
+        "value": "15+",
+        "label": "Major Awards",
+        "color": "text-amber-400"
+      },
+      {
+        "icon": "Star",
+        "value": "25+",
+        "label": "Recognition",
+        "color": "text-yellow-400"
+      },
+      {
+        "icon": "Award",
+        "value": "100%",
+        "label": "Participation",
+        "color": "text-orange-400"
+      },
+      {
+        "icon": "Medal",
+        "value": "5+",
+        "label": "Championships",
+        "color": "text-amber-300"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "value": "all",
+      "label": "All Categories",
+      "description": "View all achievements across all categories"
+    },
+    {
+      "value": "Academic",
+      "label": "Academic Excellence",
+      "description": "Outstanding academic performances and scholarly achievements"
+    },
+    {
+      "value": "Science",
+      "label": "Science & Innovation",
+      "description": "Scientific research, experiments, and technological innovations"
+    },
+    {
+      "value": "Cultural",
+      "label": "Cultural Arts",
+      "description": "Artistic expressions, performances, and cultural contributions"
+    },
+    {
+      "value": "Social",
+      "label": "Social Impact",
+      "description": "Community service, social initiatives, and humanitarian efforts"
+    },
+    {
+      "value": "Sports",
+      "label": "Sports & Athletics",
+      "description": "Athletic achievements, sports competitions, and physical excellence"
+    }
+  ],
+  "achievements": [
+    {
+      "id": 1,
+      "title": "Academic Excellence Award",
+      "category": "Academic",
+      "date": "2024-06-15",
+      "description": "Recognized for outstanding academic performance across all subjects with consistent high grades and innovative project work.",
+      "level": "National",
+      "participants": ["John Doe", "Jane Smith", "Mike Johnson"],
+      "photos": {
+        "cover": "/images/achievements/academic-excellence/cover.jpg",
+        "album": [
+          {
+            "url": "/images/achievements/academic-excellence/ceremony.jpg",
+            "caption": "Award ceremony at the national convention",
+            "photographer": "School Photography Club"
+          },
+          {
+            "url": "/images/achievements/academic-excellence/trophy.jpg",
+            "caption": "The prestigious academic excellence trophy",
+            "photographer": "Official Event Photographer"
+          },
+          {
+            "url": "/images/achievements/academic-excellence/team.jpg",
+            "caption": "Our winning academic team",
+            "photographer": "Class 11-Newton"
+          },
+          {
+            "url": "/images/achievements/academic-excellence/presentation.jpg",
+            "caption": "Final presentation to the judging panel",
+            "photographer": "Event Documentation Team"
+          }
+        ]
+      },
+      "tags": ["Excellence", "Academic", "National", "Team"],
+      "externalLinks": [
+        {
+          "title": "Official Announcement",
+          "url": "https://example.com/academic-award",
+          "type": "news"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Science Innovation Fair - First Place",
+      "category": "Science",
+      "date": "2024-05-20",
+      "description": "Won first place in the regional science innovation fair with our groundbreaking renewable energy project.",
+      "level": "Regional",
+      "participants": ["Alice Brown", "Bob Wilson", "Carol Davis"],
+      "photos": {
+        "cover": "/images/achievements/science-fair/cover.jpg",
+        "album": [
+          {
+            "url": "/images/achievements/science-fair/project-display.jpg",
+            "caption": "Our renewable energy project display",
+            "photographer": "Science Fair Committee"
+          },
+          {
+            "url": "/images/achievements/science-fair/demonstration.jpg",
+            "caption": "Live demonstration to judges and visitors",
+            "photographer": "Fair Documentation"
+          },
+          {
+            "url": "/images/achievements/science-fair/award-moment.jpg",
+            "caption": "The moment we received first place",
+            "photographer": "Fair Official"
+          },
+          {
+            "url": "/images/achievements/science-fair/team-celebration.jpg",
+            "caption": "Team celebration after winning",
+            "photographer": "Class 11-Newton"
+          },
+          {
+            "url": "/images/achievements/science-fair/innovation-setup.jpg",
+            "caption": "Detailed view of our innovation setup",
+            "photographer": "Technical Documentation"
+          }
+        ]
+      },
+      "tags": ["Innovation", "Science", "First Place", "Renewable Energy"],
+      "externalLinks": [
+        {
+          "title": "Project Details",
+          "url": "https://example.com/science-project",
+          "type": "project"
+        },
+        {
+          "title": "News Coverage",
+          "url": "https://example.com/news-coverage",
+          "type": "news"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cultural Heritage Dance Performance",
+      "category": "Cultural",
+      "date": "2024-04-10",
+      "description": "Spectacular traditional dance performance that won hearts at the inter-school cultural festival.",
+      "level": "Inter-School",
+      "participants": ["Emma Garcia", "David Lee", "Sophia Martinez", "James Taylor"],
+      "photos": {
+        "cover": "/images/achievements/cultural-dance/cover.jpg",
+        "album": [
+          {
+            "url": "/images/achievements/cultural-dance/performance1.jpg",
+            "caption": "Opening sequence of our traditional dance",
+            "photographer": "Cultural Festival Team"
+          },
+          {
+            "url": "/images/achievements/cultural-dance/costumes.jpg",
+            "caption": "Beautiful traditional costumes and makeup",
+            "photographer": "Costume Designer"
+          },
+          {
+            "url": "/images/achievements/cultural-dance/audience.jpg",
+            "caption": "Captivated audience during performance",
+            "photographer": "Event Photographer"
+          },
+          {
+            "url": "/images/achievements/cultural-dance/finale.jpg",
+            "caption": "Grand finale with all performers",
+            "photographer": "Festival Documentation"
+          },
+          {
+            "url": "/images/achievements/cultural-dance/backstage.jpg",
+            "caption": "Behind-the-scenes preparation",
+            "photographer": "Class 11-Newton"
+          },
+          {
+            "url": "/images/achievements/cultural-dance/appreciation.jpg",
+            "caption": "Receiving appreciation from cultural experts",
+            "photographer": "Official Event Team"
+          }
+        ]
+      },
+      "tags": ["Cultural", "Dance", "Traditional", "Performance"],
+      "externalLinks": [
+        {
+          "title": "Performance Video",
+          "url": "https://example.com/dance-video",
+          "type": "video"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Community Clean-Up Initiative",
+      "category": "Social",
+      "date": "2024-03-22",
+      "description": "Led a successful community clean-up drive that transformed our local neighborhood park.",
+      "level": "Community",
+      "participants": ["All Class 11-Newton Students"],
+      "photos": {
+        "cover": "/images/achievements/community-cleanup/cover.jpg",
+        "album": [
+          {
+            "url": "/images/achievements/community-cleanup/before.jpg",
+            "caption": "Park condition before our clean-up initiative",
+            "photographer": "Environmental Club"
+          },
+          {
+            "url": "/images/achievements/community-cleanup/action1.jpg",
+            "caption": "Students actively cleaning the park",
+            "photographer": "Class 11-Newton"
+          },
+          {
+            "url": "/images/achievements/community-cleanup/teamwork.jpg",
+            "caption": "Teamwork in action during the clean-up",
+            "photographer": "Community Volunteer"
+          },
+          {
+            "url": "/images/achievements/community-cleanup/after.jpg",
+            "caption": "Beautiful transformation after clean-up",
+            "photographer": "Environmental Club"
+          },
+          {
+            "url": "/images/achievements/community-cleanup/recognition.jpg",
+            "caption": "Recognition from local community leaders",
+            "photographer": "Local News"
+          }
+        ]
+      },
+      "tags": ["Community", "Environment", "Social Impact", "Teamwork"],
+      "externalLinks": [
+        {
+          "title": "Community News Article",
+          "url": "https://example.com/cleanup-news",
+          "type": "news"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Inter-School Basketball Championship",
+      "category": "Sports",
+      "date": "2024-02-28",
+      "description": "Dominated the inter-school basketball tournament with exceptional teamwork and athletic prowess.",
+      "level": "Inter-School",
+      "participants": ["Basketball Team", "Support Squad"],
+      "photos": {
+        "cover": "/images/achievements/basketball-championship/cover.jpg",
+        "album": [
+          {
+            "url": "/images/achievements/basketball-championship/team-photo.jpg",
+            "caption": "Complete basketball team before the championship",
+            "photographer": "Sports Department"
+          },
+          {
+            "url": "/images/achievements/basketball-championship/action-shot.jpg",
+            "caption": "Intense action during the final match",
+            "photographer": "Sports Photographer"
+          },
+          {
+            "url": "/images/achievements/basketball-championship/victory-moment.jpg",
+            "caption": "The moment we won the championship",
+            "photographer": "Tournament Official"
+          },
+          {
+            "url": "/images/achievements/basketball-championship/trophy-lift.jpg",
+            "caption": "Lifting the championship trophy",
+            "photographer": "Sports Media"
+          },
+          {
+            "url": "/images/achievements/basketball-championship/celebration.jpg",
+            "caption": "Team celebration after the victory",
+            "photographer": "Class 11-Newton"
+          },
+          {
+            "url": "/images/achievements/basketball-championship/coaches.jpg",
+            "caption": "With our dedicated coaches",
+            "photographer": "Sports Department"
+          }
+        ]
+      },
+      "tags": ["Sports", "Basketball", "Championship", "Teamwork"],
+      "externalLinks": [
+        {
+          "title": "Match Highlights",
+          "url": "https://example.com/basketball-highlights",
+          "type": "video"
+        },
+        {
+          "title": "Tournament Results",
+          "url": "https://example.com/tournament-results",
+          "type": "results"
+        }
+      ]
+    }
+  ],
+  "displaySettings": {
+    "gridView": {
+      "columns": {
+        "mobile": 1,
+        "tablet": 2,
+        "desktop": 3,
+        "large": 4
+      },
+      "cardHeight": "auto",
+      "imageAspectRatio": "4:3",
+      "showExcerpt": true,
+      "excerptLength": 120
+    },
+    "listView": {
+      "imageSize": {
+        "width": 80,
+        "height": 80
+      },
+      "showFullDescription": false,
+      "showTags": true,
+      "showParticipants": true
+    },
+    "modalView": {
+      "enablePhotoGallery": true,
+      "showMetadata": true,
+      "enableSocialSharing": false,
+      "showRelatedAchievements": true
+    }
+  },
+  "photoGallery": {
+    "thumbnailSize": {
+      "width": 150,
+      "height": 150
+    },
+    "fullImageSize": {
+      "maxWidth": 1200,
+      "maxHeight": 800
+    },
+    "enableLightbox": true,
+    "enableDownload": false,
+    "showCaptions": true,
+    "showPhotographer": true,
+    "enableSlideshow": true,
+    "slideshowInterval": 5000
+  },
+  "filters": {
+    "enableSearch": true,
+    "searchPlaceholder": "Search achievements...",
+    "enableDateFilter": true,
+    "enableLevelFilter": true,
+    "enableTagFilter": true,
+    "levels": ["National", "Regional", "Inter-School", "Community", "Local"]
+  },
+  "animations": {
+    "cardHover": {
+      "scale": 1.02,
+      "duration": 0.2
+    },
+    "imageHover": {
+      "scale": 1.1,
+      "duration": 0.3
+    },
+    "staggerDelay": 0.1
+  }
+}

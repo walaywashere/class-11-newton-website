@@ -186,7 +186,7 @@ const LeadershipPage = () => {
               <div className="flex bg-gray-100 rounded-xl p-1">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2.5 rounded-lg transition-colors flex items-center justify-center min-w-[40px] min-h-[40px] ${
+                  className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
                     viewMode === 'grid' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -194,7 +194,7 @@ const LeadershipPage = () => {
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2.5 rounded-lg transition-colors flex items-center justify-center min-w-[40px] min-h-[40px] ${
+                  className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
                     viewMode === 'list' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >

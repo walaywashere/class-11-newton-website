@@ -314,58 +314,160 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Discover More Transition - Perfect Edge */}
-      <div className="relative -mt-16 mb-16 z-50 flex justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2 }}
-          className="relative"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-3 cursor-pointer group"
-            onClick={() => {
-              const nextSection = document.querySelector('.explore-section');
-              if (nextSection) {
-                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
-          >
-            {/* Enhanced Button Design */}
-            <div 
-              className="px-5 py-3 sm:px-6 sm:py-3.5 lg:px-7 lg:py-4 rounded-full backdrop-blur-lg border-2 text-white font-semibold text-sm sm:text-base lg:text-lg group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl"
-              style={{
-                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%)',
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                backdropFilter: 'blur(20px)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
-              }}
-            >
-              <span className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-                Discover More
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-              </span>
-            </div>
-            
-            {/* Animated Arrow */}
+      {/* Discover More - BRAND NEW ARCHITECTURE */}
+      <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+        {/* Gradient Background */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
+          }}
+        />
+        
+        {/* Floating Particles */}
+        <div className="absolute inset-0">
+          {[...Array(6)].map((_, i) => (
             <motion.div
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              className="p-2 rounded-full"
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
               style={{
-                background: 'rgba(255, 255, 255, 0.15)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
+                left: `${20 + (i * 15)}%`,
+                top: `${30 + (i % 3) * 20}%`,
               }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.3, 0.8, 0.3],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 3 + i * 0.5,
+                repeat: Infinity,
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6 sm:space-y-8"
+          >
+            {/* Main Call to Action */}
+            <div className="space-y-4">
+              <motion.h2 
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Ready to Explore Our
+                <motion.span 
+                  className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-amber-400"
+                  animate={{ 
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  style={{ backgroundSize: '200% 200%' }}
+                >
+                  Amazing Class?
+                </motion.span>
+              </motion.h2>
+              
+              <motion.p 
+                className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                Discover our leadership, achievements, and the incredible stories of Class 11-Newton
+              </motion.p>
+            </div>
+
+            {/* Enhanced Discover Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex justify-center"
             >
-              <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-white/90 group-hover:text-white transition-colors" />
+              <motion.button
+                onClick={() => {
+                  const nextSection = document.querySelector('.explore-section');
+                  if (nextSection) {
+                    nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="group relative overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {/* Button Background */}
+                <div 
+                  className="relative px-8 py-4 sm:px-10 sm:py-5 lg:px-12 lg:py-6 rounded-2xl font-bold text-lg sm:text-xl lg:text-2xl text-white transition-all duration-500"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(245, 158, 11, 0.8) 100%)',
+                    boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    border: '2px solid rgba(255, 255, 255, 0.3)',
+                  }}
+                >
+                  {/* Animated Background Overlay */}
+                  <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(245, 158, 11, 0.9) 100%)',
+                    }}
+                  />
+                  
+                  {/* Button Content */}
+                  <span className="relative flex items-center gap-3">
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Sparkles className="w-6 h-6 sm:w-7 sm:h-7" />
+                    </motion.div>
+                    Discover More
+                    <motion.div
+                      animate={{ rotate: [360, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Sparkles className="w-6 h-6 sm:w-7 sm:h-7" />
+                    </motion.div>
+                  </span>
+                </div>
+              </motion.button>
+            </motion.div>
+
+            {/* Animated Arrow Indicator */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="flex justify-center"
+            >
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="p-3 rounded-full backdrop-blur-sm"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                }}
+              >
+                <ArrowDown className="w-6 h-6 sm:w-8 sm:h-8 text-white/70" />
+              </motion.div>
             </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
 
       {/* Explore Our Class Section - Mobile Responsive */}
       <section className="explore-section py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
