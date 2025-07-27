@@ -309,28 +309,26 @@ a[data-discover="true"]:focus {
   }
 }
 
-/* Footer visibility improvements */
-footer {
-  position: relative;
-  z-index: 10;
+/* Modern Footer Styles */
+.footer-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
-footer::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #e5e5e5, transparent);
-}
-
-/* Enhanced shadow for footer */
-.footer-shadow {
+.footer-glow {
   box-shadow: 
-    0 -10px 25px -5px rgba(0, 0, 0, 0.1),
-    0 -4px 10px -2px rgba(0, 0, 0, 0.05),
+    0 -20px 40px -10px rgba(0, 0, 0, 0.3),
+    0 -8px 16px -4px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Glassmorphism effect for footer elements */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Mobile optimizations */
@@ -370,6 +368,17 @@ footer::before {
   
   /* Footer mobile adjustments */
   footer {
-    margin-top: 2rem;
+    margin-top: 1rem;
+  }
+  
+  /* Optimize footer animations on mobile */
+  footer .animate-pulse {
+    animation-duration: 3s;
+  }
+  
+  /* Reduce footer padding on small screens */
+  footer .lg\\:py-16 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
