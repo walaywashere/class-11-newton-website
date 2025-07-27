@@ -1,23 +1,38 @@
 import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.4,
+      staggerChildren: 0.3,
       delayChildren: 0.2,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30, scale: 0.8 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const logoVariants = {
+  hidden: { opacity: 0, scale: 0.5, rotate: -180 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      duration: 1,
       ease: 'easeOut',
     },
   },
@@ -26,31 +41,107 @@ const itemVariants = {
 const Preloader = () => {
   return (
     <motion.div
-      className="fixed inset-0 bg-slate-900 flex justify-center items-center z-[101] text-center"
+      className="fixed inset-0 gradient-bg flex justify-center items-center z-[101] text-center"
       initial="hidden"
       animate="visible"
-      exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
+      exit={{ 
+        opacity: 0, 
+        scale: 1.1,
+        transition: { duration: 0.8, ease: 'easeInOut' } 
+      }}
       variants={containerVariants}
     >
-      <div>
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-black/20"></div>
+      
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10">
+        {/* Logo */}
+        <motion.div
+          variants={logoVariants}
+          className="mb-8"
+        >
+          <div className="relative mx-auto">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-accent-500 rounded-2xl flex items-center justify-center shadow-glow-lg mb-4 mx-auto">
+              <Sparkles className="w-10 h-10 text-white" />
+            </div>
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent-400 rounded-full animate-pulse"></div>
+          </div>
+        </motion.div>
+
+        {/* Welcome text */}
         <motion.p
-          className="text-2xl text-slate-400 font-light"
+          className="text-lg sm:text-xl text-white/80 font-light mb-2"
           variants={itemVariants}
         >
-          Hi, welcome to the
+          Welcome to the future
         </motion.p>
+
+        {/* Main title */}
         <motion.h1
-          className="text-6xl md:text-8xl font-bold text-white my-2"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight"
           variants={itemVariants}
         >
-          11-Newton
+          Class
+          <span className="block gradient-text bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">
+            11-Newton
+          </span>
         </motion.h1>
+
+        {/* Subtitle */}
         <motion.p
-          className="text-2xl text-indigo-400 font-semibold"
+          className="text-lg sm:text-xl text-primary-200 font-semibold mb-8"
           variants={itemVariants}
         >
-          Class Showcase
+          Where Brilliance Meets Innovation
         </motion.p>
+
+        {/* Loading animation */}
+        <motion.div
+          variants={itemVariants}
+          className="flex justify-center items-center gap-2"
+        >
+          <div className="flex gap-1">
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 bg-accent-400 rounded-full"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
+          </div>
+          <span className="text-white/60 text-sm font-medium ml-3">Loading...</span>
+        </motion.div>
       </div>
     </motion.div>
   );

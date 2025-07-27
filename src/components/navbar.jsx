@@ -1,76 +1,146 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Users, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Users, Menu, X, Sparkles } from 'lucide-react';
 
 const navLinks = [
   { title: 'Home', href: '#home' },
   { title: 'Leadership', href: '#leadership' },
-  { title: 'Classmates', href: '#classmates' },
-  { title: 'Timeline', href: '#achievements' },
+  { title: 'Students', href: '#classmates' },
+  { title: 'Achievements', href: '#achievements' },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200">
+    <motion.nav 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'glass-dark backdrop-blur-xl border-b border-white/10' 
+          : 'bg-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <div className="flex items-center">
-            <Users className="h-8 w-8 text-indigo-600" />
-            <span className="ml-3 font-bold text-xl text-gray-800">11-Newton</span>
-          </div>
+          <motion.div 
+            className="flex items-center gap-3"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <div className="relative">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-accent-500 rounded-xl flex items-center justify-center shadow-glow">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent-400 rounded-full animate-pulse"></div>
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-white">11-Newton</h1>
+              <p className="text-xs text-white/60 font-medium">Class of 2025</p>
+            </div>
+          </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-1">
-            {navLinks.map((link) => (
-              <motion.div key={link.title} whileTap={{ scale: 0.95 }}>
+          <div className="hidden lg:flex items-center space-x-1">
+            {navLinks.map((link, index) => (
+              <motion.div 
+                key={link.title}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index + 0.3 }}
+              >
                 <a
                   href={link.href}
-                  className="relative px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+                  className="group relative px-4 py-2 rounded-xl text-white/80 hover:text-white font-medium transition-all duration-300 hover:bg-white/10"
                 >
                   {link.title}
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-accent-500 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full"></span>
                 </a>
               </motion.div>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              className="p-2 rounded-md text-gray-600 hover:text-indigo-600"
+              className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={24} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={24} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3"
-        >
-          {navLinks.map((link) => (
-            <motion.div key={link.title} whileTap={{ scale: 0.98 }}>
-              <a
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
-              >
-                {link.title}
-              </a>
-            </motion.div>
-          ))}
-        </motion.div>
-      )}
-    </nav>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden glass-dark backdrop-blur-xl border-t border-white/10"
+          >
+            <div className="px-4 py-6 space-y-2">
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                >
+                  <a
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="group flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 font-medium"
+                  >
+                    <div className="w-2 h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full group-hover:scale-125 transition-transform"></div>
+                    {link.title}
+                  </a>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
