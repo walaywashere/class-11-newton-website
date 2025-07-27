@@ -8,12 +8,20 @@ const LeadershipPage = () => {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-900 text-white py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 mb-6">
+      <div className="relative bg-gradient-to-br from-primary-500 via-accent-500 to-primary-600 text-white py-12 sm:py-16 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 gradient-bg opacity-80"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
+        
+        {/* Floating decorative elements */}
+        <div className="absolute top-10 left-10 w-16 h-16 bg-white/10 rounded-2xl rotate-45 animate-float"></div>
+        <div className="absolute top-20 right-20 w-12 h-12 bg-accent-400/20 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 left-1/4 w-10 h-10 bg-white/15 rounded-lg rotate-12 animate-float"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4 mb-8">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -24,11 +32,12 @@ const LeadershipPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="text-center"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-              Our Leadership
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              Our <span className="gradient-text">Leadership</span>
             </h1>
-            <p className="text-xl text-white/80 max-w-3xl">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Meet the dedicated individuals who guide and inspire Class 11-Newton towards excellence.
             </p>
           </motion.div>
