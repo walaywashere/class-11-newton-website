@@ -117,24 +117,24 @@ const LeadershipPage = () => {
             </p>
           </motion.div>
 
-          {/* Quick Stats */}
+          {/* Quick Stats - Adaptive Sizing */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16"
+            className="flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-16"
           >
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-purple-100">
-              <div className="text-3xl font-bold text-purple-600 mb-2">1</div>
-              <div className="text-sm text-gray-600">Class Adviser</div>
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-100 flex-1 min-w-[140px] max-w-[200px] text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2">1</div>
+              <div className="text-xs sm:text-sm text-gray-600">Class Adviser</div>
             </div>
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-blue-100">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{classOfficers.length}</div>
-              <div className="text-sm text-gray-600">Class Officers</div>
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-blue-100 flex-1 min-w-[140px] max-w-[200px] text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">{classOfficers.length}</div>
+              <div className="text-xs sm:text-sm text-gray-600">Class Officers</div>
             </div>
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-emerald-100">
-              <div className="text-3xl font-bold text-emerald-600 mb-2">100%</div>
-              <div className="text-sm text-gray-600">Dedication</div>
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-emerald-100 flex-1 min-w-[140px] max-w-[200px] text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2">100%</div>
+              <div className="text-xs sm:text-sm text-gray-600">Dedication</div>
             </div>
           </motion.div>
         </div>

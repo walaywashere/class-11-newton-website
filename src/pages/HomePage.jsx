@@ -311,12 +311,12 @@ const HomePage = () => {
             </Link>
           </motion.div>
 
-          {/* Enhanced Scroll Indicator - Mobile Fixed */}
+          {/* Enhanced Scroll Indicator - Properly Centered */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2 }}
-            className="absolute bottom-2 sm:bottom-4 lg:bottom-6 left-1/2 transform -translate-x-1/2 z-10"
+            className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 z-10 w-full flex justify-center"
           >
             <motion.div
               animate={{ y: [0, 4, 0] }}
@@ -369,8 +369,8 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          {/* Cards Grid - Mobile First */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          {/* Cards Grid - Properly Aligned */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
             
             {/* Leadership Card - Mobile Responsive */}
             <motion.div
@@ -385,7 +385,8 @@ const HomePage = () => {
                 className="h-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden hover:scale-[1.02] transition-all duration-500 shadow-xl"
                 style={{
                   background: 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%)',
-                  minHeight: '400px'
+                  minHeight: '500px',
+                  height: 'auto'
                 }}
               >
                 {/* Background Pattern */}
@@ -440,8 +441,8 @@ const HomePage = () => {
               </div>
             </motion.div>
 
-            {/* Right Column Cards - Mobile Stack */}
-            <div className="flex flex-col gap-6 sm:gap-8">
+            {/* Right Column Cards - Equal Heights */}
+            <div className="flex flex-col gap-6 sm:gap-8 h-full">
               
               {/* Students Card - Mobile Responsive */}
               <motion.div
@@ -452,13 +453,14 @@ const HomePage = () => {
                 className="flex-1 group cursor-pointer"
                 onClick={() => window.location.href = '/students'}
               >
-                <div 
-                  className="h-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden hover:scale-[1.02] transition-all duration-500 shadow-xl"
-                  style={{
-                    background: 'linear-gradient(135deg, #3B82F6 0%, #10B981 100%)',
-                    minHeight: '280px'
-                  }}
-                >
+                                 <div 
+                   className="h-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden hover:scale-[1.02] transition-all duration-500 shadow-xl"
+                   style={{
+                     background: 'linear-gradient(135deg, #3B82F6 0%, #10B981 100%)',
+                     minHeight: '240px',
+                     height: '100%'
+                   }}
+                 >
                   {/* Background Pattern */}
                   <div 
                     className="absolute inset-0 opacity-10"
@@ -500,13 +502,14 @@ const HomePage = () => {
                 className="flex-1 group cursor-pointer"
                 onClick={() => window.location.href = '/achievements'}
               >
-                <div 
-                  className="h-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden hover:scale-[1.02] transition-all duration-500 shadow-xl"
-                  style={{
-                    background: 'linear-gradient(135deg, #10B981 0%, #F59E0B 100%)',
-                    minHeight: '280px'
-                  }}
-                >
+                                 <div 
+                   className="h-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden hover:scale-[1.02] transition-all duration-500 shadow-xl"
+                   style={{
+                     background: 'linear-gradient(135deg, #10B981 0%, #F59E0B 100%)',
+                     minHeight: '240px',
+                     height: '100%'
+                   }}
+                 >
                   {/* Background Pattern */}
                   <div 
                     className="absolute inset-0 opacity-10"

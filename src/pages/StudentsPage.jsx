@@ -252,26 +252,26 @@ const StudentsPage = () => {
             </p>
           </motion.div>
 
-          {/* Quick Stats - Mobile Responsive */}
+          {/* Quick Stats - Adaptive Sizing */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-12 sm:mb-16"
+            className="flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 max-w-5xl mx-auto mb-12 sm:mb-16"
           >
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-blue-100">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-blue-100 flex-1 min-w-[140px] max-w-[200px] text-center">
               <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">{students.length}</div>
               <div className="text-xs sm:text-sm text-gray-600">Total Students</div>
             </div>
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-100">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-100 flex-1 min-w-[140px] max-w-[200px] text-center">
               <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2">{students.filter(s => s.role).length}</div>
               <div className="text-xs sm:text-sm text-gray-600">Class Officers</div>
             </div>
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-emerald-100">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-emerald-100 flex-1 min-w-[140px] max-w-[200px] text-center">
               <div className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2">100%</div>
               <div className="text-xs sm:text-sm text-gray-600">Unique Stories</div>
             </div>
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-amber-100">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-amber-100 flex-1 min-w-[140px] max-w-[200px] text-center">
               <div className="text-2xl sm:text-3xl font-bold text-amber-600 mb-2">∞</div>
               <div className="text-xs sm:text-sm text-gray-600">Dreams</div>
             </div>
