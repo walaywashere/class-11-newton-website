@@ -169,8 +169,8 @@ const StudentsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       
-      {/* Modern Hero Section */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden navbar-offset">
+      {/* Mobile First Hero Section */}
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
         {/* Dynamic Background */}
         <div 
           className="absolute inset-0"
@@ -240,24 +240,24 @@ const StudentsPage = () => {
               <span className="text-blue-800 font-semibold">Student Directory</span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
               Our Amazing
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
                 Students
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Meet the brilliant minds, unique personalities, and future leaders that make Class 11-Newton extraordinary.
             </p>
           </motion.div>
 
-          {/* Quick Stats */}
+          {/* Quick Stats - Mobile Responsive */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto mb-16"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-12 sm:mb-16"
           >
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-blue-100">
               <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">{students.length}</div>
@@ -397,8 +397,8 @@ const StudentsPage = () => {
               transition={{ duration: 0.4 }}
               className={
                 viewMode === 'grid'
-                  ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'
-                  : 'space-y-4'
+                  ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6'
+                  : 'space-y-3 sm:space-y-4'
               }
             >
               {currentStudents.map((student, index) => (
@@ -407,17 +407,17 @@ const StudentsPage = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className={`group cursor-pointer ${
-                    viewMode === 'grid'
-                      ? 'bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1'
-                      : 'bg-white rounded-2xl border border-gray-200 p-4 hover:shadow-lg transition-all duration-300'
-                  }`}
+                                      className={`group cursor-pointer ${
+                      viewMode === 'grid'
+                        ? 'bg-white rounded-xl sm:rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1'
+                        : 'bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-3 sm:p-4 hover:shadow-lg transition-all duration-300'
+                    }`}
                   onClick={() => setSelectedStudent(student)}
                 >
                   {viewMode === 'grid' ? (
                     // Grid Card View - Fixed sizing
                     <>
-                      <div className="relative overflow-hidden" style={{ height: '200px' }}>
+                                              <div className="relative overflow-hidden h-40 sm:h-48 lg:h-52">
                         {student.photo ? (
                           <img
                             src={student.photo}
@@ -445,30 +445,30 @@ const StudentsPage = () => {
                           </div>
                         )}
                       </div>
-                      <div className="p-4">
-                        <div className="mb-3">
-                          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 line-clamp-1">{student.name}</h3>
-                          {student.dreamJob && (
-                            <p className="text-emerald-600 font-medium text-sm line-clamp-1">{student.dreamJob}</p>
+                                              <div className="p-3 sm:p-4">
+                          <div className="mb-2 sm:mb-3">
+                            <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-1 line-clamp-1">{student.name}</h3>
+                            {student.dreamJob && (
+                              <p className="text-emerald-600 font-medium text-xs sm:text-sm line-clamp-1">{student.dreamJob}</p>
+                            )}
+                          </div>
+                          {student.funFact && (
+                            <p className="text-gray-600 text-xs sm:text-sm line-clamp-2 mb-2 sm:mb-3">{student.funFact}</p>
                           )}
-                        </div>
-                        {student.funFact && (
-                          <p className="text-gray-600 text-sm line-clamp-2 mb-3">{student.funFact}</p>
-                        )}
-                        {student.quote && (
-                          <p className="text-blue-600 text-sm italic line-clamp-2 mb-3">"{student.quote}"</p>
-                        )}
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-1">
-                            <Heart className="w-4 h-4 text-red-400" />
-                            <span className="text-xs text-gray-500">Unique</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Target className="w-4 h-4 text-emerald-400" />
-                            <Star className="w-4 h-4 text-yellow-400" />
+                          {student.quote && (
+                            <p className="text-blue-600 text-xs sm:text-sm italic line-clamp-2 mb-2 sm:mb-3">"{student.quote}"</p>
+                          )}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1">
+                              <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-red-400" />
+                              <span className="text-xs text-gray-500">Unique</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Target className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
+                              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </>
                   ) : (
                     // List View - Fixed sizing and better mobile layout

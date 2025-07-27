@@ -190,8 +190,8 @@ const AchievementsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       
-      {/* Modern Hero Section */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden navbar-offset">
+      {/* Mobile First Hero Section */}
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
         {/* Dynamic Background */}
         <div 
           className="absolute inset-0"
@@ -261,14 +261,14 @@ const AchievementsPage = () => {
               <span className="text-amber-800 font-semibold">Hall of Fame</span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
               Our
               <span className="block bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
                 Achievements
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Celebrate the remarkable milestones, victories, and collective successes that define Class 11-Newton's excellence.
             </p>
           </motion.div>

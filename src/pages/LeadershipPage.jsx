@@ -34,8 +34,8 @@ const LeadershipPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       
-      {/* Modern Hero Section */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden navbar-offset">
+      {/* Mobile First Hero Section */}
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
         {/* Dynamic Background */}
         <div 
           className="absolute inset-0"
@@ -105,14 +105,14 @@ const LeadershipPage = () => {
               <span className="text-purple-800 font-semibold">Leadership Excellence</span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
               Meet Our
               <span className="block bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
                 Leaders
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Discover the visionaries and innovators who guide Class 11-Newton towards excellence and success.
             </p>
           </motion.div>
