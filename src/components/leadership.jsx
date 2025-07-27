@@ -104,9 +104,9 @@ const OfficerCard = ({ person, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group"
     >
-      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border-2 border-neutral-100 hover:border-primary-300 h-full">
+      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border-2 border-neutral-100 hover:border-primary-300 h-full flex flex-col">
         {/* Image Section */}
-        <div className="relative aspect-[3/4] overflow-hidden">
+        <div className="relative aspect-[3/4] overflow-hidden flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 skeleton" />
           )}
@@ -123,22 +123,22 @@ const OfficerCard = ({ person, index }) => {
           />
           
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
           
           {/* Role badge */}
-          <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-primary-700 text-xs font-bold rounded-full border border-white/50 shadow-soft">
+          <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm text-primary-700 text-xs font-bold rounded-full border border-white/60 shadow-sm">
             {person.role}
           </div>
           
-          {/* Content overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-            <h4 className="text-xl font-bold mb-2 leading-tight">{person.name}</h4>
-            <p className="text-sm text-white/90 mb-3 font-medium">{person.dreamJob}</p>
+          {/* Content overlay - Fixed positioning */}
+          <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <h4 className="text-lg sm:text-xl font-bold mb-1 leading-tight line-clamp-2">{person.name}</h4>
+            <p className="text-xs sm:text-sm text-white/90 mb-3 font-medium line-clamp-1">{person.dreamJob}</p>
             
             {person.quote && (
               <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-                  <p className="text-xs italic text-white/95 leading-relaxed">
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-2.5 border border-white/25">
+                  <p className="text-xs italic text-white/95 leading-relaxed line-clamp-2">
                     "{person.quote}"
                   </p>
                 </div>
@@ -147,23 +147,23 @@ const OfficerCard = ({ person, index }) => {
           </div>
         </div>
         
-        {/* Bottom section with enhanced styling */}
-        <div className="p-4 bg-gradient-to-r from-primary-50 via-white to-accent-50 border-t border-neutral-100">
-          <div className="flex items-center justify-between">
+        {/* Bottom section with enhanced styling - Now visible */}
+        <div className="p-3 sm:p-4 bg-gradient-to-r from-primary-50 via-white to-accent-50 border-t border-neutral-100 flex-grow flex flex-col justify-between">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-sm"></div>
-              <span className="text-sm font-semibold text-neutral-800">{person.role}</span>
+              <div className="w-2.5 h-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-sm"></div>
+              <span className="text-xs sm:text-sm font-semibold text-neutral-800 truncate">{person.role}</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-primary-300 rounded-full"></div>
+              <div className="w-1.5 h-1.5 bg-primary-300 rounded-full"></div>
               <span className="text-xs text-neutral-500 font-medium">Officer</span>
             </div>
           </div>
           
-          {/* Additional info bar */}
-          <div className="mt-3 pt-3 border-t border-neutral-100">
+          {/* Additional info bar - Now properly visible */}
+          <div className="pt-2 border-t border-neutral-100">
             <div className="flex items-center justify-center">
-              <div className="text-xs text-neutral-600 bg-neutral-100 px-3 py-1 rounded-full font-medium">
+              <div className="text-xs text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded-full font-medium">
                 Class 11-Newton
               </div>
             </div>
