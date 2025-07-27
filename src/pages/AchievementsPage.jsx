@@ -330,7 +330,7 @@ const AchievementsPage = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 min-w-[180px]"
+                                          className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl shadow-xl z-[9999] min-w-[180px]"
                   >
                     {categories.map((category, index) => (
                       <button

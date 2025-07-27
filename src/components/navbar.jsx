@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Menu, X, Sparkles } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { scrollToTopInstant } from '../utils/scrollToTop';
 
 const navLinks = [
   { title: 'Home', href: '/' },
@@ -52,7 +53,7 @@ const Navbar = () => {
               <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-accent-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <Link to="/" className="block">
+              <Link to="/" onClick={scrollToTopInstant} className="block">
                 <h1 className="text-lg sm:text-xl font-bold text-white">11-Newton</h1>
                 <p className="text-xs text-white/60 font-medium">Class of 2025</p>
               </Link>
@@ -70,6 +71,7 @@ const Navbar = () => {
               >
                 <Link
                   to={link.href}
+                  onClick={scrollToTopInstant}
                   className={`group relative px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-white/10 ${
                     location.pathname === link.href 
                       ? 'text-white bg-white/10' 
@@ -143,7 +145,10 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      scrollToTopInstant();
+                    }}
                     className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium ${
                       location.pathname === link.href 
                         ? 'text-white bg-white/10' 

@@ -321,7 +321,7 @@ const StudentsPage = () => {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-xl z-50 min-w-[180px]"
+                      className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-xl shadow-xl z-[9999] min-w-[180px]"
                     >
                       {[
                         { value: 'name', label: 'By Name' },
@@ -346,11 +346,11 @@ const StudentsPage = () => {
                 </AnimatePresence>
               </div>
 
-              {/* View Mode Toggle */}
+              {/* View Mode Toggle - Perfect Mobile Alignment */}
               <div className="flex bg-gray-100 rounded-xl p-1">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg transition-colors ${
+                  className={`p-2.5 rounded-lg transition-colors flex items-center justify-center min-w-[40px] min-h-[40px] ${
                     viewMode === 'grid' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -358,7 +358,7 @@ const StudentsPage = () => {
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg transition-colors ${
+                  className={`p-2.5 rounded-lg transition-colors flex items-center justify-center min-w-[40px] min-h-[40px] ${
                     viewMode === 'list' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >

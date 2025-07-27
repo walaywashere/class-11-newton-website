@@ -265,7 +265,7 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.6 }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 lg:mb-20"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-20 sm:mb-24 lg:mb-28"
           >
             <Link
               to="/students"
@@ -311,12 +311,12 @@ const HomePage = () => {
             </Link>
           </motion.div>
 
-          {/* Enhanced Scroll Indicator - Properly Centered */}
+          {/* Enhanced Scroll Indicator - No Overlap */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2 }}
-            className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 z-10 w-full flex justify-center"
+            className="absolute bottom-8 sm:bottom-12 lg:bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full flex justify-center"
           >
             <motion.div
               animate={{ y: [0, 4, 0] }}
