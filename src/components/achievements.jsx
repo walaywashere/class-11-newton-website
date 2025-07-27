@@ -240,7 +240,7 @@ const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "Mi
   }), []);
 
   return (
-    <section id="achievements" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-primary-50/30 via-white to-accent-50/30 overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-primary-50/30 via-white to-accent-50/30 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

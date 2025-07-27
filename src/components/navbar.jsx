@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Menu, X, Sparkles } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const navLinks = [
-  { title: 'Home', href: '#home' },
-  { title: 'Leadership', href: '#leadership' },
-  { title: 'Students', href: '#classmates' },
-  { title: 'Achievements', href: '#achievements' },
+  { title: 'Home', href: '/' },
+  { title: 'Leadership', href: '/leadership' },
+  { title: 'Students', href: '/students' },
+  { title: 'Achievements', href: '/achievements' },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,8 +49,10 @@ const Navbar = () => {
               <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-accent-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl font-bold text-white">11-Newton</h1>
-              <p className="text-xs text-white/60 font-medium">Class of 2025</p>
+              <Link to="/" className="block">
+                <h1 className="text-lg sm:text-xl font-bold text-white">11-Newton</h1>
+                <p className="text-xs text-white/60 font-medium">Class of 2025</p>
+              </Link>
             </div>
           </motion.div>
 
@@ -61,13 +65,21 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                                  transition={{ delay: Math.min(0.1 * index + 0.3, 1.0) }}
               >
-                <a
-                  href={link.href}
-                  className="group relative px-4 py-2 rounded-xl text-white/80 hover:text-white font-medium transition-all duration-300 hover:bg-white/10"
+                <Link
+                  to={link.href}
+                  className={`group relative px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-white/10 ${
+                    location.pathname === link.href 
+                      ? 'text-white bg-white/10' 
+                      : 'text-white/80 hover:text-white'
+                  }`}
                 >
                   {link.title}
-                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-accent-500 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full"></span>
-                </a>
+                  <span className={`absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-primary-400 to-accent-500 transition-all duration-300 rounded-full ${
+                    location.pathname === link.href 
+                      ? 'w-full left-0' 
+                      : 'w-0 group-hover:w-full group-hover:left-0'
+                  }`}></span>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -126,14 +138,22 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * index }}
                 >
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="group flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 font-medium text-sm sm:text-base"
+                    className={`group flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+                      location.pathname === link.href 
+                        ? 'text-white bg-white/10' 
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
                   >
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full group-hover:scale-125 transition-transform"></div>
+                    <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-primary-400 to-accent-500 rounded-full transition-transform ${
+                      location.pathname === link.href 
+                        ? 'scale-125' 
+                        : 'group-hover:scale-125'
+                    }`}></div>
                     {link.title}
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
             </div>

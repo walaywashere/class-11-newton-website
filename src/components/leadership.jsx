@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Crown, Users, Star, Quote, Award, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AdviserSection = ({ person }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -166,7 +167,7 @@ const Leadership = ({ adviser, students = [] }) => {
   ).slice(0, 8) : []; // Limit to 8 officers for better layout
 
   return (
-    <section id="leadership" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30">
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -235,13 +236,13 @@ const Leadership = ({ adviser, students = [] }) => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <a
-            href="#classmates"
+          <Link
+            to="/students"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-2xl font-semibold text-lg hover:from-primary-700 hover:to-accent-700 hover:scale-105 transition-all duration-300 shadow-large"
           >
             <Users className="w-5 h-5" />
             Meet All Classmates
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
