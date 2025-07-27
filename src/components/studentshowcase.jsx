@@ -344,43 +344,68 @@ const StudentShowcase = ({ students = [] }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap px-4 sm:px-0"
+            className="flex justify-center items-center gap-2 flex-wrap px-4 sm:px-0 mt-8"
           >
             {/* Previous button */}
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-soft"
+              className="flex items-center justify-center w-10 h-10 rounded-xl bg-white border-2 border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-neutral-200 disabled:hover:text-neutral-600 transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
 
             {/* Page numbers */}
-            {pageNumbers.map((page, index) => (
-              <button
-                key={index}
-                onClick={() => typeof page === 'number' && setCurrentPage(page)}
-                disabled={typeof page !== 'number'}
-                className={`min-w-[32px] sm:min-w-[40px] h-8 sm:h-10 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-center ${
-                  page === currentPage
-                    ? 'bg-primary-600 text-white shadow-lg border border-primary-600 font-bold scale-110'
-                    : typeof page === 'number'
-                    ? 'bg-white border border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 shadow-soft hover:scale-105'
-                    : 'bg-transparent text-neutral-400 cursor-default border-0'
-                }`}
-              >
-                {page}
-              </button>
-            ))}
+            <div className="flex items-center gap-1">
+              {pageNumbers.map((page, index) => {
+                const isCurrentPage = page === currentPage;
+                const isNumber = typeof page === 'number';
+                
+                if (!isNumber) {
+                  // Ellipsis
+                  return (
+                    <span
+                      key={index}
+                      className="flex items-center justify-center w-10 h-10 text-neutral-400 font-medium"
+                    >
+                      ...
+                    </span>
+                  );
+                }
+
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentPage(page)}
+                    className={`flex items-center justify-center w-10 h-10 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                      isCurrentPage
+                        ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white border-2 border-primary-600 shadow-lg shadow-primary-200 scale-110 hover:from-primary-700 hover:to-primary-800'
+                        : 'bg-white border-2 border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700 hover:scale-105 shadow-sm hover:shadow-md'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
 
             {/* Next button */}
             <button
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, paginationData.totalPages))}
               disabled={currentPage === paginationData.totalPages}
-              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-soft"
+              className="flex items-center justify-center w-10 h-10 rounded-xl bg-white border-2 border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-neutral-200 disabled:hover:text-neutral-600 transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronRight className="w-5 h-5" />
             </button>
+
+            {/* Page info for mobile */}
+            <div className="w-full sm:w-auto mt-4 sm:mt-0 sm:ml-4">
+              <div className="text-center sm:text-left">
+                <span className="text-sm text-neutral-600 bg-neutral-100 px-3 py-1.5 rounded-full font-medium">
+                  Page {currentPage} of {paginationData.totalPages}
+                </span>
+              </div>
+            </div>
           </motion.div>
         )}
       </div>

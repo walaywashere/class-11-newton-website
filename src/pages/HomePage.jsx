@@ -16,7 +16,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden navbar-offset safe-x">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden navbar-offset safe-x pb-16 sm:pb-20">
         {/* Modern gradient background */}
         <div className="absolute inset-0 gradient-bg"></div>
         
@@ -134,15 +134,17 @@ const HomePage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+          className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-white/60"
+            className="flex flex-col items-center gap-1 sm:gap-2 text-white/70 hover:text-white/90 transition-colors duration-300"
           >
-            <span className="text-sm font-medium">Explore More</span>
-            <ArrowDown className="w-5 h-5" />
+            <span className="text-xs sm:text-sm font-medium bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+              Explore More
+            </span>
+            <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
           </motion.div>
         </motion.div>
       </section>
