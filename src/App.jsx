@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import Preloader from './components/Preloader';
-import Navbar from './components/Navbar';
-import Homepage from './components/Homepage';
-import StudentShowcase from './components/StudentShowcase';
-import Leadership from './components/Leadership';
-import Achievements from './components/Achievements';
+import Preloader from './components/preloader.js';
+import Navbar from './components/navbar.js';
+import HomePage from './components/homepage.js';
+import StudentShowcase from './components/studentshowcase.js';
+import Leadership from './components/leadership.js';
+import Achievements from './components/achievements.js';
 import { adviser, students, achievements } from './data/classData.jsx';
 
 function App() {
@@ -25,7 +25,6 @@ function App() {
         {isLoading && <Preloader />}
       </AnimatePresence>
 
-      {/* This ensures the main content only renders AFTER loading is false */}
       {!isLoading && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -35,7 +34,7 @@ function App() {
           <div className="bg-slate-100 text-slate-800 font-poppins">
             <Navbar />
             <main>
-              <Homepage />
+              <HomePage />
               <Leadership adviser={adviser} students={students} />
               <StudentShowcase students={students} />
               <Achievements achievements={achievements} />
