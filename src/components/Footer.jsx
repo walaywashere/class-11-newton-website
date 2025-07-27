@@ -1,11 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Sparkles, 
-  Heart, 
-  Mail, 
-  MapPin, 
-  Calendar,
   ArrowUp
 } from 'lucide-react';
 import { getIcon } from '../utils/iconMapper';
@@ -85,7 +80,7 @@ const Footer = () => {
                       boxShadow: '0 8px 32px rgba(59, 130, 246, 0.3)'
                     }}
                   >
-                    <Sparkles className="w-8 h-8 text-white" />
+                    {React.createElement(getIcon('Sparkles'), { className: "w-8 h-8 text-white" })}
                     <div className="absolute inset-0 rounded-2xl bg-white/20 animate-pulse"></div>
                   </div>
                   <div>
@@ -128,7 +123,7 @@ const Footer = () => {
                 className="lg:col-span-3"
               >
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-blue-400" />
+                  {React.createElement(getIcon('BookOpen'), { className: "w-5 h-5 text-blue-400" })}
                   Quick Links
                 </h3>
                 <nav className="space-y-3">
@@ -159,7 +154,7 @@ const Footer = () => {
                 className="lg:col-span-4"
               >
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-red-400" />
+                  {React.createElement(getIcon('Heart'), { className: "w-5 h-5 text-red-400" })}
                   Connect With Us
                 </h3>
                 
@@ -167,19 +162,19 @@ const Footer = () => {
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                      <MapPin className="w-4 h-4 text-green-400" />
+                      {React.createElement(getIcon('MapPin'), { className: "w-4 h-4 text-green-400" })}
                     </div>
                     <span>{contact.schoolName}, {contact.city}</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                      <Mail className="w-4 h-4 text-blue-400" />
+                      {React.createElement(getIcon('Mail'), { className: "w-4 h-4 text-blue-400" })}
                     </div>
                     <span>{contact.email}</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                      <Calendar className="w-4 h-4 text-purple-400" />
+                      {React.createElement(getIcon('Calendar'), { className: "w-4 h-4 text-purple-400" })}
                     </div>
                     <span>{contact.academicYear}</span>
                   </div>
@@ -224,7 +219,7 @@ const Footer = () => {
                   &copy; {currentYear} {branding.name}. {copyright.text}
                 </p>
                 <p className="text-gray-500 text-xs mt-1 flex items-center justify-center sm:justify-start gap-1">
-                  {copyright.madeWithLove.split('❤️')[0]}<Heart className="w-3 h-3 text-red-400 animate-pulse" />{copyright.madeWithLove.split('❤️')[1]}
+                  {copyright.madeWithLove.split('❤️')[0]}{React.createElement(getIcon('Heart'), { className: "w-3 h-3 text-red-400 animate-pulse" })}{copyright.madeWithLove.split('❤️')[1]}
                 </p>
               </motion.div>
 
