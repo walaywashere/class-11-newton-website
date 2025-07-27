@@ -195,39 +195,144 @@ const HomePage = () => {
             >
               <Link
                 to="/leadership"
-                className="group relative block h-80 sm:h-96 rounded-3xl overflow-hidden shadow-large hover:shadow-glow transition-all duration-500 hover:scale-[1.02]"
+                style={{
+                  background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #d97706 100%)',
+                  minHeight: '280px',
+                  borderRadius: '24px',
+                  boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  display: 'block',
+                  textDecoration: 'none',
+                  transition: 'all 0.5s ease'
+                }}
+                className="group hover:scale-[1.02]"
+                onMouseEnter={(e) => {
+                  e.target.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.4), 0 20px 40px rgba(14, 165, 233, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.boxShadow = '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)';
+                }}
               >
-                {/* Background Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600"></div>
-                
                 {/* Pattern Overlay */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 left-4 w-20 h-20 border-2 border-white rounded-full"></div>
-                  <div className="absolute top-16 right-8 w-12 h-12 border border-white rounded-lg rotate-45"></div>
-                  <div className="absolute bottom-8 left-12 w-8 h-8 bg-white/20 rounded-full"></div>
+                <div 
+                  style={{
+                    position: 'absolute',
+                    inset: '0',
+                    opacity: '0.1',
+                    pointerEvents: 'none'
+                  }}
+                >
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: '16px',
+                      left: '16px',
+                      width: '80px',
+                      height: '80px',
+                      border: '2px solid white',
+                      borderRadius: '50%'
+                    }}
+                  ></div>
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: '64px',
+                      right: '32px',
+                      width: '48px',
+                      height: '48px',
+                      border: '1px solid white',
+                      borderRadius: '8px',
+                      transform: 'rotate(45deg)'
+                    }}
+                  ></div>
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      bottom: '32px',
+                      left: '48px',
+                      width: '32px',
+                      height: '32px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      borderRadius: '50%'
+                    }}
+                  ></div>
                 </div>
                 
                 {/* Content */}
-                <div className="relative z-10 h-full flex flex-col justify-between p-8 sm:p-10 text-white">
+                <div 
+                  style={{
+                    position: 'relative',
+                    zIndex: '10',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    padding: '32px',
+                    color: 'white'
+                  }}
+                >
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
-                      <Crown className="w-4 h-4" />
+                    <div 
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        padding: '6px 12px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        backdropFilter: 'blur(8px)',
+                        borderRadius: '20px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        marginBottom: '24px'
+                      }}
+                    >
+                      <Crown style={{ width: '16px', height: '16px' }} />
                       Leadership Team
                     </div>
                     
-                    <h3 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight">
+                                         <h3 
+                       style={{
+                         fontSize: '32px',
+                         fontWeight: 'bold',
+                         marginBottom: '16px',
+                         lineHeight: '1.1',
+                         color: 'white'
+                       }}
+                       className="sm:text-4xl lg:text-5xl"
+                     >
                       Meet Our
-                      <span className="block">Amazing Leaders</span>
+                      <span style={{ display: 'block' }}>Amazing Leaders</span>
                     </h3>
                     
-                    <p className="text-white/90 text-lg leading-relaxed mb-6">
+                    <p 
+                      style={{
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        fontSize: '18px',
+                        lineHeight: '1.6',
+                        marginBottom: '24px'
+                      }}
+                    >
                       Discover the inspiring individuals who guide our class towards excellence and innovation.
                     </p>
                   </div>
                   
-                  <div className="flex items-center gap-3 text-white font-semibold group-hover:gap-4 transition-all duration-300">
+                  <div 
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      color: 'white',
+                      fontWeight: '600',
+                      fontSize: '16px'
+                    }}
+                    className="group-hover:gap-4 transition-all duration-300"
+                  >
                     <span>Explore Leadership</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight 
+                      style={{ width: '20px', height: '20px' }} 
+                      className="group-hover:translate-x-1 transition-transform" 
+                    />
                   </div>
                 </div>
               </Link>
