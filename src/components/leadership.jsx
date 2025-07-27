@@ -306,16 +306,6 @@ const Leadership = ({ adviser, students = [] }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-            
-            {/* Fallback Button - Simple Blue Background */}
-            <div className="mt-4">
-              <Link
-                to="/students"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl transition-colors duration-300"
-              >
-                👥 Meet All Classmates →
-              </Link>
-            </div>
           </div>
         </motion.div>
       </div>
