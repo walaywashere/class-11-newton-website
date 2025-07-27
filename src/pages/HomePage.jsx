@@ -205,13 +205,13 @@ const HomePage = () => {
               </p>
             </motion.div>
 
-            {/* Interactive Stats Cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-12 max-w-4xl mx-auto"
-            >
+                         {/* Interactive Stats Cards */}
+             <motion.div
+               initial={{ opacity: 0, y: 40 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.2 }}
+               className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-16 sm:mb-20 max-w-4xl mx-auto"
+             >
               {[
                 { icon: Users, label: 'Brilliant Minds', value: '40+', color: 'blue' },
                 { icon: Trophy, label: 'Achievements', value: '15+', color: 'purple' },
@@ -256,13 +256,13 @@ const HomePage = () => {
               ))}
             </motion.div>
 
-            {/* CTA Buttons - Redesigned */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.6 }}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-16"
-            >
+                         {/* CTA Buttons - Redesigned */}
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.6 }}
+               className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-20 sm:mb-24"
+             >
                              <Link
                  to="/students"
                  onClick={scrollToTopInstant}

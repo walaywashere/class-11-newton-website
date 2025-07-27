@@ -227,13 +227,13 @@ const StudentsPage = () => {
               </p>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto"
-            >
+                         {/* Stats */}
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.2 }}
+               className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto mb-16 sm:mb-20"
+             >
               {[
                 { icon: Users, label: 'Brilliant Minds', value: '40+', color: 'blue' },
                 { icon: Heart, label: 'Unique Stories', value: '40+', color: 'emerald' },

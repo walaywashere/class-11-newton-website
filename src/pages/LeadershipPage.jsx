@@ -207,13 +207,13 @@ const LeadershipPage = () => {
               </p>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto"
-            >
+                         {/* Stats */}
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.2 }}
+               className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-2xl mx-auto mb-16 sm:mb-20"
+             >
               {[
                 { icon: Crown, label: 'Class Adviser', value: '1', color: 'purple' },
                 { icon: Users, label: 'Student Officers', value: '8+', color: 'blue' },
@@ -229,7 +229,7 @@ const LeadershipPage = () => {
                     y: -5,
                     transition: { duration: 0.2 }
                   }}
-                  className="group cursor-pointer"
+                                     className="group cursor-pointer w-full sm:w-auto sm:flex-1 sm:min-w-[180px] sm:max-w-[200px]"
                 >
                   <div 
                     className="p-4 sm:p-6 rounded-2xl backdrop-blur-md border transition-all duration-300 group-hover:shadow-2xl"

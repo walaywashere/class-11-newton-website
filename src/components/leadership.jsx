@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Crown, Users, Star, Quote, Award, Heart, MapPin, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { scrollToTopInstant } from '../utils/scrollToTop';
 
 // Enhanced Adviser Card Component
 const AdviserCard = ({ person }) => {
@@ -273,6 +274,7 @@ const Leadership = ({ adviser, students = [] }) => {
             {/* Primary Button with Inline Styles */}
             <Link
               to="/students"
+              onClick={scrollToTopInstant}
               style={{
                 background: 'linear-gradient(135deg, #0284c7 0%, #d97706 100%)',
                 color: 'white',
