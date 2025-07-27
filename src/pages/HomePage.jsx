@@ -197,7 +197,7 @@ const HomePage = () => {
           </motion.div>
 
           {/* Interactive Cards Grid - Fixed Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 auto-rows-fr">
             
             {/* Leadership Card - Full Left Side */}
             <motion.div
@@ -211,16 +211,18 @@ const HomePage = () => {
                 to="/leadership"
                 style={{
                   background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #d97706 100%)',
-                  minHeight: '400px',
+                  height: '100%',
+                  minHeight: '500px',
                   borderRadius: '24px',
                   boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)',
                   overflow: 'hidden',
                   position: 'relative',
                   display: 'block',
                   textDecoration: 'none',
-                  transition: 'all 0.5s ease'
+                  transition: 'all 0.5s ease',
+                  outline: 'none'
                 }}
-                className="group hover:scale-[1.02]"
+                className="group hover:scale-[1.02] focus:outline-none focus:ring-0"
                 onMouseEnter={(e) => {
                   e.target.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.4), 0 20px 40px rgba(14, 165, 233, 0.2)';
                 }}
@@ -352,77 +354,84 @@ const HomePage = () => {
               </Link>
             </motion.div>
 
-            {/* Students Card - Top Right */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <Link
-                to="/students"
-                className="group block bg-white rounded-2xl p-6 sm:p-8 shadow-soft hover:shadow-large border-2 border-neutral-100 hover:border-primary-200 transition-all duration-500 hover:-translate-y-2 h-full"
+            {/* Right Side Container */}
+            <div className="flex flex-col gap-6 lg:gap-8">
+              {/* Students Card - Top Right */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex-1"
               >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <Users className="w-7 h-7 text-white" />
+                <Link
+                  to="/students"
+                  className="group block bg-white rounded-2xl p-6 sm:p-8 shadow-soft hover:shadow-large border-2 border-neutral-100 hover:border-primary-200 transition-all duration-500 hover:-translate-y-2 h-full focus:outline-none focus:ring-0"
+                  style={{ outline: 'none' }}
+                >
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-7 h-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">Student Showcase</h3>
+                      <p className="text-neutral-600 leading-relaxed">
+                        Meet the brilliant minds behind Class 11-Newton and their unique stories.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">Student Showcase</h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      Meet the brilliant minds behind Class 11-Newton and their unique stories.
-                    </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sm text-neutral-500">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span>40+ Students</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all duration-300">
+                      <span>View Profiles</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-neutral-500">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span>40+ Students</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all duration-300">
-                    <span>View Profiles</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
+                </Link>
+              </motion.div>
 
-            {/* Achievements Card - Bottom Right */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <Link
-                to="/achievements"
-                className="group block bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 shadow-soft hover:shadow-large border-2 border-amber-100 hover:border-amber-200 transition-all duration-500 hover:-translate-y-2 h-full"
+              {/* Achievements Card - Bottom Right */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="flex-1"
               >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <Trophy className="w-7 h-7 text-white" />
+                <Link
+                  to="/achievements"
+                  className="group block bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 shadow-soft hover:shadow-large border-2 border-amber-100 hover:border-amber-200 transition-all duration-500 hover:-translate-y-2 h-full focus:outline-none focus:ring-0"
+                  style={{ outline: 'none' }}
+                >
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Trophy className="w-7 h-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">Our Achievements</h3>
+                      <p className="text-neutral-600 leading-relaxed">
+                        Celebrate the milestones and successes that define our journey.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">Our Achievements</h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      Celebrate the milestones and successes that define our journey.
-                    </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sm text-neutral-500">
+                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                      <span>15+ Milestones</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-amber-600 font-semibold group-hover:gap-3 transition-all duration-300">
+                      <span>View Timeline</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-neutral-500">
-                    <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                    <span>15+ Milestones</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-amber-600 font-semibold group-hover:gap-3 transition-all duration-300">
-                    <span>View Timeline</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
+                </Link>
+              </motion.div>
+            </div>
           </div>
 
           {/* Bottom CTA */}

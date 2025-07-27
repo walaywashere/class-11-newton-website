@@ -207,6 +207,25 @@ button, a, input, textarea {
   visibility: visible !important;
 }
 
+/* Remove blue outline on focus for all interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Custom focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(14, 165, 233, 0.5) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
 /* Card hover effects */
 .card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
