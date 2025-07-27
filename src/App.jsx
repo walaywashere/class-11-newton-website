@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
-import Homepage from './components/Homepage';
+import HomePage from './components/HomePage'; 
 import StudentShowcase from './components/StudentShowcase';
 import Leadership from './components/Leadership';
 import Achievements from './components/Achievements';
