@@ -109,7 +109,7 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <Link
               to="/students"
@@ -127,22 +127,22 @@ const HomePage = () => {
               Our Leadership
             </Link>
           </motion.div>
-
-          {/* Scroll indicator */}
+        </motion.div>
+        
+        {/* Scroll indicator - Moved to bottom and properly positioned */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-2 text-white/60"
           >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="flex flex-col items-center gap-2 text-white/60"
-            >
-              <span className="text-sm font-medium">Explore More</span>
-              <ArrowDown className="w-5 h-5" />
-            </motion.div>
+            <span className="text-sm font-medium">Explore More</span>
+            <ArrowDown className="w-5 h-5" />
           </motion.div>
         </motion.div>
       </section>
@@ -155,7 +155,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-8"
+            className="text-center mb-12 sm:mb-16"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
               Explore Our Class
@@ -165,7 +165,7 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {/* Leadership Card */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -175,13 +175,13 @@ const HomePage = () => {
             >
               <Link
                 to="/leadership"
-                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2"
+                className="group block bg-white rounded-2xl p-6 lg:p-8 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2 h-full"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Leadership</h3>
-                <p className="text-neutral-600 mb-4 leading-relaxed">Meet our class adviser and student officers who guide our journey.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-4">Leadership</h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed flex-grow">Meet our class adviser and student officers who guide our journey.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Learn More <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -197,13 +197,13 @@ const HomePage = () => {
             >
               <Link
                 to="/students"
-                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2"
+                className="group block bg-white rounded-2xl p-6 lg:p-8 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2 h-full"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Student Showcase</h3>
-                <p className="text-neutral-600 mb-4 leading-relaxed">Discover the unique stories and dreams of our classmates.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-4">Student Showcase</h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed flex-grow">Discover the unique stories and dreams of our classmates.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Explore Profiles <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -219,13 +219,13 @@ const HomePage = () => {
             >
               <Link
                 to="/achievements"
-                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2"
+                className="group block bg-white rounded-2xl p-6 lg:p-8 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2 h-full"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Achievements</h3>
-                <p className="text-neutral-600 mb-4 leading-relaxed">Celebrate our collective successes and milestones.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-4">Achievements</h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed flex-grow">Celebrate our collective successes and milestones.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   View Timeline <ArrowRight className="w-4 h-4 ml-2" />
                 </div>

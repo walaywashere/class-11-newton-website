@@ -11,7 +11,7 @@ const AdviserSection = ({ person }) => {
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl transform rotate-1"></div>
       
-      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-large p-4 sm:p-6 md:p-8 lg:p-12 border border-white/20">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-large p-4 sm:p-6 md:p-8 lg:p-12 border-2 border-neutral-100 hover:border-primary-200 transition-all duration-300">
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Image Section */}
           <motion.div 
@@ -104,7 +104,7 @@ const OfficerCard = ({ person, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group"
     >
-      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border border-neutral-200 hover:border-primary-300">
+      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border-2 border-neutral-100 hover:border-primary-300 h-full">
         {/* Image Section */}
         <div className="relative aspect-[3/4] overflow-hidden">
           {!imageLoaded && (
@@ -123,38 +123,55 @@ const OfficerCard = ({ person, index }) => {
           />
           
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
           
           {/* Role badge */}
-          <div className="absolute top-4 left-4 px-3 py-1 glass text-white text-xs font-semibold rounded-full">
+          <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-primary-700 text-xs font-bold rounded-full border border-white/50 shadow-soft">
             {person.role}
           </div>
           
           {/* Content overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-            <h4 className="text-xl font-bold mb-2">{person.name}</h4>
-            <p className="text-sm text-white/80 mb-3">{person.dreamJob}</p>
+            <h4 className="text-xl font-bold mb-2 leading-tight">{person.name}</h4>
+            <p className="text-sm text-white/90 mb-3 font-medium">{person.dreamJob}</p>
             
             {person.quote && (
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-xs italic text-white/90 border-l-2 border-accent-400 pl-3">
-                  "{person.quote}"
-                </p>
+              <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                  <p className="text-xs italic text-white/95 leading-relaxed">
+                    "{person.quote}"
+                  </p>
+                </div>
               </div>
             )}
           </div>
         </div>
         
-        {/* Bottom section */}
-        <div className="p-4 bg-gradient-to-r from-primary-50 to-accent-50">
+        {/* Bottom section with enhanced styling */}
+        <div className="p-4 bg-gradient-to-r from-primary-50 via-white to-accent-50 border-t border-neutral-100">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full"></div>
-              <span className="text-sm font-medium text-neutral-700">{person.role}</span>
+              <div className="w-3 h-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-sm"></div>
+              <span className="text-sm font-semibold text-neutral-800">{person.role}</span>
             </div>
-            <div className="text-xs text-neutral-500">Class Officer</div>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 bg-primary-300 rounded-full"></div>
+              <span className="text-xs text-neutral-500 font-medium">Officer</span>
+            </div>
+          </div>
+          
+          {/* Additional info bar */}
+          <div className="mt-3 pt-3 border-t border-neutral-100">
+            <div className="flex items-center justify-center">
+              <div className="text-xs text-neutral-600 bg-neutral-100 px-3 py-1 rounded-full font-medium">
+                Class 11-Newton
+              </div>
+            </div>
           </div>
         </div>
+        
+        {/* Hover effect overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-500/0 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
       </div>
     </motion.div>
   );
@@ -221,7 +238,7 @@ const Leadership = ({ adviser, students = [] }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 xl:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {officers.map((officer, index) => (
               <OfficerCard key={officer.name} person={officer} index={index} />
             ))}
