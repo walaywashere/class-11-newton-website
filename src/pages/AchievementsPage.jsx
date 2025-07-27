@@ -191,7 +191,7 @@ const AchievementsPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       
       {/* Mobile First Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32">
         {/* Dynamic Background */}
         <div 
           className="absolute inset-0"
@@ -312,7 +312,7 @@ const AchievementsPage = () => {
             className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
           >
             {/* Category Filter */}
-            <div className="relative">
+            <div className="relative z-[99999]">
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors"
@@ -330,7 +330,7 @@ const AchievementsPage = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                                          className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl shadow-xl z-[9999] min-w-[180px]"
+                                          className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl shadow-2xl z-[99999] min-w-[180px]"
                   >
                     {categories.map((category, index) => (
                       <button

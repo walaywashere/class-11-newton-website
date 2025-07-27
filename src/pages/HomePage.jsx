@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Mobile First */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28">
         {/* Dynamic Gradient Background */}
         <div 
           className="absolute inset-0"
@@ -260,12 +260,12 @@ const HomePage = () => {
             ))}
           </motion.div>
 
-          {/* CTA Buttons - Mobile Stack */}
+          {/* CTA Buttons - No Overlap */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.6 }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-20 sm:mb-24 lg:mb-28"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-24 sm:mb-32 lg:mb-40"
           >
             <Link
               to="/students"
@@ -311,12 +311,12 @@ const HomePage = () => {
             </Link>
           </motion.div>
 
-          {/* Enhanced Scroll Indicator - No Overlap */}
+          {/* Enhanced Scroll Indicator - Maximum Gap */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2 }}
-            className="absolute bottom-8 sm:bottom-12 lg:bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full flex justify-center"
+            className="absolute bottom-12 sm:bottom-20 lg:bottom-24 left-1/2 transform -translate-x-1/2 z-20 w-full flex justify-center"
           >
             <motion.div
               animate={{ y: [0, 4, 0] }}
