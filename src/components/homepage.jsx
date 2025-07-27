@@ -7,6 +7,11 @@ const HomePage = () => {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  // Error boundary for this component
+  if (typeof window === 'undefined') {
+    return null; // SSR safety
+  }
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Modern gradient background */}

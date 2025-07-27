@@ -39,6 +39,11 @@ const logoVariants = {
 };
 
 const Preloader = () => {
+  // Error boundary for animations
+  if (typeof window === 'undefined') {
+    return null; // SSR safety
+  }
+
   return (
     <motion.div
       className="fixed inset-0 gradient-bg flex justify-center items-center z-[101] text-center"

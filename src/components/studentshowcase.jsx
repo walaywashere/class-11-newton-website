@@ -18,11 +18,12 @@ const StudentCard = ({ student, index }) => {
       initial={{ opacity: 0, y: 40, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: index * 0.05 }}
+      transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.5) }}
       className="group"
     >
       <div 
-        className="w-full aspect-[3/4] [perspective:1000px] cursor-pointer" 
+        className="w-full aspect-[3/4] cursor-pointer" 
+        style={{ perspective: '1000px' }}
         onClick={flipCard}
         role="button"
         tabIndex={0}
@@ -35,13 +36,17 @@ const StudentCard = ({ student, index }) => {
         aria-label={`View details for ${student.name}`}
       >
         <motion.div
-          className="relative w-full h-full [transform-style:preserve-3d]"
+          className="relative w-full h-full"
+          style={{ transformStyle: 'preserve-3d' }}
           initial={false}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         >
           {/* Front of the Card */}
-          <div className="absolute w-full h-full [backface-visibility:hidden] rounded-2xl overflow-hidden shadow-large group-hover:shadow-glow transition-all duration-300">
+          <div 
+            className="absolute w-full h-full rounded-2xl overflow-hidden shadow-large group-hover:shadow-glow transition-all duration-300"
+            style={{ backfaceVisibility: 'hidden' }}
+          >
             <div className="relative w-full h-full">
               {!imageLoaded && (
                 <div className="absolute inset-0 skeleton" />
@@ -93,7 +98,10 @@ const StudentCard = ({ student, index }) => {
           </div>
 
           {/* Back of the Card */}
-          <div className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl bg-white shadow-large border border-neutral-100 overflow-hidden">
+          <div 
+            className="absolute w-full h-full rounded-2xl bg-white shadow-large border border-neutral-100 overflow-hidden"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          >
             <div className="h-full flex flex-col">
               {/* Header */}
               <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-4 text-white">

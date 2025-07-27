@@ -48,7 +48,7 @@ const TimelineItem = ({ item, isOdd, index }) => {
       scale: 1,
       transition: {
         duration: 0.6,
-        delay: index * 0.1,
+        delay: Math.min(index * 0.1, 1.0),
         ease: "easeOut"
       }
     }

@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
-import TestComponent from './components/TestComponent';
 import Preloader from './components/preloader';
 import Navbar from './components/navbar';
 import HomePage from './components/homepage';
@@ -20,7 +19,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Shorter loading time for testing
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -45,12 +44,6 @@ function App() {
             >
               Skip to main content
             </a>
-            
-            {/* Test Component Only */}
-            <TestComponent />
-            
-            {/* Commented out other components for testing */}
-            {/*
             <Navbar />
             <main id="main-content">
               <HomePage />
@@ -77,7 +70,6 @@ function App() {
                 </div>
               </div>
             </footer>
-            */}
           </div>
         </motion.div>
       )}
