@@ -51,7 +51,6 @@ const TimelineSkeleton = ({ isOdd, delay = 0 }) => (
 
 // Enhanced timeline item component
 const TimelineItem = ({ item, isOdd, index }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [isHoverig, setIsHovering] = useState(false);
 
   // Memoize animation variants
@@ -176,7 +175,6 @@ const TimelineItem = ({ item, isOdd, index }) => {
                   alt={item.title || 'Achievement image'}
                   className="w-full h-32 sm:h-40 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
-                  onLoad={() => setImageLoaded(true)}
                   onError={(e) => {
                     e.target.style.display = 'none';
                   }}
@@ -247,17 +245,11 @@ const TimelineItem = ({ item, isOdd, index }) => {
 // Enhanced main component
 const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "A timeline of our key moments and achievements." }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Simulate data fetching with error handling
     const timer = setTimeout(() => {
-      try {
-        setIsLoading(false);
-      } catch (err) {
-        setError('Failed to load achievements');
-        setIsLoading(false);
-      }
+      setIsLoading(false);
     }, 1200);
     
     return () => clearTimeout(timer);
@@ -294,25 +286,7 @@ const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "A 
     }
   };
 
-  if (error) {
-    return (
-      <section id="achievements" className="py-12 sm:py-16 md:py-24 bg-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-              <div className="text-red-600 mb-2">
-                <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-red-800 font-semibold mb-2">Error Loading Timeline</h3>
-              <p className="text-red-600 text-sm">{error}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+
 
   return (
     <section id="achievements" className="py-12 sm:py-16 md:py-24 bg-slate-200 overflow-hidden">

@@ -179,7 +179,7 @@ const StudentShowcase = ({ students = [] }) => {
     }
     
     return pages;
-  }, [currentPage, paginationData.totalPages]);
+  }, [currentPage, paginationData]);
   
   return (
     <section id="classmates" className="py-16 md:py-24 bg-slate-100">
