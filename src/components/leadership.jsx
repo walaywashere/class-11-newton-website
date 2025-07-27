@@ -11,8 +11,8 @@ const AdviserSection = ({ person }) => {
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl transform rotate-1"></div>
       
-              <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-large p-4 sm:p-6 md:p-8 lg:p-12 border border-white/20">
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-large p-4 sm:p-6 md:p-8 lg:p-12 border border-white/20">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Image Section */}
           <motion.div 
             className="relative group"
@@ -21,7 +21,7 @@ const AdviserSection = ({ person }) => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+            <div className="relative aspect-[4/5] max-w-sm mx-auto lg:max-w-none rounded-2xl overflow-hidden">
               {/* Loading skeleton */}
               {!imageLoaded && (
                 <div className="absolute inset-0 skeleton rounded-2xl" />
@@ -104,7 +104,7 @@ const OfficerCard = ({ person, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group"
     >
-      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border border-neutral-100">
+      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border border-neutral-200 hover:border-primary-300">
         {/* Image Section */}
         <div className="relative aspect-[3/4] overflow-hidden">
           {!imageLoaded && (
@@ -221,7 +221,7 @@ const Leadership = ({ adviser, students = [] }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 xl:gap-8">
             {officers.map((officer, index) => (
               <OfficerCard key={officer.name} person={officer} index={index} />
             ))}

@@ -46,7 +46,7 @@ const Preloader = () => {
 
   return (
     <motion.div
-      className="fixed inset-0 gradient-bg flex justify-center items-center z-[101] text-center"
+      className="fixed inset-0 gradient-bg flex flex-col justify-center items-center z-[101] text-center px-4"
       initial="hidden"
       animate="visible"
       exit={{ 
@@ -82,14 +82,14 @@ const Preloader = () => {
         ))}
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-lg mx-auto">
         {/* Logo */}
         <motion.div
           variants={logoVariants}
-          className="mb-8"
+          className="mb-8 flex justify-center"
         >
-          <div className="relative mx-auto">
-            <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-accent-500 rounded-2xl flex items-center justify-center shadow-glow-lg mb-4 mx-auto">
+          <div className="relative">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-accent-500 rounded-2xl flex items-center justify-center shadow-glow-lg">
               <Sparkles className="w-10 h-10 text-white" />
             </div>
             <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent-400 rounded-full animate-pulse"></div>
@@ -117,7 +117,7 @@ const Preloader = () => {
 
         {/* Subtitle */}
         <motion.p
-          className="text-lg sm:text-xl text-primary-200 font-semibold mb-8"
+          className="text-lg sm:text-xl text-primary-200 font-semibold mb-12"
           variants={itemVariants}
         >
           Where Brilliance Meets Innovation
@@ -126,26 +126,20 @@ const Preloader = () => {
         {/* Loading animation */}
         <motion.div
           variants={itemVariants}
-          className="flex justify-center items-center gap-2"
+          className="flex flex-col items-center justify-center gap-4"
         >
-          <div className="flex gap-1">
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-2 h-2 bg-accent-400 rounded-full"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                }}
-              />
-            ))}
+          {/* Loading spinner */}
+          <div className="flex justify-center items-center">
+            <div className="relative">
+              <div className="w-12 h-12 border-4 border-white/20 border-t-accent-400 rounded-full animate-spin"></div>
+              <div className="absolute inset-0 w-12 h-12 border-4 border-transparent border-l-primary-400 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+            </div>
           </div>
-          <span className="text-white/60 text-sm font-medium ml-3">Loading...</span>
+          
+          {/* Loading text */}
+          <div className="text-center">
+            <span className="text-white/80 text-sm font-medium">Loading...</span>
+          </div>
         </motion.div>
       </div>
     </motion.div>

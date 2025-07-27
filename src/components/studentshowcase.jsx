@@ -44,7 +44,7 @@ const StudentCard = ({ student, index }) => {
         >
           {/* Front of the Card */}
           <div 
-            className="absolute w-full h-full rounded-2xl overflow-hidden shadow-large group-hover:shadow-glow transition-all duration-300"
+            className="absolute w-full h-full rounded-2xl overflow-hidden shadow-large border border-neutral-200 group-hover:shadow-glow transition-all duration-300"
             style={{ backfaceVisibility: 'hidden' }}
           >
             <div className="relative w-full h-full">
@@ -99,7 +99,7 @@ const StudentCard = ({ student, index }) => {
 
           {/* Back of the Card */}
           <div 
-            className="absolute w-full h-full rounded-2xl bg-white shadow-large border border-neutral-100 overflow-hidden"
+            className="absolute w-full h-full rounded-2xl bg-white shadow-large border border-neutral-200 overflow-hidden"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <div className="h-full flex flex-col">
@@ -260,8 +260,8 @@ const StudentShowcase = ({ students = [] }) => {
           </p>
 
           {/* Search Bar - Mobile responsive */}
-          <div className="max-w-md mx-auto relative px-4 sm:px-0">
-            <div className="absolute inset-y-0 left-4 sm:left-0 pl-4 flex items-center pointer-events-none">
+          <div className="max-w-md mx-auto relative mb-8">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-400" />
             </div>
             <input
@@ -269,7 +269,7 @@ const StudentShowcase = ({ students = [] }) => {
               placeholder="Search students, careers, roles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-white border border-neutral-200 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base text-neutral-900 placeholder-neutral-500"
+              className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-white border border-neutral-200 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base text-neutral-900 placeholder-neutral-500 shadow-soft"
             />
           </div>
         </motion.div>
@@ -280,7 +280,7 @@ const StudentShowcase = ({ students = [] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-8"
         >
           <div className="px-4 py-2 bg-white rounded-xl shadow-soft border border-neutral-100">
             <span className="text-sm text-neutral-600">
@@ -306,7 +306,7 @@ const StudentShowcase = ({ students = [] }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12"
+              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 mb-8 sm:mb-12"
             >
               {paginationData.currentStudents.map((student, index) => (
                 <StudentCard key={student.name} student={student} index={index} />
@@ -350,7 +350,7 @@ const StudentShowcase = ({ students = [] }) => {
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-soft"
             >
               <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
@@ -363,10 +363,10 @@ const StudentShowcase = ({ students = [] }) => {
                 disabled={typeof page !== 'number'}
                 className={`min-w-[32px] sm:min-w-[40px] h-8 sm:h-10 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 ${
                   page === currentPage
-                    ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-glow'
+                    ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-glow border-0'
                     : typeof page === 'number'
-                    ? 'bg-white border border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600'
-                    : 'bg-transparent text-neutral-400 cursor-default'
+                    ? 'bg-white border border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 shadow-soft'
+                    : 'bg-transparent text-neutral-400 cursor-default border-0'
                 }`}
               >
                 {page}
@@ -377,9 +377,9 @@ const StudentShowcase = ({ students = [] }) => {
             <button
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, paginationData.totalPages))}
               disabled={currentPage === paginationData.totalPages}
-              className="p-2 rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white border border-neutral-200 text-neutral-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-soft"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </motion.div>
         )}

@@ -85,7 +85,7 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-12 max-w-2xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 mb-12 max-w-2xl mx-auto"
           >
             <div className="glass rounded-2xl p-6 text-center group hover:bg-white/20 transition-all duration-300">
               <Users className="w-8 h-8 text-accent-300 mx-auto mb-3 group-hover:scale-110 transition-transform" />
@@ -175,13 +175,13 @@ const HomePage = () => {
             >
               <Link
                 to="/leadership"
-                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-100 hover:border-primary-200"
+                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Leadership</h3>
-                <p className="text-neutral-600 mb-4">Meet our class adviser and student officers who guide our journey.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-3">Leadership</h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed">Meet our class adviser and student officers who guide our journey.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Learn More <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -197,13 +197,13 @@ const HomePage = () => {
             >
               <Link
                 to="/students"
-                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-100 hover:border-primary-200"
+                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Student Showcase</h3>
-                <p className="text-neutral-600 mb-4">Discover the unique stories and dreams of our classmates.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-3">Student Showcase</h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed">Discover the unique stories and dreams of our classmates.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Explore Profiles <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -219,13 +219,13 @@ const HomePage = () => {
             >
               <Link
                 to="/achievements"
-                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-100 hover:border-primary-200"
+                className="group block bg-white rounded-2xl p-6 shadow-soft hover:shadow-large transition-all duration-300 border border-neutral-200 hover:border-primary-300 hover:-translate-y-2"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">Achievements</h3>
-                <p className="text-neutral-600 mb-4">Celebrate our collective successes and milestones.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-3">Achievements</h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed">Celebrate our collective successes and milestones.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   View Timeline <ArrowRight className="w-4 h-4 ml-2" />
                 </div>

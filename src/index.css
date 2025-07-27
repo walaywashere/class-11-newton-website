@@ -49,19 +49,24 @@ body {
 
 /* Navbar height compensation */
 .navbar-offset {
-  padding-top: calc(4rem + env(safe-area-inset-top));
+  padding-top: calc(5rem + env(safe-area-inset-top));
 }
 
 @media (min-width: 640px) {
   .navbar-offset {
-    padding-top: calc(4.5rem + env(safe-area-inset-top));
+    padding-top: calc(5.5rem + env(safe-area-inset-top));
   }
 }
 
 @media (min-width: 1024px) {
   .navbar-offset {
-    padding-top: calc(5rem + env(safe-area-inset-top));
+    padding-top: calc(6rem + env(safe-area-inset-top));
   }
+}
+
+/* Ensure content doesn't overlap with fixed navbar */
+body {
+  scroll-padding-top: 6rem;
 }
 
 /* Modern scrollbar styles */
@@ -229,7 +234,7 @@ footer::before {
   
   /* Ensure proper spacing on mobile */
   .navbar-offset {
-    padding-top: calc(4rem + env(safe-area-inset-top, 20px));
+    padding-top: calc(5rem + env(safe-area-inset-top, 20px));
   }
   
   /* Footer mobile adjustments */

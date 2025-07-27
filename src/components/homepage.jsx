@@ -85,7 +85,7 @@ const HomePage = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 max-w-2xl mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 max-w-2xl mx-auto"
         >
           <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center group hover:bg-white/20 transition-all duration-300">
             <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-accent-300 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
