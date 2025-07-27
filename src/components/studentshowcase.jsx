@@ -306,7 +306,7 @@ const StudentShowcase = ({ students = [] }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 mb-8 sm:mb-12"
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 mb-8 sm:mb-12"
             >
               {paginationData.currentStudents.map((student, index) => (
                 <StudentCard key={student.name} student={student} index={index} />
@@ -368,6 +368,7 @@ const StudentShowcase = ({ students = [] }) => {
                     ? 'bg-white border border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 shadow-soft'
                     : 'bg-transparent text-neutral-400 cursor-default border-0'
                 }`}
+                style={page === currentPage ? { color: 'white' } : {}}
               >
                 {page}
               </button>

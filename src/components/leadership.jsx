@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Crown, Users, Star, Quote, Award, Heart } from 'lucide-react';
+import { Crown, Users, Star, Quote, Award, Heart, Shield, Target, BookOpen, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AdviserSection = ({ person }) => {
@@ -21,7 +21,7 @@ const AdviserSection = ({ person }) => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <div className="relative aspect-[4/5] max-w-sm mx-auto lg:max-w-none rounded-2xl overflow-hidden">
+            <div className="relative aspect-[4/5] max-w-sm mx-auto lg:max-w-none rounded-2xl overflow-hidden border-4 border-white shadow-xl">
               {/* Loading skeleton */}
               {!imageLoaded && (
                 <div className="absolute inset-0 skeleton rounded-2xl" />
@@ -43,7 +43,7 @@ const AdviserSection = ({ person }) => {
             </div>
             
             {/* Floating badge */}
-            <div className="absolute -top-4 -right-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white p-3 rounded-2xl shadow-glow">
+            <div className="absolute -top-4 -right-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white p-3 rounded-2xl shadow-glow border-2 border-white">
               <Crown className="w-6 h-6" />
             </div>
           </motion.div>
@@ -57,7 +57,7 @@ const AdviserSection = ({ person }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-100 to-accent-100 text-primary-700 rounded-full text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-100 to-accent-100 text-primary-700 rounded-full text-sm font-semibold border border-primary-200">
               <Award className="w-4 h-4" />
               Class Adviser
             </div>
@@ -70,18 +70,18 @@ const AdviserSection = ({ person }) => {
             {/* Quote */}
             <div className="relative">
               <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary-200" />
-              <blockquote className="text-lg sm:text-xl text-neutral-600 italic leading-relaxed pl-8">
+              <blockquote className="text-lg sm:text-xl text-neutral-600 italic leading-relaxed pl-8 border-l-4 border-primary-300 bg-primary-50/50 p-4 rounded-r-xl">
                 "{person?.fact || 'Dedicated to nurturing young minds and fostering excellence in education.'}"
               </blockquote>
             </div>
             
             {/* Stats or highlights */}
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <div className="flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-xl">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2 px-4 py-3 bg-primary-50 rounded-xl border border-primary-200">
                 <Heart className="w-4 h-4 text-primary-600" />
                 <span className="text-sm font-medium text-primary-700">Mentor</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-accent-50 rounded-xl">
+              <div className="flex items-center gap-2 px-4 py-3 bg-accent-50 rounded-xl border border-accent-200">
                 <Star className="w-4 h-4 text-accent-600" />
                 <span className="text-sm font-medium text-accent-700">Inspiring</span>
               </div>
@@ -104,7 +104,7 @@ const OfficerCard = ({ person, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group"
     >
-      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border border-neutral-200 hover:border-primary-300">
+      <div className="relative bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden card-hover border-2 border-neutral-200 hover:border-primary-300">
         {/* Image Section */}
         <div className="relative aspect-[3/4] overflow-hidden">
           {!imageLoaded && (
@@ -126,7 +126,7 @@ const OfficerCard = ({ person, index }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
           
           {/* Role badge */}
-          <div className="absolute top-4 left-4 px-3 py-1 glass text-white text-xs font-semibold rounded-full">
+          <div className="absolute top-4 left-4 px-3 py-1 glass text-white text-xs font-semibold rounded-full border border-white/20">
             {person.role}
           </div>
           
@@ -146,13 +146,13 @@ const OfficerCard = ({ person, index }) => {
         </div>
         
         {/* Bottom section */}
-        <div className="p-4 bg-gradient-to-r from-primary-50 to-accent-50">
+        <div className="p-4 bg-gradient-to-r from-primary-50 to-accent-50 border-t-2 border-primary-200">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full"></div>
               <span className="text-sm font-medium text-neutral-700">{person.role}</span>
             </div>
-            <div className="text-xs text-neutral-500">Class Officer</div>
+            <div className="text-xs text-neutral-500 bg-white px-2 py-1 rounded-full border border-neutral-200">Class Officer</div>
           </div>
         </div>
       </div>
@@ -177,7 +177,7 @@ const Leadership = ({ adviser, students = [] }) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 glass rounded-full text-primary-700 text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 glass rounded-full text-primary-700 text-sm font-medium border border-primary-200">
             <Users className="w-4 h-4" />
             Our Leadership Team
           </div>
@@ -221,10 +221,63 @@ const Leadership = ({ adviser, students = [] }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 xl:gap-8">
+          {/* Mobile responsive grid with minimum 2 columns */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {officers.map((officer, index) => (
               <OfficerCard key={officer.name} person={officer} index={index} />
             ))}
+          </div>
+        </motion.div>
+
+        {/* Additional Features Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-20"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-4">
+              Leadership Qualities
+            </h3>
+            <p className="text-neutral-600 max-w-2xl mx-auto">
+              The core values and skills that define our leadership team.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div className="bg-white rounded-2xl p-6 shadow-soft border-2 border-neutral-200 hover:border-primary-300 transition-all duration-300 text-center group hover:shadow-large">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Shield className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-neutral-900 mb-2">Integrity</h4>
+              <p className="text-sm text-neutral-600">Leading with honesty and moral principles</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-soft border-2 border-neutral-200 hover:border-primary-300 transition-all duration-300 text-center group hover:shadow-large">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Target className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-neutral-900 mb-2">Vision</h4>
+              <p className="text-sm text-neutral-600">Setting clear goals and inspiring others</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-soft border-2 border-neutral-200 hover:border-primary-300 transition-all duration-300 text-center group hover:shadow-large">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-neutral-900 mb-2">Knowledge</h4>
+              <p className="text-sm text-neutral-600">Continuous learning and growth mindset</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-soft border-2 border-neutral-200 hover:border-primary-300 transition-all duration-300 text-center group hover:shadow-large">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <GraduationCap className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-neutral-900 mb-2">Excellence</h4>
+              <p className="text-sm text-neutral-600">Striving for the highest standards</p>
+            </div>
           </div>
         </motion.div>
 
@@ -233,12 +286,12 @@ const Leadership = ({ adviser, students = [] }) => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center mt-16"
         >
           <Link
             to="/students"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-2xl font-semibold text-lg hover:from-primary-700 hover:to-accent-700 hover:scale-105 transition-all duration-300 shadow-large"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-2xl font-semibold text-lg hover:from-primary-700 hover:to-accent-700 hover:scale-105 transition-all duration-300 shadow-large border-2 border-primary-500"
           >
             <Users className="w-5 h-5" />
             Meet All Classmates
