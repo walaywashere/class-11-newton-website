@@ -196,8 +196,8 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          {/* Interactive Cards Grid - Fixed Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 auto-rows-fr">
+          {/* Interactive Cards Grid - Properly Fixed Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             
             {/* Leadership Card - Full Left Side */}
             <motion.div
@@ -207,22 +207,19 @@ const HomePage = () => {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="lg:row-span-2"
             >
-              <Link
-                to="/leadership"
+              <div
                 style={{
                   background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #d97706 100%)',
                   height: '100%',
-                  minHeight: '500px',
                   borderRadius: '24px',
                   boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.1)',
                   overflow: 'hidden',
                   position: 'relative',
-                  display: 'block',
-                  textDecoration: 'none',
                   transition: 'all 0.5s ease',
-                  outline: 'none'
+                  cursor: 'pointer'
                 }}
-                className="group hover:scale-[1.02] focus:outline-none focus:ring-0"
+                className="group hover:scale-[1.02]"
+                onClick={() => window.location.href = '/leadership'}
                 onMouseEnter={(e) => {
                   e.target.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.4), 0 20px 40px rgba(14, 165, 233, 0.2)';
                 }}
@@ -351,7 +348,7 @@ const HomePage = () => {
                     />
                   </div>
                 </div>
-              </Link>
+              </div>
             </motion.div>
 
             {/* Right Side Container */}
@@ -364,10 +361,19 @@ const HomePage = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex-1"
               >
-                <Link
-                  to="/students"
-                  className="group block bg-white rounded-2xl p-6 sm:p-8 shadow-soft hover:shadow-large border-2 border-neutral-100 hover:border-primary-200 transition-all duration-500 hover:-translate-y-2 h-full focus:outline-none focus:ring-0"
-                  style={{ outline: 'none' }}
+                <div
+                  style={{
+                    background: 'white',
+                    borderRadius: '16px',
+                    padding: '24px 32px',
+                    boxShadow: '0 2px 8px -2px rgba(0, 0, 0, 0.1), 0 4px 12px -4px rgba(0, 0, 0, 0.05)',
+                    border: '2px solid #f5f5f5',
+                    height: '100%',
+                    transition: 'all 0.5s ease',
+                    cursor: 'pointer'
+                  }}
+                  className="group hover:shadow-large hover:border-primary-200 hover:-translate-y-2"
+                  onClick={() => window.location.href = '/students'}
                 >
                   <div className="flex items-start gap-4 mb-6">
                     <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -391,7 +397,7 @@ const HomePage = () => {
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.div>
 
               {/* Achievements Card - Bottom Right */}
@@ -402,10 +408,19 @@ const HomePage = () => {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="flex-1"
               >
-                <Link
-                  to="/achievements"
-                  className="group block bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 shadow-soft hover:shadow-large border-2 border-amber-100 hover:border-amber-200 transition-all duration-500 hover:-translate-y-2 h-full focus:outline-none focus:ring-0"
-                  style={{ outline: 'none' }}
+                <div
+                  style={{
+                    background: 'linear-gradient(135deg, #fffbeb 0%, #fed7aa 100%)',
+                    borderRadius: '16px',
+                    padding: '24px 32px',
+                    boxShadow: '0 2px 8px -2px rgba(0, 0, 0, 0.1), 0 4px 12px -4px rgba(0, 0, 0, 0.05)',
+                    border: '2px solid #fef3c7',
+                    height: '100%',
+                    transition: 'all 0.5s ease',
+                    cursor: 'pointer'
+                  }}
+                  className="group hover:shadow-large hover:border-amber-200 hover:-translate-y-2"
+                  onClick={() => window.location.href = '/achievements'}
                 >
                   <div className="flex items-start gap-4 mb-6">
                     <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -429,7 +444,7 @@ const HomePage = () => {
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.div>
             </div>
           </div>

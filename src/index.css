@@ -207,20 +207,35 @@ button, a, input, textarea {
   visibility: visible !important;
 }
 
-/* Remove blue outline on focus for all interactive elements */
+/* Remove all default focus outlines and rings */
+*:focus,
+*:focus-visible,
+*:active,
 a:focus,
 button:focus,
+div:focus,
 input:focus,
 textarea:focus,
 select:focus,
 [tabindex]:focus {
   outline: none !important;
   box-shadow: none !important;
+  border: none !important;
 }
 
-/* Custom focus styles for accessibility */
-a:focus-visible,
-button:focus-visible {
+/* Remove React Router Link focus styles */
+a[data-discover="true"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any browser-specific focus styles */
+::-moz-focus-inner {
+  border: 0 !important;
+}
+
+/* Custom focus styles for true accessibility (keyboard navigation only) */
+.accessible-focus:focus-visible {
   outline: 2px solid rgba(14, 165, 233, 0.5) !important;
   outline-offset: 2px !important;
   border-radius: 4px !important;
