@@ -148,14 +148,14 @@ const HomePage = () => {
       </section>
 
       {/* Quick Links Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-8"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
               Explore Our Class
@@ -180,8 +180,8 @@ const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">Leadership</h3>
-                <p className="text-neutral-600 mb-6 leading-relaxed">Meet our class adviser and student officers who guide our journey.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">Leadership</h3>
+                <p className="text-neutral-600 mb-4 leading-relaxed">Meet our class adviser and student officers who guide our journey.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Learn More <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -202,8 +202,8 @@ const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">Student Showcase</h3>
-                <p className="text-neutral-600 mb-6 leading-relaxed">Discover the unique stories and dreams of our classmates.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">Student Showcase</h3>
+                <p className="text-neutral-600 mb-4 leading-relaxed">Discover the unique stories and dreams of our classmates.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   Explore Profiles <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -224,8 +224,8 @@ const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">Achievements</h3>
-                <p className="text-neutral-600 mb-6 leading-relaxed">Celebrate our collective successes and milestones.</p>
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">Achievements</h3>
+                <p className="text-neutral-600 mb-4 leading-relaxed">Celebrate our collective successes and milestones.</p>
                 <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
                   View Timeline <ArrowRight className="w-4 h-4 ml-2" />
                 </div>

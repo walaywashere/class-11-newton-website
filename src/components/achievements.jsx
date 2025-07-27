@@ -157,7 +157,7 @@ const TimelineItem = ({ item, isOdd, index }) => {
       {/* Timeline Connector */}
       <div className="relative w-2 lg:w-24 flex-shrink-0 mx-auto lg:mx-0">
         {/* Vertical line */}
-        <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gradient-to-b from-primary-200 to-accent-200 transform -translate-x-1/2" />
+        <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-gradient-to-b from-primary-300 via-primary-400 to-accent-400 transform -translate-x-1/2 opacity-60" />
         
         {/* Center dot */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -166,16 +166,16 @@ const TimelineItem = ({ item, isOdd, index }) => {
             animate={isHovering ? { scale: 1.2 } : { scale: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="w-6 h-6 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-glow flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-lg border-4 border-white flex items-center justify-center">
               {item.icon ? (
-                <item.icon className="w-3 h-3 text-white" />
+                <item.icon className="w-4 h-4 text-white" />
               ) : (
-                <div className="w-2 h-2 bg-white rounded-full" />
+                <div className="w-3 h-3 bg-white rounded-full" />
               )}
             </div>
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-400 rounded-full opacity-0"
-              animate={isHovering ? { opacity: 0.3, scale: 1.5 } : { opacity: 0, scale: 1 }}
+              animate={isHovering ? { opacity: 0.4, scale: 1.8 } : { opacity: 0, scale: 1 }}
               transition={{ duration: 0.3 }}
             />
           </motion.div>

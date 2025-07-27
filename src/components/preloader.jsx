@@ -126,19 +126,30 @@ const Preloader = () => {
         {/* Loading animation */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col items-center justify-center gap-4"
+          className="flex flex-col items-center justify-center gap-3"
         >
-          {/* Loading spinner */}
-          <div className="flex justify-center items-center">
-            <div className="relative">
-              <div className="w-12 h-12 border-4 border-white/20 border-t-accent-400 rounded-full animate-spin"></div>
-              <div className="absolute inset-0 w-12 h-12 border-4 border-transparent border-l-primary-400 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
-            </div>
+          {/* Simple loading dots */}
+          <div className="flex justify-center items-center gap-1">
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-3 h-3 bg-accent-400 rounded-full"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
           </div>
           
           {/* Loading text */}
           <div className="text-center">
-            <span className="text-white/80 text-sm font-medium">Loading...</span>
+            <span className="text-white/90 text-base font-medium">Loading...</span>
           </div>
         </motion.div>
       </div>

@@ -363,7 +363,7 @@ const StudentShowcase = ({ students = [] }) => {
                 disabled={typeof page !== 'number'}
                 className={`min-w-[32px] sm:min-w-[40px] h-8 sm:h-10 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 ${
                   page === currentPage
-                    ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-glow border-0'
+                    ? 'bg-primary-600 text-white shadow-lg border border-primary-600 font-bold'
                     : typeof page === 'number'
                     ? 'bg-white border border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 shadow-soft'
                     : 'bg-transparent text-neutral-400 cursor-default border-0'
