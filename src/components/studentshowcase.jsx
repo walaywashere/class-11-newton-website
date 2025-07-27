@@ -171,12 +171,15 @@ const StudentShowcase = ({ students = [] }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const studentsPerPage = 12;
 
-  // Filter students based on search
+  // Filter students based on search with error handling
   const filteredStudents = useMemo(() => {
+    if (!Array.isArray(students)) return [];
     return students.filter(student => 
-      student?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student?.dreamJob?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student?.role?.toLowerCase().includes(searchTerm.toLowerCase())
+      student && student.name && (
+        student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (student.dreamJob && student.dreamJob.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (student.role && student.role.toLowerCase().includes(searchTerm.toLowerCase()))
+      )
     );
   }, [students, searchTerm]);
 

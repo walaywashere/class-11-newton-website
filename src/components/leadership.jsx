@@ -159,11 +159,11 @@ const OfficerCard = ({ person, index }) => {
   );
 };
 
-const Leadership = ({ adviser, students }) => {
-  // Filter class officers
-  const officers = students.filter(student => 
-    student.role && !['Student', 'Member'].includes(student.role)
-  ).slice(0, 8); // Limit to 8 officers for better layout
+const Leadership = ({ adviser, students = [] }) => {
+  // Filter class officers with error handling
+  const officers = Array.isArray(students) ? students.filter(student => 
+    student && student.role && !['Student', 'Member'].includes(student.role)
+  ).slice(0, 8) : []; // Limit to 8 officers for better layout
 
   return (
     <section id="leadership" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30">

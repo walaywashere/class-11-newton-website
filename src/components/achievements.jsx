@@ -201,11 +201,17 @@ const Achievements = ({ achievements = [], title = "Our Journey", subtitle = "Mi
     return () => clearTimeout(timer);
   }, []);
 
-  // Memoize filtered achievements
+  // Memoize filtered achievements with better error handling
   const validAchievements = useMemo(() => {
-    return Array.isArray(achievements) 
-      ? achievements.filter(item => item && (item.title || item.description))
-      : [];
+    if (!Array.isArray(achievements)) {
+      console.warn('Achievements data is not an array:', achievements);
+      return [];
+    }
+    return achievements.filter(item => {
+      if (!item) return false;
+      if (!item.title && !item.description) return false;
+      return true;
+    });
   }, [achievements]);
 
   // Animation variants

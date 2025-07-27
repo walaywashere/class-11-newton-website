@@ -264,27 +264,31 @@ export const students = [
 
 export const achievements = [
   {
-    icon: <Rocket size={24} />,
-    date: 'August 2024',
+    icon: Rocket,
+    date: '2024-08-15',
     title: 'School Year Kick-off',
-    description: 'Began our senior high school journey together as 11-Newton.',
+    description: 'Began our senior high school journey together as 11-Newton, marking the start of an incredible academic adventure.',
+    tags: ['Academic', 'Beginning', 'Unity']
   },
   {
-    icon: <BookOpen size={24} />,
-    date: 'November 2024',
+    icon: BookOpen,
+    date: '2024-11-20',
     title: 'Science Fair Winners',
-    description: 'Won 1st place in the annual school-wide Science Fair competition.',
+    description: 'Won 1st place in the annual school-wide Science Fair competition with our innovative research project.',
+    tags: ['Science', 'Competition', 'Victory']
   },
   {
-    icon: <Award size={24} />,
-    date: 'February 2025',
+    icon: Award,
+    date: '2025-02-14',
     title: 'Sports Fest Champions',
-    description: 'Crowned as the overall champions of the intramural sports festival.',
+    description: 'Crowned as the overall champions of the intramural sports festival, showcasing our teamwork and athletic prowess.',
+    tags: ['Sports', 'Champions', 'Teamwork']
   },
   {
-    icon: <Calendar size={24} />,
-    date: 'June 2025',
-    title: 'Finals Week',
-    description: 'Successfully completed our final academic examinations for the year.',
+    icon: Calendar,
+    date: '2025-06-10',
+    title: 'Finals Week Success',
+    description: 'Successfully completed our final academic examinations for the year with outstanding results across all subjects.',
+    tags: ['Academic', 'Success', 'Excellence']
   },
 ];
