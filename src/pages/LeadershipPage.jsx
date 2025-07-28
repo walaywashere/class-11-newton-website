@@ -169,38 +169,35 @@ const LeadershipPage = () => {
               />
             </div>
 
-            {/* Filter and View Controls */}
-            <div className="flex items-center gap-4 w-full sm:w-auto">
-              {/* Filter Dropdown - Global System */}
-              <GlobalDropdown
-                trigger={<Filter className="w-4 h-4" />}
-                options={filterOptions}
-                value={filterType}
-                onChange={setFilterType}
-                placeholder="Filter"
-                align="left"
-                className="flex-shrink-0"
-              />
+            {/* Filter Dropdown - Global System (Direct Child like Achievements) */}
+            <GlobalDropdown
+              trigger={<Filter className="w-4 h-4" />}
+              options={filterOptions}
+              value={filterType}
+              onChange={setFilterType}
+              placeholder="Filter"
+              align="left"
+              className="flex-shrink-0"
+            />
 
-              {/* View Mode Toggle - Perfect Mobile Alignment */}
-              <div className="flex bg-gray-100 rounded-xl p-1">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
-                    viewMode === 'grid' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  <Grid className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
-                    viewMode === 'list' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  <List className="w-4 h-4" />
-                </button>
-              </div>
+            {/* View Mode Toggle - Perfect Mobile Alignment */}
+            <div className="flex bg-gray-100 rounded-xl p-1">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
+                  viewMode === 'grid' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <Grid className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-3 rounded-lg transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] ${
+                  viewMode === 'list' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <List className="w-4 h-4" />
+              </button>
             </div>
           </motion.div>
 
