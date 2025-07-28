@@ -120,10 +120,24 @@ const PerfectDropdownMenu = ({
       top = triggerRect.bottom + PERFECT_GAP;
       height = dropdown.maxHeight;
     } else if (spaceAbove >= dropdown.maxHeight + PERFECT_GAP + margin) {
-      // PERFECT ABOVE POSITIONING
+      // PERFECT ABOVE POSITIONING - FORCE EXACT 4PX GAP
       direction = 'above';
       height = dropdown.maxHeight;
-      top = triggerRect.top - height - PERFECT_GAP;
+      // CRITICAL: Position dropdown so its BOTTOM is exactly 4px above trigger TOP
+      top = triggerRect.top - PERFECT_GAP - height;
+      
+      // DEBUG: Log upward positioning
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🔺 UPWARD POSITIONING DEBUG:', {
+          triggerTop: triggerRect.top,
+          dropdownHeight: height,
+          PERFECT_GAP: PERFECT_GAP,
+          calculatedTop: top,
+          formula: `${triggerRect.top} - ${PERFECT_GAP} - ${height} = ${top}`,
+          expectedBottomOfDropdown: top + height,
+          actualGapFromTrigger: triggerRect.top - (top + height)
+        });
+      }
     } else {
       // PERFECT FALLBACK - Use bigger space
       if (spaceBelow > spaceAbove) {
@@ -133,7 +147,21 @@ const PerfectDropdownMenu = ({
       } else {
         direction = 'above';
         height = Math.max(200, spaceAbove - PERFECT_GAP - margin);
-        top = triggerRect.top - height - PERFECT_GAP;
+        // CRITICAL: Position dropdown so its BOTTOM is exactly 4px above trigger TOP
+        top = triggerRect.top - PERFECT_GAP - height;
+        
+        // DEBUG: Log fallback upward positioning
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🔺 FALLBACK UPWARD DEBUG:', {
+            triggerTop: triggerRect.top,
+            dropdownHeight: height,
+            PERFECT_GAP: PERFECT_GAP,
+            calculatedTop: top,
+            formula: `${triggerRect.top} - ${PERFECT_GAP} - ${height} = ${top}`,
+            expectedBottomOfDropdown: top + height,
+            actualGapFromTrigger: triggerRect.top - (top + height)
+          });
+        }
       }
     }
 
@@ -194,20 +222,13 @@ const PerfectDropdownMenu = ({
         height: position.height
       }}
     >
-      {/* PERFECT DROPDOWN CONTAINER */}
+      {/* PERFECT DROPDOWN CONTAINER - NO HEADER FOR TRUE 4PX GAP */}
       <div className="bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden">
-        {/* PERFECT HEADER */}
-        <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-          <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
-            Select Option
-          </span>
-        </div>
-
-        {/* PERFECT OPTIONS CONTAINER */}
+        {/* PERFECT OPTIONS CONTAINER - DIRECT CONTENT */}
         <div 
           className="overflow-y-auto"
           style={{ 
-            maxHeight: Math.max(200, position.height - 100) + 'px'
+            maxHeight: position.height + 'px'
           }}
         >
           {options.map((option, index) => (
@@ -229,13 +250,6 @@ const PerfectDropdownMenu = ({
               )}
             </button>
           ))}
-        </div>
-
-        {/* PERFECT FOOTER */}
-        <div className="px-4 py-2 bg-gray-50 border-t border-gray-200 text-center">
-          <span className="text-xs text-gray-500">
-            Selected: {options.find(opt => opt.value === value)?.label || 'None'}
-          </span>
         </div>
       </div>
     </motion.div>,
