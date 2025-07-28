@@ -70,7 +70,7 @@ const StudentsPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999999] flex items-center justify-center p-4"
           onClick={onClose}
         >
           <motion.div
@@ -97,7 +97,8 @@ const StudentsPage = () => {
               )}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors"
+                className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors z-[9999999] shadow-lg"
+                style={{ fontSize: '20px', fontWeight: 'bold' }}
               >
                 ×
               </button>
