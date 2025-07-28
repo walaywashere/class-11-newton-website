@@ -89,9 +89,23 @@ const DropdownMenu = ({
       maxHeight: Math.min(400, viewport.height * 0.6),
     };
 
-    // Horizontal positioning
+    // Smart horizontal positioning with auto-alignment
     let left = triggerRect.left;
-    switch (align) {
+    
+    // Determine the best alignment based on available space
+    const spaceOnLeft = triggerRect.left;
+    const spaceOnRight = viewport.width - triggerRect.right;
+    const margin = 32;
+    
+    // Auto-detect best alignment if not explicitly set or if there's not enough space
+    let effectiveAlign = align;
+    if (align === 'right' && spaceOnRight < dropdown.width + margin) {
+      effectiveAlign = 'left'; // Switch to left if not enough space on right
+    } else if (align === 'left' && spaceOnLeft < dropdown.width + margin) {
+      effectiveAlign = 'right'; // Switch to right if not enough space on left
+    }
+    
+    switch (effectiveAlign) {
       case 'left':
         left = triggerRect.left;
         break;
@@ -104,8 +118,7 @@ const DropdownMenu = ({
         break;
     }
 
-    // Prevent horizontal overflow with generous margins
-    const margin = 32;
+    // Final overflow prevention with generous margins
     left = Math.max(margin, Math.min(left, viewport.width - dropdown.width - margin));
 
     // Vertical positioning - prefer above, fallback to below

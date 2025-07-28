@@ -318,7 +318,7 @@ const StudentsPage = () => {
                 value={sortBy}
                 onChange={setSortBy}
                 placeholder="Sort"
-                align="right"
+                align="left"
                 className="flex-shrink-0"
               />
 

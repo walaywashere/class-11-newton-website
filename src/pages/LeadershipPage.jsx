@@ -178,7 +178,7 @@ const LeadershipPage = () => {
                 value={filterType}
                 onChange={setFilterType}
                 placeholder="Filter"
-                align="right"
+                align="left"
                 className="flex-shrink-0"
               />
 
