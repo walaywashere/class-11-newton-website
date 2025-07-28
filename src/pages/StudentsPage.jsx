@@ -290,26 +290,33 @@ const StudentsPage = () => {
       <section className="py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Enhanced Controls Bar */}
+          {/* Search Bar - Separate from Controls */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col lg:flex-row gap-4 justify-between items-center mb-12 p-4 sm:p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-6"
           >
-            {/* Search */}
-            <div className="relative flex-1 max-w-md w-full">
+            <div className="relative max-w-md mx-auto">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search by name, role, dream job, or fun fact..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
               />
             </div>
+          </motion.div>
 
-            {/* Sort Dropdown - Global System (Direct Child like Achievements) */}
+          {/* Controls Bar - Exact Copy of Achievements Structure */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
+          >
+            {/* Sort Dropdown - Exact Copy of Achievements */}
             <GlobalDropdown
               trigger={<Filter className="w-4 h-4" />}
               options={sortOptions}
@@ -320,7 +327,7 @@ const StudentsPage = () => {
               className="flex-shrink-0"
             />
 
-            {/* View Mode Toggle - Perfect Mobile Alignment */}
+            {/* View Mode Toggle - Exact Copy of Achievements */}
             <div className="flex bg-gray-100 rounded-xl p-1">
               <button
                 onClick={() => setViewMode('grid')}
