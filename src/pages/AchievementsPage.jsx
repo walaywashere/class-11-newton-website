@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Trophy, Star, Award, Zap, Target, Medal, Crown, Users, Calendar, MapPin, ExternalLink, Filter, Grid, List, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
-import Dropdown from '../components/Dropdown';
+import GlobalDropdown from '../components/GlobalDropdown';
 
 const AchievementsPage = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -316,8 +316,8 @@ const AchievementsPage = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
           >
-            {/* Category Filter - Bulletproof */}
-            <Dropdown
+            {/* Category Filter - Global System */}
+            <GlobalDropdown
               trigger={<Filter className="w-4 h-4" />}
               options={categoryOptions}
               value={filterCategory}

@@ -4,7 +4,7 @@ import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, 
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { students } from '../data/classData';
-import Dropdown from '../components/Dropdown';
+import GlobalDropdown from '../components/GlobalDropdown';
 
 const StudentsPage = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -311,8 +311,8 @@ const StudentsPage = () => {
 
             {/* Sort and View Controls */}
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              {/* Sort Dropdown - Bulletproof */}
-              <Dropdown
+              {/* Sort Dropdown - Global System */}
+              <GlobalDropdown
                 trigger={<Filter className="w-4 h-4" />}
                 options={sortOptions}
                 value={sortBy}

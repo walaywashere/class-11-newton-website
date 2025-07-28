@@ -4,7 +4,7 @@ import { ArrowLeft, Crown, Sparkles, Users, Trophy, Search, Filter, Grid, List, 
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { adviser, students } from '../data/classData';
-import Dropdown from '../components/Dropdown';
+import GlobalDropdown from '../components/GlobalDropdown';
 
 const LeadershipPage = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -171,8 +171,8 @@ const LeadershipPage = () => {
 
             {/* Filter and View Controls */}
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              {/* Filter Dropdown - Bulletproof */}
-              <Dropdown
+              {/* Filter Dropdown - Global System */}
+              <GlobalDropdown
                 trigger={<Filter className="w-4 h-4" />}
                 options={filterOptions}
                 value={filterType}
