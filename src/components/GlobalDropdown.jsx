@@ -98,6 +98,12 @@ const DropdownMenu = ({
       maxHeight: isMobile ? Math.min(300, viewport.height * 0.5) : Math.min(400, viewport.height * 0.6),
     };
 
+    // FORCE RECALCULATION - Get fresh rect to avoid stale data
+    const freshTriggerRect = triggerRef.current?.getBoundingClientRect();
+    if (freshTriggerRect) {
+      triggerRect = freshTriggerRect;
+    }
+
     // Debug logging for positioning issues
     if (process.env.NODE_ENV === 'development') {
       console.log('🔍 Dropdown Position Debug:', {
@@ -105,7 +111,11 @@ const DropdownMenu = ({
         triggerRect: triggerRect,
         viewport: viewport,
         dropdown: dropdown,
-        isMobile: isMobile
+        isMobile: isMobile,
+        triggerElement: triggerRef.current,
+        triggerParent: triggerRef.current?.parentElement,
+        triggerOffsetParent: triggerRef.current?.offsetParent,
+        freshRect: freshTriggerRect
       });
     }
 
@@ -147,39 +157,35 @@ const DropdownMenu = ({
     // Final overflow prevention with generous margins
     left = Math.max(margin, Math.min(left, viewport.width - dropdown.width - margin));
 
-    // SMART POSITIONING - Detect best direction with consistent gap
+    // SIMPLIFIED POSITIONING - Force exact 4px gap like Achievements
     const spaceAbove = triggerRect.top;
     const spaceBelow = viewport.height - triggerRect.bottom;
-    const gap = 4; // Very small gap for tight connection
-    const viewportMargin = isMobile ? 8 : 16; // Smaller margin on mobile for more space
+    const EXACT_GAP = 4; // Hardcoded 4px gap - no variables, no calculations
+    const viewportMargin = isMobile ? 8 : 16;
     
     let top;
     let actualHeight = dropdown.maxHeight;
     
-    // Determine if dropdown fits below
-    const fitsBelow = spaceBelow >= dropdown.maxHeight + gap + viewportMargin;
+    // Simple logic: prefer below, fallback to above
+    const hasSpaceBelow = spaceBelow >= dropdown.maxHeight + EXACT_GAP + viewportMargin;
+    const hasSpaceAbove = spaceAbove >= dropdown.maxHeight + EXACT_GAP + viewportMargin;
     
-    // Determine if dropdown fits above
-    const fitsAbove = spaceAbove >= dropdown.maxHeight + gap + viewportMargin;
-    
-    if (fitsBelow) {
-      // Show below - preferred direction
-      top = triggerRect.bottom + gap;
+    if (hasSpaceBelow) {
+      // Show below with EXACT 4px gap
+      top = triggerRect.bottom + EXACT_GAP;
       actualHeight = dropdown.maxHeight;
-    } else if (fitsAbove) {
-      // Show above - fallback if no space below
+    } else if (hasSpaceAbove) {
+      // Show above with EXACT 4px gap
       actualHeight = dropdown.maxHeight;
-      top = triggerRect.top - actualHeight - gap; // Use actualHeight for consistency
+      top = triggerRect.top - actualHeight - EXACT_GAP;
     } else {
-      // Use the larger space and adjust height
-      if (spaceBelow > spaceAbove) {
-        // Show below with adjusted height
-        top = triggerRect.bottom + gap;
-        actualHeight = Math.max(200, spaceBelow - gap - viewportMargin);
+      // Fallback: use available space with EXACT 4px gap
+      if (spaceBelow >= spaceAbove) {
+        top = triggerRect.bottom + EXACT_GAP;
+        actualHeight = Math.max(200, spaceBelow - EXACT_GAP - viewportMargin);
       } else {
-        // Show above with adjusted height
-        actualHeight = Math.max(200, spaceAbove - gap - viewportMargin);
-        top = triggerRect.top - actualHeight - gap;
+        actualHeight = Math.max(200, spaceAbove - EXACT_GAP - viewportMargin);
+        top = triggerRect.top - actualHeight - EXACT_GAP;
       }
     }
 
@@ -203,23 +209,36 @@ const DropdownMenu = ({
         triggerRect: {
           top: triggerRect.top,
           bottom: triggerRect.bottom,
-          height: triggerRect.height
+          height: triggerRect.height,
+          left: triggerRect.left,
+          right: triggerRect.right,
+          width: triggerRect.width
         },
         dropdown: {
           maxHeight: dropdown.maxHeight,
           actualHeight: actualHeight,
-          calculatedTop: finalPosition.top
+          calculatedTop: finalPosition.top,
+          calculatedLeft: finalPosition.left,
+          width: dropdown.width
         },
         gaps: {
-          expectedGap: gap,
+          expectedGap: EXACT_GAP,
           actualGap: actualGap,
-          gapDifference: Math.abs(actualGap - gap)
+          gapDifference: Math.abs(actualGap - EXACT_GAP)
         },
-        space: {
-          above: spaceAbove,
-          below: spaceBelow,
-          fitsAbove: spaceAbove >= dropdown.maxHeight + gap + viewportMargin,
-          fitsBelow: spaceBelow >= dropdown.maxHeight + gap + viewportMargin
+                  space: {
+            above: spaceAbove,
+            below: spaceBelow,
+            fitsAbove: hasSpaceAbove,
+            fitsBelow: hasSpaceBelow
+          },
+        positioning: {
+          exactGap: EXACT_GAP,
+          viewportMargin: viewportMargin,
+          effectiveAlign: effectiveAlign,
+          isMobile: isMobile,
+          hasSpaceBelow: hasSpaceBelow,
+          hasSpaceAbove: hasSpaceAbove
         }
       });
     }
@@ -482,6 +501,19 @@ const GlobalDropdown = ({
               ? 'opacity-50 cursor-not-allowed' 
               : 'cursor-pointer'
           }`}
+          style={{
+            // FORCE EXACT DIMENSIONS - Override any inherited styles
+            minWidth: '140px',
+            height: 'auto',
+            padding: '12px 16px',
+            margin: '0',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            boxSizing: 'border-box'
+          }}
         >
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <div className="flex-shrink-0">
