@@ -98,12 +98,6 @@ const DropdownMenu = ({
       maxHeight: isMobile ? Math.min(300, viewport.height * 0.5) : Math.min(400, viewport.height * 0.6),
     };
 
-    // FORCE RECALCULATION - Get fresh rect to avoid stale data
-    const freshTriggerRect = triggerRef.current?.getBoundingClientRect();
-    if (freshTriggerRect) {
-      triggerRect = freshTriggerRect;
-    }
-
     // Debug logging for positioning issues
     if (process.env.NODE_ENV === 'development') {
       console.log('🔍 Dropdown Position Debug:', {
@@ -111,11 +105,7 @@ const DropdownMenu = ({
         triggerRect: triggerRect,
         viewport: viewport,
         dropdown: dropdown,
-        isMobile: isMobile,
-        triggerElement: triggerRef.current,
-        triggerParent: triggerRef.current?.parentElement,
-        triggerOffsetParent: triggerRef.current?.offsetParent,
-        freshRect: freshTriggerRect
+        isMobile: isMobile
       });
     }
 
