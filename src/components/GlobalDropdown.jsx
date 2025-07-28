@@ -84,8 +84,13 @@ const DropdownMenu = ({
       height: window.innerHeight,
     };
 
+    // Responsive width calculation
+    const isMobile = viewport.width < 640; // sm breakpoint
+    const minWidth = isMobile ? 200 : 240;
+    const maxWidth = isMobile ? viewport.width - 32 : 320;
+    
     const dropdown = {
-      width: Math.max(triggerRect.width, 280),
+      width: Math.min(maxWidth, Math.max(triggerRect.width, minWidth)),
       maxHeight: Math.min(400, viewport.height * 0.6),
     };
 
@@ -95,7 +100,7 @@ const DropdownMenu = ({
     // Determine the best alignment based on available space
     const spaceOnLeft = triggerRect.left;
     const spaceOnRight = viewport.width - triggerRect.right;
-    const margin = 32;
+    const margin = isMobile ? 16 : 32; // Smaller margins on mobile
     
     // Auto-detect best alignment if not explicitly set or if there's not enough space
     let effectiveAlign = align;
@@ -116,6 +121,14 @@ const DropdownMenu = ({
       default:
         left = triggerRect.right - dropdown.width;
         break;
+    }
+    
+    // Special alignment adjustment for better visual alignment
+    // If dropdown is wider than trigger, adjust positioning for better visual balance
+    if (dropdown.width > triggerRect.width && effectiveAlign === 'left') {
+      // Slightly offset to align with trigger's visual center for better appearance
+      const offset = Math.min(8, (dropdown.width - triggerRect.width) / 4);
+      left = triggerRect.left - offset;
     }
 
     // Final overflow prevention with generous margins
