@@ -98,6 +98,17 @@ const DropdownMenu = ({
       maxHeight: Math.min(400, viewport.height * 0.6),
     };
 
+    // Debug logging for positioning issues
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔍 Dropdown Position Debug:', {
+        page: window.location.pathname,
+        triggerRect: triggerRect,
+        viewport: viewport,
+        dropdown: dropdown,
+        isMobile: isMobile
+      });
+    }
+
     // Smart horizontal positioning with auto-alignment
     let left = triggerRect.left;
     
@@ -136,37 +147,40 @@ const DropdownMenu = ({
     // Final overflow prevention with generous margins
     left = Math.max(margin, Math.min(left, viewport.width - dropdown.width - margin));
 
-    // Vertical positioning - prefer above, fallback to below
-    const spaceAbove = triggerRect.top;
+    // FORCE BELOW POSITIONING - Consistent gap for all pages
     const spaceBelow = viewport.height - triggerRect.bottom;
-    const requiredSpace = dropdown.maxHeight + 8; // Smaller gap requirement
-
-    let top;
+    const gap = 4; // Very small gap for tight connection
+    
+    let top = triggerRect.bottom + gap;
     let actualHeight = dropdown.maxHeight;
-
-    if (spaceAbove >= requiredSpace) {
-      // Show above with smaller gap
-      top = triggerRect.top - dropdown.maxHeight - 8;
-    } else if (spaceBelow >= requiredSpace) {
-      // Show below with smaller gap
-      top = triggerRect.bottom + 8;
-    } else {
-      // Use the larger space and adjust height
-      if (spaceAbove > spaceBelow) {
-        actualHeight = Math.max(200, spaceAbove - 24);
-        top = 24;
-      } else {
-        actualHeight = Math.max(200, spaceBelow - 24);
-        top = triggerRect.bottom + 8;
-      }
+    
+    // Ensure dropdown fits in viewport
+    if (top + dropdown.maxHeight > viewport.height - 16) {
+      // Adjust height to fit in remaining space
+      actualHeight = Math.max(200, viewport.height - top - 16);
     }
 
-    return {
+    const finalPosition = {
       left: Math.round(left),
       top: Math.round(top),
       width: dropdown.width,
       height: actualHeight,
     };
+
+    // Debug final position
+    if (process.env.NODE_ENV === 'development') {
+      console.log('📍 Final Position:', {
+        page: window.location.pathname,
+        finalPosition: finalPosition,
+        spaceBelow: spaceBelow,
+        gap: gap,
+        triggerBottom: triggerRect.bottom,
+        dropdownTop: finalPosition.top,
+        actualGap: finalPosition.top - triggerRect.bottom
+      });
+    }
+
+    return finalPosition;
   };
 
   const position = getPosition();
@@ -325,6 +339,17 @@ const GlobalDropdown = ({
     if (disabled || !triggerRef.current) return;
 
     const rect = triggerRef.current.getBoundingClientRect();
+    
+    // Debug trigger rect for positioning issues
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎯 Trigger Rect Debug:', {
+        page: window.location.pathname,
+        rect: rect,
+        scrollY: window.scrollY,
+        element: triggerRef.current
+      });
+    }
+    
     setTriggerRect({
       left: rect.left,
       top: rect.top,
