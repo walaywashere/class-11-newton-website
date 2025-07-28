@@ -29,12 +29,13 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className={`fixed top-0 w-full z-[100] transition-all duration-300 ${
-        isScrolled 
-          ? 'glass-dark backdrop-blur-xl border-b border-white/10' 
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 w-full z-[100] transition-all duration-300"
       style={{
+        background: isScrolled 
+          ? 'rgba(0, 0, 0, 0.8)' 
+          : 'rgba(0, 0, 0, 0.4)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
         paddingTop: 'env(safe-area-inset-top)',
       }}
     >

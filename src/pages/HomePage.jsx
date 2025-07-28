@@ -311,108 +311,40 @@ const HomePage = () => {
             </Link>
           </motion.div>
 
-        </div>
-      </section>
-
-      {/* Discover More - Seamless Hero Blend */}
-      <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden -mt-1">
-        {/* Seamless Gradient Background - Blends with Hero */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
-              radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.15) 0%, transparent 50%),
-              linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)
-            `
-          }}
-        />
-        
-        {/* Animated Grid Pattern - Matches Hero */}
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-            animation: 'gridSlide 30s linear infinite'
-          }}
-        />
-
-        {/* Floating Elements - Matches Hero */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-blue-400/20 rounded-full"
-              style={{
-                left: `${15 + (i * 12)}%`,
-                top: `${25 + (i % 4) * 18}%`,
-              }}
-              animate={{
-                y: [0, -25, 0],
-                opacity: [0.2, 0.6, 0.2],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{
-                duration: 4 + i * 0.3,
-                repeat: Infinity,
-                delay: i * 0.4,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Integrated Discover More - INSIDE Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 sm:space-y-8"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 2.5 }}
+            className="mt-16 sm:mt-20 lg:mt-24 space-y-6 sm:space-y-8"
           >
-            {/* Main Call to Action */}
+            {/* Call to Action Text */}
             <div className="space-y-4">
               <motion.h2 
-                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold text-white/90"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 2.7 }}
               >
-                Ready to Explore Our
+                Ready to
                 <motion.span 
-                  className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-amber-400"
+                  className="ml-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-amber-400"
                   animate={{ 
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
                   style={{ backgroundSize: '200% 200%' }}
                 >
-                  Amazing Class?
+                  Explore?
                 </motion.span>
               </motion.h2>
-              
-              <motion.p 
-                className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                Discover our leadership, achievements, and the incredible stories of Class 11-Newton
-              </motion.p>
             </div>
 
-            {/* Enhanced Discover Button */}
+            {/* Integrated Discover Button */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 2.9 }}
               className="flex justify-center"
             >
               <motion.button
@@ -426,64 +358,42 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Button Background */}
                 <div 
-                  className="relative px-8 py-4 sm:px-10 sm:py-5 lg:px-12 lg:py-6 rounded-2xl font-bold text-lg sm:text-xl lg:text-2xl text-white transition-all duration-500"
+                  className="relative px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-xl font-bold text-base sm:text-lg lg:text-xl text-white transition-all duration-500"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(245, 158, 11, 0.8) 100%)',
-                    boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                    border: '2px solid rgba(255, 255, 255, 0.3)',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '2px solid rgba(255, 255, 255, 0.2)',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                   }}
                 >
-                  {/* Animated Background Overlay */}
                   <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(245, 158, 11, 0.9) 100%)',
+                      background: 'rgba(255, 255, 255, 0.15)',
                     }}
                   />
                   
-                  {/* Button Content */}
                   <span className="relative flex items-center gap-3">
                     <motion.div
                       animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                     >
-                      <Sparkles className="w-6 h-6 sm:w-7 sm:h-7" />
+                      <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
                     </motion.div>
                     Discover More
                     <motion.div
-                      animate={{ rotate: [360, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                      animate={{ y: [0, -2, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <Sparkles className="w-6 h-6 sm:w-7 sm:h-7" />
+                      <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
                     </motion.div>
                   </span>
                 </div>
               </motion.button>
             </motion.div>
-
-            {/* Animated Arrow Indicator */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex justify-center"
-            >
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="p-3 rounded-full backdrop-blur-sm"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                }}
-              >
-                <ArrowDown className="w-6 h-6 sm:w-8 sm:h-8 text-white/70" />
-              </motion.div>
-            </motion.div>
           </motion.div>
+
         </div>
       </section>
 
