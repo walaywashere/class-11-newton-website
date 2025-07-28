@@ -19,12 +19,9 @@ class DropdownManager {
   }
 
   clearActive() {
-    // Ensure scroll is unlocked when clearing active dropdown (only if not mobile)
-    const isMobile = window.innerWidth < 640;
-    if (!isMobile) {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    }
+    // Ensure scroll is unlocked when clearing active dropdown
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
     
     this.activeDropdown = null;
     this.notifyListeners();
@@ -200,16 +197,30 @@ const DropdownMenu = ({
         ? finalPosition.top - triggerRect.bottom 
         : triggerRect.top - (finalPosition.top + actualHeight);
       
-      console.log('📍 Smart Position Decision:', {
+      console.log('📍 Gap Debug Analysis:', {
         page: window.location.pathname,
         direction: direction,
-        spaceAbove: spaceAbove,
-        spaceBelow: spaceBelow,
-        fitsAbove: spaceAbove >= dropdown.maxHeight + gap + viewportMargin,
-        fitsBelow: spaceBelow >= dropdown.maxHeight + gap + viewportMargin,
-        finalPosition: finalPosition,
-        actualGap: actualGap,
-        actualHeight: actualHeight
+        triggerRect: {
+          top: triggerRect.top,
+          bottom: triggerRect.bottom,
+          height: triggerRect.height
+        },
+        dropdown: {
+          maxHeight: dropdown.maxHeight,
+          actualHeight: actualHeight,
+          calculatedTop: finalPosition.top
+        },
+        gaps: {
+          expectedGap: gap,
+          actualGap: actualGap,
+          gapDifference: Math.abs(actualGap - gap)
+        },
+        space: {
+          above: spaceAbove,
+          below: spaceBelow,
+          fitsAbove: spaceAbove >= dropdown.maxHeight + gap + viewportMargin,
+          fitsBelow: spaceBelow >= dropdown.maxHeight + gap + viewportMargin
+        }
       });
     }
 
@@ -250,7 +261,12 @@ const DropdownMenu = ({
       </div>
 
       {/* Options */}
-      <div className="max-h-80 overflow-y-auto py-2">
+      <div 
+        className="overflow-y-auto py-2"
+        style={{ 
+          maxHeight: `${Math.max(200, position.height - 120)}px` // Account for header + footer
+        }}
+      >
         {options.map((option, index) => {
           const isSelected = value === option.value;
           return (
@@ -392,12 +408,9 @@ const GlobalDropdown = ({
       height: rect.height,
     });
 
-    // Don't lock scroll on mobile to allow dropdown scrolling
-    const isMobile = window.innerWidth < 640;
-    if (!isMobile) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '0px'; // Prevent layout shift
-    }
+    // Lock scroll when dropdown opens (always)
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = '0px'; // Prevent layout shift
 
     setIsOpen(true);
     dropdownManager.setActive({
@@ -408,12 +421,9 @@ const GlobalDropdown = ({
 
   // Handle closing
   const handleClose = () => {
-    // Unlock scroll when dropdown closes (only if it was locked)
-    const isMobile = window.innerWidth < 640;
-    if (!isMobile) {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    }
+    // Unlock scroll when dropdown closes
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
     
     setIsOpen(false);
     setTriggerRect(null);
@@ -447,11 +457,8 @@ const GlobalDropdown = ({
   useEffect(() => {
     return () => {
       if (isOpen) {
-        const isMobile = window.innerWidth < 640;
-        if (!isMobile) {
-          document.body.style.overflow = '';
-          document.body.style.paddingRight = '';
-        }
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
       }
     };
   }, [isOpen]);
