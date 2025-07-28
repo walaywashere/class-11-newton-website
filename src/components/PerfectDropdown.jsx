@@ -291,7 +291,7 @@ const PerfectDropdown = ({
     }
   }, [isOpen, handleClose, handleOpen]);
 
-  // PERFECT ESCAPE KEY HANDLER
+  // PERFECT ESCAPE KEY HANDLER + GLOBAL CLICK HANDLER
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -299,14 +299,24 @@ const PerfectDropdown = ({
       }
     };
 
+    const handleGlobalClick = (e) => {
+      if (isOpen && triggerRef.current && !triggerRef.current.contains(e.target)) {
+        handleClose();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
+      document.addEventListener('mousedown', handleGlobalClick);
+      document.addEventListener('touchstart', handleGlobalClick);
       window.addEventListener('resize', updateTriggerPosition);
       window.addEventListener('scroll', updateTriggerPosition, true);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('mousedown', handleGlobalClick);
+      document.removeEventListener('touchstart', handleGlobalClick);
       window.removeEventListener('resize', updateTriggerPosition);
       window.removeEventListener('scroll', updateTriggerPosition, true);
     };

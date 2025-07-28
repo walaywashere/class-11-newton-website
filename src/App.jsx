@@ -8,9 +8,9 @@ import Preloader from './components/preloader';
 import Navbar from './components/navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import LeadershipPage from './pages/LeadershipPage';
-import StudentsPage from './pages/StudentsPage';
-import AchievementsPage from './pages/AchievementsPage';
+import PerfectLeadershipPage from './pages/PerfectLeadershipPage';
+import PerfectStudentsPage from './pages/PerfectStudentsPage';
+import PerfectAchievementsPage from './pages/PerfectAchievementsPage';
 
 function App() {
   const [isLoading, setIsLoading] = useState(() => {
@@ -58,9 +58,9 @@ function App() {
                 <Suspense fallback={<LoadingSpinner text="Loading page..." />}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/leadership" element={<LeadershipPage />} />
-                    <Route path="/students" element={<StudentsPage />} />
-                    <Route path="/achievements" element={<AchievementsPage />} />
+                    <Route path="/leadership" element={<PerfectLeadershipPage />} />
+                    <Route path="/students" element={<PerfectStudentsPage />} />
+                    <Route path="/achievements" element={<PerfectAchievementsPage />} />
                   </Routes>
                 </Suspense>
               </main>
