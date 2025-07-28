@@ -19,9 +19,12 @@ class DropdownManager {
   }
 
   clearActive() {
-    // Ensure scroll is unlocked when clearing active dropdown
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
+    // Ensure scroll is unlocked when clearing active dropdown (only if not mobile)
+    const isMobile = window.innerWidth < 640;
+    if (!isMobile) {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
     
     this.activeDropdown = null;
     this.notifyListeners();
@@ -95,7 +98,7 @@ const DropdownMenu = ({
     
     const dropdown = {
       width: Math.min(maxWidth, Math.max(triggerRect.width, minWidth)),
-      maxHeight: Math.min(400, viewport.height * 0.6),
+      maxHeight: isMobile ? Math.min(300, viewport.height * 0.5) : Math.min(400, viewport.height * 0.6),
     };
 
     // Debug logging for positioning issues
@@ -151,7 +154,7 @@ const DropdownMenu = ({
     const spaceAbove = triggerRect.top;
     const spaceBelow = viewport.height - triggerRect.bottom;
     const gap = 4; // Very small gap for tight connection
-    const viewportMargin = 16; // Minimum margin from viewport edge
+    const viewportMargin = isMobile ? 8 : 16; // Smaller margin on mobile for more space
     
     let top;
     let actualHeight = dropdown.maxHeight;
@@ -165,21 +168,23 @@ const DropdownMenu = ({
     if (fitsBelow) {
       // Show below - preferred direction
       top = triggerRect.bottom + gap;
+      actualHeight = dropdown.maxHeight;
     } else if (fitsAbove) {
       // Show above - fallback if no space below
-      top = triggerRect.top - dropdown.maxHeight - gap;
-          } else {
-        // Use the larger space and adjust height
-        if (spaceBelow > spaceAbove) {
-          // Show below with adjusted height
-          top = triggerRect.bottom + gap;
-          actualHeight = Math.max(200, spaceBelow - gap - viewportMargin);
-        } else {
-          // Show above with adjusted height
-          actualHeight = Math.max(200, spaceAbove - gap - viewportMargin);
-          top = triggerRect.top - actualHeight - gap;
-        }
+      actualHeight = dropdown.maxHeight;
+      top = triggerRect.top - actualHeight - gap; // Use actualHeight for consistency
+    } else {
+      // Use the larger space and adjust height
+      if (spaceBelow > spaceAbove) {
+        // Show below with adjusted height
+        top = triggerRect.bottom + gap;
+        actualHeight = Math.max(200, spaceBelow - gap - viewportMargin);
+      } else {
+        // Show above with adjusted height
+        actualHeight = Math.max(200, spaceAbove - gap - viewportMargin);
+        top = triggerRect.top - actualHeight - gap;
       }
+    }
 
     const finalPosition = {
       left: Math.round(left),
@@ -387,9 +392,12 @@ const GlobalDropdown = ({
       height: rect.height,
     });
 
-    // Lock scroll when dropdown opens
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = '0px'; // Prevent layout shift
+    // Don't lock scroll on mobile to allow dropdown scrolling
+    const isMobile = window.innerWidth < 640;
+    if (!isMobile) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = '0px'; // Prevent layout shift
+    }
 
     setIsOpen(true);
     dropdownManager.setActive({
@@ -400,9 +408,12 @@ const GlobalDropdown = ({
 
   // Handle closing
   const handleClose = () => {
-    // Unlock scroll when dropdown closes
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
+    // Unlock scroll when dropdown closes (only if it was locked)
+    const isMobile = window.innerWidth < 640;
+    if (!isMobile) {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
     
     setIsOpen(false);
     setTriggerRect(null);
@@ -436,8 +447,11 @@ const GlobalDropdown = ({
   useEffect(() => {
     return () => {
       if (isOpen) {
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
+        const isMobile = window.innerWidth < 640;
+        if (!isMobile) {
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+        }
       }
     };
   }, [isOpen]);
