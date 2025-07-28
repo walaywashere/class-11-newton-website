@@ -147,18 +147,39 @@ const DropdownMenu = ({
     // Final overflow prevention with generous margins
     left = Math.max(margin, Math.min(left, viewport.width - dropdown.width - margin));
 
-    // FORCE BELOW POSITIONING - Consistent gap for all pages
+    // SMART POSITIONING - Detect best direction with consistent gap
+    const spaceAbove = triggerRect.top;
     const spaceBelow = viewport.height - triggerRect.bottom;
     const gap = 4; // Very small gap for tight connection
+    const viewportMargin = 16; // Minimum margin from viewport edge
     
-    let top = triggerRect.bottom + gap;
+    let top;
     let actualHeight = dropdown.maxHeight;
     
-    // Ensure dropdown fits in viewport
-    if (top + dropdown.maxHeight > viewport.height - 16) {
-      // Adjust height to fit in remaining space
-      actualHeight = Math.max(200, viewport.height - top - 16);
-    }
+    // Determine if dropdown fits below
+    const fitsBelow = spaceBelow >= dropdown.maxHeight + gap + viewportMargin;
+    
+    // Determine if dropdown fits above
+    const fitsAbove = spaceAbove >= dropdown.maxHeight + gap + viewportMargin;
+    
+    if (fitsBelow) {
+      // Show below - preferred direction
+      top = triggerRect.bottom + gap;
+    } else if (fitsAbove) {
+      // Show above - fallback if no space below
+      top = triggerRect.top - dropdown.maxHeight - gap;
+          } else {
+        // Use the larger space and adjust height
+        if (spaceBelow > spaceAbove) {
+          // Show below with adjusted height
+          top = triggerRect.bottom + gap;
+          actualHeight = Math.max(200, spaceBelow - gap - viewportMargin);
+        } else {
+          // Show above with adjusted height
+          actualHeight = Math.max(200, spaceAbove - gap - viewportMargin);
+          top = triggerRect.top - actualHeight - gap;
+        }
+      }
 
     const finalPosition = {
       left: Math.round(left),
@@ -169,14 +190,21 @@ const DropdownMenu = ({
 
     // Debug final position
     if (process.env.NODE_ENV === 'development') {
-      console.log('📍 Final Position:', {
+      const direction = finalPosition.top < triggerRect.top ? 'above' : 'below';
+      const actualGap = direction === 'below' 
+        ? finalPosition.top - triggerRect.bottom 
+        : triggerRect.top - (finalPosition.top + actualHeight);
+      
+      console.log('📍 Smart Position Decision:', {
         page: window.location.pathname,
-        finalPosition: finalPosition,
+        direction: direction,
+        spaceAbove: spaceAbove,
         spaceBelow: spaceBelow,
-        gap: gap,
-        triggerBottom: triggerRect.bottom,
-        dropdownTop: finalPosition.top,
-        actualGap: finalPosition.top - triggerRect.bottom
+        fitsAbove: spaceAbove >= dropdown.maxHeight + gap + viewportMargin,
+        fitsBelow: spaceBelow >= dropdown.maxHeight + gap + viewportMargin,
+        finalPosition: finalPosition,
+        actualGap: actualGap,
+        actualHeight: actualHeight
       });
     }
 
