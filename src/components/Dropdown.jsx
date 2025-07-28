@@ -48,17 +48,19 @@ const Dropdown = ({
 
   const selectedOption = options.find(option => option.value === value);
 
-  // Calculate dropdown position
+  // Calculate dropdown position with better PC alignment
   const getDropdownPosition = () => {
+    if (!triggerPosition.width) return {};
+    
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const dropdownWidth = Math.max(triggerPosition.width, 200);
-    const dropdownMaxHeight = Math.min(300, viewportHeight * 0.4);
+    const dropdownWidth = Math.max(triggerPosition.width, 220);
+    let dropdownMaxHeight = Math.min(320, viewportHeight * 0.5);
     
     let left = triggerPosition.x;
-    let top = triggerPosition.y - dropdownMaxHeight - 8; // Above trigger by default
+    let top = triggerPosition.y - dropdownMaxHeight - 12; // Above trigger by default
 
-    // Horizontal alignment
+    // Horizontal alignment with better PC support
     switch (align) {
       case 'left':
         left = triggerPosition.x;
@@ -72,27 +74,41 @@ const Dropdown = ({
         break;
     }
 
-    // Prevent horizontal overflow
-    if (left + dropdownWidth > viewportWidth - 16) {
-      left = viewportWidth - dropdownWidth - 16;
+    // Enhanced overflow prevention for PC screens
+    const margin = 24; // Larger margin for PC
+    if (left + dropdownWidth > viewportWidth - margin) {
+      left = viewportWidth - dropdownWidth - margin;
     }
-    if (left < 16) {
-      left = 16;
-    }
-
-    // Check if we should show below instead of above
-    if (top < 16) {
-      top = triggerPosition.y + triggerPosition.height + 8;
+    if (left < margin) {
+      left = margin;
     }
 
-    // Final check - if still doesn't fit, center vertically
-    if (top + dropdownMaxHeight > viewportHeight - 16) {
-      top = Math.max(16, (viewportHeight - dropdownMaxHeight) / 2);
+    // Smart vertical positioning
+    const spaceAbove = triggerPosition.y;
+    const spaceBelow = viewportHeight - (triggerPosition.y + triggerPosition.height);
+    
+    if (spaceAbove >= dropdownMaxHeight + 12) {
+      // Show above if there's enough space
+      top = triggerPosition.y - dropdownMaxHeight - 12;
+    } else if (spaceBelow >= dropdownMaxHeight + 12) {
+      // Show below if there's enough space
+      top = triggerPosition.y + triggerPosition.height + 12;
+    } else {
+      // Show in the larger space, but limit height
+      if (spaceAbove > spaceBelow) {
+        const availableHeight = spaceAbove - 24;
+        top = 24;
+        dropdownMaxHeight = Math.min(dropdownMaxHeight, availableHeight);
+      } else {
+        const availableHeight = spaceBelow - 24;
+        top = triggerPosition.y + triggerPosition.height + 12;
+        dropdownMaxHeight = Math.min(dropdownMaxHeight, availableHeight);
+      }
     }
 
     return {
-      left: `${left}px`,
-      top: `${top}px`,
+      left: `${Math.round(left)}px`,
+      top: `${Math.round(top)}px`,
       width: `${dropdownWidth}px`,
       maxHeight: `${dropdownMaxHeight}px`
     };
@@ -123,46 +139,54 @@ const Dropdown = ({
         </button>
       </div>
 
-      {/* Modal-Style Dropdown Portal */}
+      {/* Full-Page Modal Backdrop */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0" style={{ zIndex: 999999999 }}>
-            {/* Blurred Backdrop - Highlights Only Dropdown */}
+          <>
+            {/* Full-Page Blurred Backdrop */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+              animate={{ opacity: 1, backdropFilter: 'blur(8px)' }}
+              exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/30 z-[999999998]"
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Highlighted Trigger Clone */}
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                left: `${triggerPosition.x}px`,
-                top: `${triggerPosition.y}px`,
-                width: `${triggerPosition.width}px`,
-                height: `${triggerPosition.height}px`,
-              }}
-            >
-              <div className="w-full h-full bg-white border-2 border-blue-400 rounded-xl shadow-lg backdrop-blur-sm" />
-            </div>
+            {/* Dropdown Container */}
+            <div className="fixed inset-0 z-[999999999] pointer-events-none">
+              {/* Highlighted Trigger Clone */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="absolute pointer-events-none"
+                style={{
+                  left: `${triggerPosition.x}px`,
+                  top: `${triggerPosition.y}px`,
+                  width: `${triggerPosition.width}px`,
+                  height: `${triggerPosition.height}px`,
+                }}
+              >
+                <div className="w-full h-full bg-white border-2 border-blue-500 rounded-xl shadow-xl" 
+                     style={{ boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.2)' }} />
+              </motion.div>
 
-            {/* Dropdown Menu */}
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className={`absolute bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden ${dropdownClassName}`}
-              style={{
-                ...getDropdownPosition(),
-                overflowY: 'auto'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
+              {/* Dropdown Menu */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className={`absolute bg-white border border-gray-300 rounded-xl shadow-2xl overflow-hidden pointer-events-auto ${dropdownClassName}`}
+                style={{
+                  ...getDropdownPosition(),
+                  overflowY: 'auto',
+                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)'
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
               {/* Dropdown Header */}
               <div className="px-4 py-2 bg-gray-50 border-b border-gray-200">
                 <div className="flex items-center gap-2">
@@ -208,11 +232,12 @@ const Dropdown = ({
                 <span className="text-xs text-gray-500">
                   {options.length} option{options.length !== 1 ? 's' : ''} available
                 </span>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                             </div>
+               </motion.div>
+             </div>
+           </>
+         )}
+       </AnimatePresence>
     </>
   );
 };
