@@ -165,9 +165,24 @@ const DropdownMenu = ({
       top = triggerRect.bottom + EXACT_GAP;
       actualHeight = dropdown.maxHeight;
     } else if (hasSpaceAbove) {
-      // Show above with EXACT 4px gap
+      // Show above with EXACT 4px gap - FORCED CALCULATION
       actualHeight = dropdown.maxHeight;
-      top = triggerRect.top - actualHeight - EXACT_GAP;
+      // FORCE: Position dropdown exactly 4px above trigger
+      top = triggerRect.top - EXACT_GAP - actualHeight;
+      
+      // DEBUG: Log upward positioning calculation
+      if (process.env.NODE_ENV === 'development') {
+        const calculatedGap = triggerRect.top - (top + actualHeight);
+        console.log('🔺 UPWARD POSITIONING DEBUG:', {
+          triggerTop: triggerRect.top,
+          actualHeight: actualHeight,
+          EXACT_GAP: EXACT_GAP,
+          calculatedTop: top,
+          expectedGap: EXACT_GAP,
+          actualGap: calculatedGap,
+          formula: `${triggerRect.top} - ${EXACT_GAP} - ${actualHeight} = ${top}`
+        });
+      }
     } else {
       // Fallback: use available space with EXACT 4px gap
       if (spaceBelow >= spaceAbove) {
@@ -175,7 +190,22 @@ const DropdownMenu = ({
         actualHeight = Math.max(200, spaceBelow - EXACT_GAP - viewportMargin);
       } else {
         actualHeight = Math.max(200, spaceAbove - EXACT_GAP - viewportMargin);
-        top = triggerRect.top - actualHeight - EXACT_GAP;
+        // FORCE: Position dropdown exactly 4px above trigger
+        top = triggerRect.top - EXACT_GAP - actualHeight;
+        
+        // DEBUG: Log fallback upward positioning
+        if (process.env.NODE_ENV === 'development') {
+          const calculatedGap = triggerRect.top - (top + actualHeight);
+          console.log('🔺 FALLBACK UPWARD DEBUG:', {
+            triggerTop: triggerRect.top,
+            actualHeight: actualHeight,
+            EXACT_GAP: EXACT_GAP,
+            calculatedTop: top,
+            expectedGap: EXACT_GAP,
+            actualGap: calculatedGap,
+            formula: `${triggerRect.top} - ${EXACT_GAP} - ${actualHeight} = ${top}`
+          });
+        }
       }
     }
 
