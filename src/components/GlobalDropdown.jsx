@@ -19,6 +19,10 @@ class DropdownManager {
   }
 
   clearActive() {
+    // Ensure scroll is unlocked when clearing active dropdown
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    
     this.activeDropdown = null;
     this.notifyListeners();
   }
@@ -123,12 +127,10 @@ const DropdownMenu = ({
         break;
     }
     
-    // Special alignment adjustment for better visual alignment
-    // If dropdown is wider than trigger, adjust positioning for better visual balance
-    if (dropdown.width > triggerRect.width && effectiveAlign === 'left') {
-      // Slightly offset to align with trigger's visual center for better appearance
-      const offset = Math.min(8, (dropdown.width - triggerRect.width) / 4);
-      left = triggerRect.left - offset;
+    // Better visual alignment - position dropdown closer to trigger
+    if (effectiveAlign === 'left') {
+      // Keep dropdown aligned with trigger's left edge for consistency
+      left = triggerRect.left;
     }
 
     // Final overflow prevention with generous margins
@@ -137,25 +139,25 @@ const DropdownMenu = ({
     // Vertical positioning - prefer above, fallback to below
     const spaceAbove = triggerRect.top;
     const spaceBelow = viewport.height - triggerRect.bottom;
-    const requiredSpace = dropdown.maxHeight + 16;
+    const requiredSpace = dropdown.maxHeight + 8; // Smaller gap requirement
 
     let top;
     let actualHeight = dropdown.maxHeight;
 
     if (spaceAbove >= requiredSpace) {
-      // Show above
-      top = triggerRect.top - dropdown.maxHeight - 16;
+      // Show above with smaller gap
+      top = triggerRect.top - dropdown.maxHeight - 8;
     } else if (spaceBelow >= requiredSpace) {
-      // Show below
-      top = triggerRect.bottom + 16;
+      // Show below with smaller gap
+      top = triggerRect.bottom + 8;
     } else {
       // Use the larger space and adjust height
       if (spaceAbove > spaceBelow) {
-        actualHeight = Math.max(200, spaceAbove - 32);
-        top = 32;
+        actualHeight = Math.max(200, spaceAbove - 24);
+        top = 24;
       } else {
-        actualHeight = Math.max(200, spaceBelow - 32);
-        top = triggerRect.bottom + 16;
+        actualHeight = Math.max(200, spaceBelow - 24);
+        top = triggerRect.bottom + 8;
       }
     }
 
@@ -332,6 +334,10 @@ const GlobalDropdown = ({
       height: rect.height,
     });
 
+    // Lock scroll when dropdown opens
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = '0px'; // Prevent layout shift
+
     setIsOpen(true);
     dropdownManager.setActive({
       id: dropdownId.current,
@@ -341,6 +347,10 @@ const GlobalDropdown = ({
 
   // Handle closing
   const handleClose = () => {
+    // Unlock scroll when dropdown closes
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    
     setIsOpen(false);
     setTriggerRect(null);
     dropdownManager.clearActive();
@@ -368,6 +378,16 @@ const GlobalDropdown = ({
       setTriggerRect(null);
     }
   }, [hasBackdrop, isOpen]);
+
+  // Cleanup scroll lock on component unmount
+  useEffect(() => {
+    return () => {
+      if (isOpen) {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+    };
+  }, [isOpen]);
 
   const selectedOption = options.find(option => option.value === value);
 
