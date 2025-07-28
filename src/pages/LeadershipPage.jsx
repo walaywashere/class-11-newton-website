@@ -4,7 +4,7 @@ import { ArrowLeft, Crown, Sparkles, Users, Trophy, Search, Filter, Grid, List, 
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { adviser, students } from '../data/classData';
-import GlobalDropdown from '../components/GlobalDropdown';
+import PerfectDropdown from '../components/PerfectDropdown';
 
 const LeadershipPage = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -176,8 +176,8 @@ const LeadershipPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
           >
-            {/* Filter Dropdown - Exact Copy of Achievements */}
-            <GlobalDropdown
+            {/* Filter Dropdown - Perfect System */}
+            <PerfectDropdown
               trigger={<Filter className="w-4 h-4" />}
               options={filterOptions}
               value={filterType}

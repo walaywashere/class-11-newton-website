@@ -4,7 +4,7 @@ import { ArrowLeft, Users, Heart, Star, BookOpen, Trophy, Search, Filter, Grid, 
 import { Link } from 'react-router-dom';
 import { scrollToTopInstant } from '../utils/scrollToTop';
 import { students } from '../data/classData';
-import GlobalDropdown from '../components/GlobalDropdown';
+import PerfectDropdown from '../components/PerfectDropdown';
 
 const StudentsPage = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -316,8 +316,8 @@ const StudentsPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200 shadow-lg"
           >
-            {/* Sort Dropdown - Exact Copy of Achievements */}
-            <GlobalDropdown
+            {/* Sort Dropdown - Perfect System */}
+            <PerfectDropdown
               trigger={<Filter className="w-4 h-4" />}
               options={sortOptions}
               value={sortBy}
